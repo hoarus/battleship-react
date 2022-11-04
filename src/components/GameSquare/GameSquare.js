@@ -1,8 +1,14 @@
 import React from 'react';
 
 function GameSquare() {
+  const style = {
+    gameSquare:{
+      border: 'solid 2px red',
+    }
+  }
+
   return(
-    <div>GameSquare</div>
+    <div style={style.gameSquare}>x</div>
   );
 }
 
