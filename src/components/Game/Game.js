@@ -4,7 +4,7 @@ import {GameBoard} from '../GameLogic/GameBoard';
 import GameContext from '../Game/GameContext';
 import PlaceShips from '../PlaceShips/PlaceShips';
 
-import PlayerDetails from '../PlayerDetails/PlayerDetails';
+import PlayerInputs from '../PlayerInputs/PlayerInputs';
 import {Ship} from '../GameLogic/Ship';
 import { createUseStyles } from 'react-jss';
 
@@ -47,15 +47,28 @@ function Game() {
     setPlayers: setPlayers,
   }
 
-  return (
-    <GameContext.Provider value={gameState}>
+
+  const playerOne = gameState.players[0];
+  const playerTwo = gameState.players[1];
+
+  if (gameState.players.length == 0) {
+    return (
+      <GameContext.Provider value={gameState}>
+        <div className={classes.gameWrapper}>
+          <PlayerInputs/>
+        </div>
+      </GameContext.Provider>
+    );
+  } else {
+    return(
+      <GameContext.Provider value={gameState}>
       <div className={classes.gameWrapper}>
-        <PlayerDetails/>
         <PlaceShips/>
         <Board/>
       </div>
     </GameContext.Provider>
-  );
+    )
+  }
 }
 
 export default Game;
