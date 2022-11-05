@@ -1,10 +1,11 @@
-import React, { createContext } from 'react';
-import GameSquare from '../GameSquare/GameSquare';
+import React, { useContext } from 'react';
 import { createUseStyles } from 'react-jss';
-import {GameBoard} from '../GameLogic/GameBoard';
-import GameContext from './GameContext';
-import {Ship} from '../GameLogic/Ship';
+import GameContext from '../Game/GameContext';
+import GameSquare from '../GameSquare/GameSquare';
 
+const incrementLetter = function(i) {
+  return String.fromCharCode('A'.charCodeAt(0) + i)
+}
 
 const useStyles = createUseStyles({
   gameBoard: {
@@ -19,48 +20,21 @@ const useStyles = createUseStyles({
   }
 })
 
-const incrementLetter = function(i) {
-  return String.fromCharCode('A'.charCodeAt(0) + i)
-}
-
-const gameBoard = new GameBoard();
-
-const ships = {
-  destroyer: (new Ship(2)),
-  submarine: (new Ship(3)),
-  cruiser: (new Ship(3)),
-  battleship: (new Ship(4)),
-  carrier: (new Ship(5)),
-
-}
 
 
 function Board() {
-
-  const [, updateState] = React.useState();
-  const forceUpdate = React.useCallback(() => updateState({}), []); 
   const classes = useStyles();
-
-  const gameState = {
-    gameBoard: gameBoard,
-    updateIncrementer: 0,
-    update: forceUpdate,
-  }
-  // Need to force a way for the context to rerender
-    // I think this should be an overarching object that includes the game components
-    // In addition, there will be one component of the object that is updated anytime something in the game changes, which forces the rerender
-      // Will probably use State for this
+  const gameState = useContext(GameContext);
+  const gameBoard = gameState.gameBoard;
 
   return(
     <div className={classes.wrapper}>
-      <GameContext.Provider value={gameState}>
         <div className= {classes.gameBoard}>
           {gameBoard.board.map((row, y) =>
             row.map((square, x) =>
             <GameSquare key={x} value={square} position={`${incrementLetter(x)}${y + 1}`}/> 
             )) }
         </div>
-      </GameContext.Provider>
     </div>
   )
 }

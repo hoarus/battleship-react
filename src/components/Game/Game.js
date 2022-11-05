@@ -1,7 +1,9 @@
 import React, {Fragment}  from 'react';
 import Board from '../GameBoard/Board';
+import {GameBoard} from '../GameLogic/GameBoard';
+import GameContext from '../Game/GameContext';
 import PlaceShips from '../PlaceShips/PlaceShips';
-
+import {Ship} from '../GameLogic/Ship';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
@@ -18,14 +20,34 @@ const useStyles = createUseStyles({
   }
 })
 
+const gameBoard = new GameBoard();
+
+
+const ships = {
+  destroyer: (new Ship(2)),
+  submarine: (new Ship(3)),
+  cruiser: (new Ship(3)),
+  battleship: (new Ship(4)),
+  carrier: (new Ship(5)),
+}
+
 
 function Game() {
   const classes = useStyles();
+  const [, updateState] = React.useState();
+  const forceUpdate = React.useCallback(() => updateState({}), []); 
+  const gameState = {
+    gameBoard: gameBoard,
+    update: forceUpdate,
+  }
+
   return (
+    <GameContext.Provider value={gameState}>
       <div className={classes.gameWrapper}>
         <PlaceShips/>
         <Board/>
       </div>
+    </GameContext.Provider>
   );
 }
 

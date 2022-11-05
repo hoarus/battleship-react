@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import GameContext from '../GameBoard/GameContext';
+import GameContext from '../Game/GameContext';
 import { createUseStyles } from 'react-jss';
 import {Ship} from '../GameLogic/Ship';
 
