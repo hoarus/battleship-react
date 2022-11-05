@@ -13,8 +13,6 @@ const useStyles = createUseStyles({
     display: 'flex',
     justifyContent: 'center',
   }
-
-
   
 })
 
