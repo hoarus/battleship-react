@@ -60,7 +60,6 @@ class GameBoard {
     for (let i = 0; i < ship.length; i++) {
       this.updatePosition(pos, ship);
       orientation == "x" ? pos[1] += 1 : pos[0] += 1;
-      console.log(pos);
     }
 
 

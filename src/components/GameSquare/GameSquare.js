@@ -7,6 +7,7 @@ const useStyles = createUseStyles({
   gameSquare: {
     border: 'solid 1px darkblue',
     backgroundColor: 'lightgreen',
+    color: 'black',
     width: '100%',
     height: '100%',
     boxSizing: 'border-box',
@@ -38,9 +39,10 @@ function GameSquare(props) {
   }
   const squareType =  () => gameBoard.lookupPosition(props.position);
   const smallShip = new Ship(2);
+
   if(squareType() === 0) {
     return(
-      <div className={classes.gameSquare} onClick = {placeShip}>{squareType}</div>
+      <div className={classes.gameSquare} onClick = {placeShip}>{props.position}</div>
     );
   } else {
     return(

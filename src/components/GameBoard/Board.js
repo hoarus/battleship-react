@@ -3,6 +3,7 @@ import GameSquare from '../GameSquare/GameSquare';
 import { createUseStyles } from 'react-jss';
 import {GameBoard} from './GameBoard';
 import GameContext from './GameContext';
+import {Ship} from '../GameBoard/ship';
 
 
 const useStyles = createUseStyles({
@@ -10,7 +11,7 @@ const useStyles = createUseStyles({
     display: 'grid',
     gridTemplateColumns: 'repeat(10, 1fr)',
     border: 'solid 2px darkblue',
-    width: '80%',
+    width: '100%',
   },
   wrapper: {
     display: 'flex',
@@ -23,6 +24,15 @@ const incrementLetter = function(i) {
 }
 
 const gameBoard = new GameBoard();
+
+const ships = {
+  destroyer: (new Ship(2)),
+  submarine: (new Ship(3)),
+  cruiser: (new Ship(3)),
+  battleship: (new Ship(4)),
+  carrier: (new Ship(5)),
+
+}
 
 
 function Board() {
@@ -50,7 +60,6 @@ function Board() {
             <GameSquare key={x} value={square} position={`${incrementLetter(x)}${y + 1}`}/> 
             )) }
         </div>
-        <button onClick={forceUpdate}>Force re-render</button>
       </GameContext.Provider>
     </div>
   )
