@@ -76,6 +76,26 @@ test('places horizontal ship 2', () => {
   );
 }); 
 
+test('places horizontal ship 3', () => {
+  let board = new GameBoard();
+  let ship = new Ship(2);
+  board.placeShip(ship, "I1", "x");
+  expect(board.display()).toEqual(
+    [ [0, 0, 0, 0, 0, 0, 0, 0, ship, ship],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ]
+  );
+}); 
+
+
 test('places vertical ship', () => {
   let board = new GameBoard();
   let ship = new Ship(5);

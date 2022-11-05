@@ -26,6 +26,8 @@ class GameBoard {
     return this.board;
   }
 
+  //pos[0] is equal to y-coordinate. pos[1] is equal to x-coordinate.
+
   lookupPosition(coordinates){
     let pos = this.convertPosition(coordinates);
     return this.board[pos[0]][pos[1]];
@@ -65,9 +67,9 @@ class GameBoard {
 
     function isPlacementPossible(){
       if (orientation == "x") {
-        return (pos[1] + ship.length < 10);
+        return (pos[1] + ship.length <= 10);
       } else  {
-        return (pos[0] + ship.length < 10);
+        return (pos[0] + ship.length <= 10);
       }
     }
   }
