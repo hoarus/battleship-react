@@ -35,7 +35,7 @@ class GameBoard {
 
   convertPosition(coordinates){
     let x = convertXPosition(coordinates[0]);
-    let y = Number(coordinates[1]) - 1;
+    let y = Number(coordinates.substring(1)) - 1;
     return [y, x]
 
     function convertXPosition(x){
