@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import GameContext from '../GameBoard/Game';
 
-function GameSquare() {
+function GameSquare(props) {
+
+  const gameBoard = useContext(GameContext);
   const style = {
     gameSquare:{
       border: 'solid 1px darkblue',
@@ -14,7 +17,7 @@ function GameSquare() {
   }
 
   return(
-    <div style={style.gameSquare}></div>
+    <div style={style.gameSquare}>{gameBoard.lookupPosition('a6')}</div>
   );
 }
 
