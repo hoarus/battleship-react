@@ -1,5 +1,5 @@
 import React, {Fragment}  from 'react';
-import Board from '../GameBoard/GameBoard';
+import Board from '../GameBoard/Board';
 import GameTitle from '../GameTitle/GameTitle';
 import './normalize.css';
 

@@ -1,4 +1,4 @@
-import { Ship } from '../GameLogic/ship.js';
+import { Ship } from './ship';
 
 test('creates new ship with length 3', () => {
   let ship = new Ship(3);

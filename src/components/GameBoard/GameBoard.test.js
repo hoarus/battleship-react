@@ -1,5 +1,5 @@
-import { Ship } from '../../GameLogic/ship.js';
-import { GameBoard } from './GameBoardLogic';
+import { Ship } from './ship.js';
+import { GameBoard } from './GameBoard';
 
 test('creates and displays new GameBoard', () => {
   let board = new GameBoard();
