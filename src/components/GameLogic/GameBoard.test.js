@@ -173,6 +173,48 @@ test('Prohibits impossible ship placement 2', () => {
   );
 }); 
 
+test('Prohibits impossible ship placement 3', () => {
+  let board = new GameBoard();
+  let shipOne = new Ship(2);
+  let shipTwo = new Ship(2);
+  board.placeShip(shipOne, "I1", "x");
+  board.placeShip(shipTwo, "H1", "x");
+  expect(board.display()).toEqual(
+    [ [0, 0, 0, 0, 0, 0, 0, 0, shipOne, shipOne],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ]
+  );
+}); 
+
+test('Prohibits impossible ship placement 4', () => {
+  let board = new GameBoard();
+  let shipOne = new Ship(2);
+  let shipTwo = new Ship(2);
+  board.placeShip(shipOne, "J9", "y");
+  board.placeShip(shipTwo, "J8", "y");
+  expect(board.display()).toEqual(
+    [ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, shipOne],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, shipOne]
+  ]
+  );
+}); 
+
 
 test('Receive attack updates coordinates with miss 1', () => {
   let board = new GameBoard();

@@ -52,6 +52,7 @@ class GameBoard {
 
   placeShip(ship, position, orientation){
     let pos = this.convertPosition(position);
+    let board = this.board;
     // Break function if not a possible move
     if (!isPlacementPossible()) {
       return "Impossible Move";
@@ -67,10 +68,28 @@ class GameBoard {
 
     function isPlacementPossible(){
       if (orientation == "x") {
-        return (pos[1] + ship.length <= 10);
+        return ((pos[1] + ship.length <= 10) && shipPathIsClear());
       } else  {
-        return (pos[0] + ship.length <= 10);
+        return (pos[0] + ship.length <= 10 && shipPathIsClear());
       }
+    }
+
+    function shipPathIsClear(){
+      let shipPath = [];
+      if (orientation == "x") {
+        for (let i=pos[1]; i < (pos[1] + ship.length); i++) {
+          let currentObject = board[pos[0]][i];
+          shipPath.push(currentObject);
+        }
+      } else {
+        for (let i=pos[0]; i < (pos[0] + ship.length); i++) {
+          let currentObject = board[i][pos[1]];
+          shipPath.push(currentObject);
+        }
+      }
+      let anyObstacles = shipPath.some( 
+        value => { return typeof value == "object" } );
+      return !anyObstacles
     }
   }
 

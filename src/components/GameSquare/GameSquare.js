@@ -34,7 +34,7 @@ function GameSquare(props) {
   const gameState = useContext(GameContext);
   const gameBoard = gameState.gameBoard;
   const placeShip = function() {
-    gameBoard.placeShip(smallShip, props.position, "x");
+    gameBoard.placeShip(smallShip, props.position, "y");
     gameState.update();
   }
   const squareType =  () => gameBoard.lookupPosition(props.position);
