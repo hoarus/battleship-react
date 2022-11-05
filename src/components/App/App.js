@@ -1,7 +1,6 @@
 import React, {Fragment}  from 'react';
-import Board from '../GameBoard/Board';
 import GameTitle from '../GameTitle/GameTitle';
-import PlaceShips from '../PlaceShips/PlaceShips';
+import Game from '../Game/Game';
 import './normalize.css';
 
 import { createUseStyles } from 'react-jss';
@@ -12,12 +11,6 @@ const useStyles = createUseStyles({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  gameWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    width: '80%'
-  }
 })
 
 
@@ -25,11 +18,8 @@ function App() {
   const classes = useStyles();
   return (
     <div className={classes.pageWrapper}>
-      <div className={classes.gameWrapper}>
         <GameTitle/>
-        <PlaceShips/>
-        <Board/>
-      </div>
+        <Game/>
     </div>
   );
 }
