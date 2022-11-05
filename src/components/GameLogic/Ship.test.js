@@ -1,4 +1,4 @@
-import { Ship } from './ship';
+import { Ship } from './Ship';
 
 test('creates new ship with length 3', () => {
   let ship = new Ship(3);

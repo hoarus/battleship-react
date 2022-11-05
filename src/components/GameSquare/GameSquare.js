@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import GameContext from '../GameBoard/GameContext';
 import { createUseStyles } from 'react-jss';
-import {Ship} from '../GameBoard/ship';
+import {Ship} from '../GameLogic/Ship';
 
 const useStyles = createUseStyles({
   gameSquare: {

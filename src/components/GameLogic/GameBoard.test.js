@@ -1,4 +1,4 @@
-import { Ship } from './ship.js';
+import { Ship } from './Ship.js';
 import { GameBoard } from './GameBoard';
 
 test('creates and displays new GameBoard', () => {

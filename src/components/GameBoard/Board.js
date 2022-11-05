@@ -1,9 +1,9 @@
 import React, { createContext } from 'react';
 import GameSquare from '../GameSquare/GameSquare';
 import { createUseStyles } from 'react-jss';
-import {GameBoard} from './GameBoard';
+import {GameBoard} from '../GameLogic/GameBoard';
 import GameContext from './GameContext';
-import {Ship} from '../GameBoard/ship';
+import {Ship} from '../GameLogic/Ship';
 
 
 const useStyles = createUseStyles({

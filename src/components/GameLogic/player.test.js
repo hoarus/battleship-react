@@ -1,6 +1,6 @@
-import { Ship } from '../GameLogic/ship.js';
-import { GameBoard } from '../components/GameBoard/GameBoardLogic';
-import { Player } from '../GameLogic/player.js';
+import { Ship } from './Ship';
+import { GameBoard } from './GameBoard';
+import { Player } from './Player';
 
 test('player can input name', () => {
   let player = new Player("Sam");
