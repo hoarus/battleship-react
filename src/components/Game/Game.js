@@ -1,10 +1,12 @@
-import React, {Fragment}  from 'react';
+import React from 'react';
 import Board from '../GameBoard/Board';
 import {GameBoard} from '../GameLogic/GameBoard';
 import GameContext from '../Game/GameContext';
 import PlaceShips from '../PlaceShips/PlaceShips';
+import Player from '../Player/Player';
 import {Ship} from '../GameLogic/Ship';
 import { createUseStyles } from 'react-jss';
+
 
 const useStyles = createUseStyles({
   pageWrapper: {
@@ -44,6 +46,7 @@ function Game() {
   return (
     <GameContext.Provider value={gameState}>
       <div className={classes.gameWrapper}>
+        <Player/>
         <PlaceShips/>
         <Board/>
       </div>
