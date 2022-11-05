@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {Player} from '../GameLogic/Player';
+import GameContext from '../Game/GameContext';
 
-let players = [];
+export default function PlayerDetails(props){
 
-export default function PlayerDetails(){
+  const gameState = useContext(GameContext);
   const [names, setNames] = useState('');
   const setName = function(event) {
     setNames({
@@ -15,9 +16,13 @@ export default function PlayerDetails(){
     event.preventDefault();
     const playerOne = new Player(names.playerOne);
     const playerTwo = new Player(names.playerTwo);
-    players = [playerOne, playerTwo];
-    console.log(players);
+    gameState.setPlayers([playerOne, playerTwo]);
   }
+
+  const playerOne = gameState.players[0];
+  const playerTwo = gameState.players[1];
+
+  if (gameState.players.length == 0) {
    return(
     <div>
       <form onSubmit={createPlayers}>
@@ -40,9 +45,14 @@ export default function PlayerDetails(){
          </label>
         <button type='submit'>Save Names</button>
       </form>
-      <div>Preview</div>
-      <p>{names.playerOne}</p>
-      <p>{names.playerTwo}</p>
     </div>
   )
+   } else {
+    return(
+      <div>
+        <h2>Player One: {playerOne.name}</h2>
+        <h2>Player Two: {playerTwo.name}</h2>
+      </div>
+    )
+   }
 }

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Board from '../GameBoard/Board';
 import {GameBoard} from '../GameLogic/GameBoard';
 import GameContext from '../Game/GameContext';
 import PlaceShips from '../PlaceShips/PlaceShips';
+
 import PlayerDetails from '../PlayerDetails/PlayerDetails';
 import {Ship} from '../GameLogic/Ship';
 import { createUseStyles } from 'react-jss';
@@ -35,12 +36,15 @@ const ships = {
 
 
 function Game() {
+  const [players, setPlayers] = useState([]);
   const classes = useStyles();
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []); 
   const gameState = {
     gameBoard: gameBoard,
     update: forceUpdate,
+    players: players,
+    setPlayers: setPlayers,
   }
 
   return (
