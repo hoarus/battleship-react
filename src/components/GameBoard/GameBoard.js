@@ -4,14 +4,6 @@ import { createUseStyles } from 'react-jss';
 import {GameBoard} from './GameBoardLogic';
 import GameContext from './Game';
 
-const user = {
-  name: 'Kwame',
-  favorites: [
-    'avocado',
-    'carrot'
-  ]
-}
-
 
 const useStyles = createUseStyles({
   gameBoard: {
@@ -26,6 +18,11 @@ const useStyles = createUseStyles({
   }
 })
 
+const incrementLetter = function(i) {
+  return String.fromCharCode('A'.charCodeAt(0) + i)
+}
+
+
 function Board() {
 
   const classes = useStyles();
@@ -38,7 +35,7 @@ function Board() {
         <div className= {classes.gameBoard}>
           {gameBoard.board.map((row, y) =>
             row.map((square, x) =>
-            <GameSquare key={x} value={square} position={`[${y}][${x}]`}/> 
+            <GameSquare key={x} value={square} position={`${incrementLetter(x)}${y + 1}`}/> 
             )) }
         </div>
       </GameContext.Provider>

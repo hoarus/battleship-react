@@ -17,7 +17,7 @@ function GameSquare(props) {
   }
 
   return(
-    <div style={style.gameSquare}>{gameBoard.lookupPosition('a6')}</div>
+    <div style={style.gameSquare}>{props.position}</div>
   );
 }
 
