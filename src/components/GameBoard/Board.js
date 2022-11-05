@@ -22,22 +22,35 @@ const incrementLetter = function(i) {
   return String.fromCharCode('A'.charCodeAt(0) + i)
 }
 
+const gameBoard = new GameBoard();
+
 
 function Board() {
 
+  const [, updateState] = React.useState();
+  const forceUpdate = React.useCallback(() => updateState({}), []); 
   const classes = useStyles();
-  const gameBoard = new GameBoard();
-  console.log(gameBoard.board);
-  
+
+  const gameState = {
+    gameBoard: gameBoard,
+    updateIncrementer: 0,
+    update: forceUpdate,
+  }
+  // Need to force a way for the context to rerender
+    // I think this should be an overarching object that includes the game components
+    // In addition, there will be one component of the object that is updated anytime something in the game changes, which forces the rerender
+      // Will probably use State for this
+
   return(
     <div className={classes.wrapper}>
-      <GameContext.Provider value={gameBoard}>
+      <GameContext.Provider value={gameState}>
         <div className= {classes.gameBoard}>
           {gameBoard.board.map((row, y) =>
             row.map((square, x) =>
             <GameSquare key={x} value={square} position={`${incrementLetter(x)}${y + 1}`}/> 
             )) }
         </div>
+        <button onClick={forceUpdate}>Force re-render</button>
       </GameContext.Provider>
     </div>
   )

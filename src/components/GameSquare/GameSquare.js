@@ -28,14 +28,17 @@ const useStyles = createUseStyles({
 
 
 function GameSquare(props) {
+
   const classes = useStyles();
-  const gameBoard = useContext(GameContext);
+  const gameState = useContext(GameContext);
+  const gameBoard = gameState.gameBoard;
   const placeShip = function() {
     gameBoard.placeShip(smallShip, props.position, "x");
+    gameState.update();
   }
-  const squareType = gameBoard.lookupPosition(props.position);
+  const squareType =  () => gameBoard.lookupPosition(props.position);
   const smallShip = new Ship(2);
-  if(squareType === 0) {
+  if(squareType() === 0) {
     return(
       <div className={classes.gameSquare} onClick = {placeShip}>{squareType}</div>
     );
