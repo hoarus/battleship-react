@@ -7,6 +7,7 @@ import PlaceShips from '../PlaceShips/PlaceShips';
 import PlayerInputs from '../PlayerInputs/PlayerInputs';
 import {Ship} from '../GameLogic/Ship';
 import { createUseStyles } from 'react-jss';
+import PlayerDetails from '../PlayerDetails/PlayerDetails';
 
 
 const useStyles = createUseStyles({
@@ -62,11 +63,12 @@ function Game() {
   } else {
     return(
       <GameContext.Provider value={gameState}>
-      <div className={classes.gameWrapper}>
-        <PlaceShips/>
-        <Board/>
-      </div>
-    </GameContext.Provider>
+        <div className={classes.gameWrapper}>
+          <PlayerDetails/>
+          <PlaceShips/>
+          <Board/>
+        </div>
+      </GameContext.Provider>
     )
   }
 }
