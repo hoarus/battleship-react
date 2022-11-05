@@ -1,5 +1,5 @@
 import { Ship } from '../GameLogic/ship.js';
-import { GameBoard } from '../GameLogic/gameboard';
+import { GameBoard } from '../components/GameBoard/GameBoardLogic';
 import { Player } from '../GameLogic/player.js';
 
 test('player can input name', () => {

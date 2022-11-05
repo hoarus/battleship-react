@@ -1,6 +1,7 @@
 import React from 'react';
 import GameSquare from '../GameSquare/GameSquare';
 import { createUseStyles } from 'react-jss';
+import {GameBoard} from './GameBoardLogic';
 
 const useStyles = createUseStyles({
   gameBoard: {
@@ -17,116 +18,23 @@ const useStyles = createUseStyles({
 })
 
 
-function GameBoard() {
+
+function Board() {
 
   const classes = useStyles();
+  const gameBoard = new GameBoard();
+
 
   return(
     <div className={classes.wrapper}>
       <div className= {classes.gameBoard}>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
-        <GameSquare/>
+        {gameBoard.board.map((row) =>
+          row.map((square, index) =>
+          <GameSquare key={index}/> 
+          )) }
       </div>
     </div>
   )
 }
 
-export default GameBoard;
+export default Board;
