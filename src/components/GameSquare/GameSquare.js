@@ -29,15 +29,20 @@ const useStyles = createUseStyles({
 
 
 function GameSquare(props) {
-
   const classes = useStyles();
+  const players = props.players;
+  const setPlayers = props.setPlayers;
   const gameState = useContext(GameContext);
-  const gameBoard = gameState.gameBoardOne;
+  const currentPlayer = players[0];
+  const myGameBoard = currentPlayer.myGameBoard;
+
+
   const placeShip = function() {
-    gameBoard.placeShip(smallShip, props.position, "y");
+    myGameBoard.placeShip(smallShip, props.position, "y");
+    setPlayers(players);
     gameState.update();
   }
-  const squareType =  () => gameBoard.lookupPosition(props.position);
+  const squareType =  () => myGameBoard.lookupPosition(props.position);
   const smallShip = new Ship(2);
 
   if(squareType() === 0) {

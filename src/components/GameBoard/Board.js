@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { createUseStyles } from 'react-jss';
-import GameContext from '../Game/GameContext';
 import GameSquare from '../GameSquare/GameSquare';
 
 const incrementLetter = function(i) {
@@ -21,18 +20,22 @@ const useStyles = createUseStyles({
 })
 
 
+function Board(props) {
+  const players = props.players;
+  const setPlayers = props.setPlayers;
+  const playerOne = props.players[0];
+  const playerTwo = props.players[1];
 
-function Board() {
+
   const classes = useStyles();
-  const gameState = useContext(GameContext);
-  const gameBoard = gameState.gameBoardOne
+  const gameBoard = playerOne.myGameBoard;
 
   return(
     <div className={classes.wrapper}>
         <div className= {classes.gameBoard}>
           {gameBoard.board.map((row, y) =>
             row.map((square, x) =>
-            <GameSquare key={x} value={square} position={`${incrementLetter(x)}${y + 1}`}/> 
+            <GameSquare key={x} value={square} position={`${incrementLetter(x)}${y + 1}`} players={players} setPlayers={setPlayers}/> 
             )) }
         </div>
     </div>

@@ -39,6 +39,8 @@ const gameBoardOne = new GameBoard();
 const gameBoardTwo = new GameBoard();
 const playerOne = new Player();
 const playerTwo = new Player();
+playerOne.myGameBoard = gameBoardOne;
+playerTwo.myGameBoard = gameBoardTwo;
 
 
 const ships = {
@@ -56,23 +58,18 @@ function Game() {
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []); 
   const gameState = {
-    gameBoardOne: gameBoardOne,
-    gameBoardTwo: gameBoardTwo,
-    playerOne: playerOne,
-    playerTwo: playerTwo,
     update: forceUpdate,
-    players: players,
-    setPlayers: setPlayers,
-    //Need to find some way to create a function in the context which enables toggling between players
-    //Actually, maybe I don't. Maybe it only needs to be a single function which is passed down to a specific "Turn Over" button component
-    currentPlayer: playerOne,
-    togglePlayer: togglePlayer(playerOne, playerOne, playerTwo),
   }
 
+      //Need to find some way to create a function in the context which enables toggling between players
+    //Actually, maybe I don't. Maybe it only needs to be a single function which is passed down to a specific "Turn Over" button component
+    //currentPlayer: playerOne,
+    //togglePlayer: togglePlayer(playerOne, playerOne, playerTwo),
 
 
 
-  if (gameState.playerOne.name == "AI") {
+
+  if (players[0].name == "AI") {
     return (
       <GameContext.Provider value={gameState}>
         <div className={classes.gameWrapper}>
@@ -86,7 +83,7 @@ function Game() {
         <div className={classes.gameWrapper}>
           <PlayerDetails players={players}/>
           <PlaceShips/>
-          <Board/>
+          <Board players={players} setPlayers={setPlayers}/>
         </div>
       </GameContext.Provider>
     )
