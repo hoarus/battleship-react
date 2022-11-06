@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import GameContext from '../Game/GameContext';
 import { createUseStyles } from 'react-jss';
 import {Ship} from '../GameLogic/Ship';
+import { render } from '@testing-library/react';
 
 const useStyles = createUseStyles({
   wrapper: {
@@ -10,7 +11,7 @@ const useStyles = createUseStyles({
     alignItems: 'center',
     border: 'solid 2px blue',
     margin: ' 1rem 0rem',
-    height: '30vh',
+    minHeight: '30vh',
   },
   shipGalley: {
     padding: '1rem',
@@ -29,7 +30,17 @@ const useStyles = createUseStyles({
   },
   ship:{
     display: 'flex',
-    height: '2rem',
+
+    justifyContent: 'center',
+    backgroundColor: 'orange',
+    '&:hover': {
+      backgroundColor: 'pink',
+    },
+  },
+  verticalShip:{
+    display: 'flex',
+    flexDirection: 'column',
+
     justifyContent: 'center',
     backgroundColor: 'orange',
     '&:hover': {
@@ -43,12 +54,18 @@ const useStyles = createUseStyles({
     height: '100%',
     boxSizing: 'border-box',
     aspectRatio: '1/1',
+    height: '2rem',
   },
   selected: {
     backgroundColor: 'purple',
     '&:hover': {
       backgroundColor: 'purple',
     },
+  },
+  selectedShipContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
   }
 })
 
@@ -59,6 +76,8 @@ function PlaceShips(props) {
   const setShips = props.setShips;
   const selectShip = props.selectShip;
   const selectedShip = props.selectedShip;
+  const shipOrientation = props.shipOrientation;
+  const setShipOrientation = props.setShipOrientation;
 
   const renderShip = (length, key) => {
     let ship = [];
@@ -95,14 +114,39 @@ function PlaceShips(props) {
     )
   }
 
+  const ShipOrientationContainer = function(){
+    const toggleOrientation = function() {
+      if (shipOrientation == "x") {
+        setShipOrientation("y")
+      } else {
+        setShipOrientation("x")
+      }
+
+    }
+    return(
+      <button onClick={toggleOrientation}>Rotate Ship</button>
+    )
+
+  }
+
   const SelectedShipContainer = function() {
+
+    const shipOrientationClass = function() {
+      if (shipOrientation == "x") {
+        return(classes.ship)
+      } else {
+        return(classes.verticalShip)
+      }
+    }
+
     if (!selectedShip == false) {
       return(
-        <div className={classes.selectedShip}>
+        <div className={classes.selectedShipContainer}>
           <div className={classes.shipContainer}>
             <div className={classes.shipName}>{selectedShip.name}</div>
-            <div className={`${classes.ship} ${classes.selected}`}>{renderShip(selectedShip.ship.length, "selected")}</div>
+            <div className={`${shipOrientation == 'x' ? classes.ship : classes.verticalShip} ${classes.selected}`}>{renderShip(selectedShip.ship.length, "selected")}</div>
           </div>
+          <ShipOrientationContainer/>
         </div>
       )
     } else {
@@ -111,6 +155,8 @@ function PlaceShips(props) {
       )
     }
   }
+
+
 
     return(
       <div className={classes.wrapper}>

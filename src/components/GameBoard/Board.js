@@ -47,6 +47,8 @@ function Board(props) {
               selectShip={selectShip}
               ships={props.ships} 
               setShips={props.setShips}
+              shipOrientation={props.shipOrientation}
+              setShipOrientation={props.setShipOrientation}
             /> 
             )) }
         </div>

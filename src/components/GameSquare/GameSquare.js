@@ -39,19 +39,23 @@ function GameSquare(props) {
   const gameState = useContext(GameContext);
   const currentPlayer = players[0];
   const myGameBoard = currentPlayer.myGameBoard;
+  const shipOrientation = props.shipOrientation;
+  const position = props.position;
+  const setShipOrientation = props.setShipOrientation;
+  
   const removePlacedShip = function() {
     const updatedShips = {    }
     for (const shipName in ships) {
       if (shipName != selectedShip.name)
       updatedShips[shipName] = ships[shipName];
     }
-    console.log(updatedShips);
     setShips(updatedShips);
   }
 
+
   const placeShip = function() {
     if (selectedShip == false) {return} 
-    myGameBoard.placeShip(ship, props.position, "y");
+    myGameBoard.placeShip(ship, position, shipOrientation);
     setPlayers(players);
     gameState.update();
     // Update Ships
