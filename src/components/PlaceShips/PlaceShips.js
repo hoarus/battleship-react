@@ -56,7 +56,7 @@ function PlaceShips(props) {
   const classes = useStyles();
   const ships = props.ships;
   const setShips = props.setShips;
-  const [selectedShip, updateSelectedShip] = useState();
+  let selectedShip = false;
 
   const renderShip = (length, key) => {
     let ship = [];
@@ -66,9 +66,10 @@ function PlaceShips(props) {
     return ship;
   }
 
+
   const selectShip = function(event){
-    selectedShip.classList.remove(classes.selected);
-    updateSelectedShip(event.currentTarget);
+    (selectedShip == false)|| selectedShip.classList.remove(classes.selected);
+    selectedShip = event.currentTarget;
     selectedShip.classList.add(classes.selected);
   }
 
