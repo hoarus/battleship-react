@@ -7,9 +7,10 @@ const useStyles = createUseStyles({
   wrapper: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    alignItems: 'center',
     border: 'solid 2px blue',
     margin: ' 1rem 0rem',
+    height: '30vh',
   },
   shipGalley: {
     padding: '1rem',
@@ -58,8 +59,6 @@ function PlaceShips(props) {
   const setShips = props.setShips;
   const selectShip = props.selectShip;
   const selectedShip = props.selectedShip;
-  const [selectedShipName, setSelectedShipName] = useState();
-  let highlightedShip = false;
 
   const renderShip = (length, key) => {
     let ship = [];
@@ -78,31 +77,50 @@ function PlaceShips(props) {
     // highlightedShip = event.currentTarget;
     // highlightedShip.classList.add(classes.selected);
     // Select highlighted ship in Game
-    selectShip(ships[shipName]);
-    setSelectedShipName(shipName);
+    selectShip({
+      name: shipName,
+      ship: ships[shipName],
+    });
   }
 
-  return(
-    <div className={classes.wrapper}>
-      <h2>Place Ships</h2>
-      <div className={classes.selectedShip}></div>
-        <div className={classes.shipContainer}>
-          <div className={classes.shipName}>{selectedShipName}</div>
-          <div className={`${classes.ship} ${classes.selected}`}>{renderShip(selectedShip.length, "selected")}</div>
-        </div>
+  const ShipGalley = function() {
+    return(
       <div className= {classes.shipGalley}>
-        {Object.keys(ships).map((key, index) => {
-          const length = ships[key].getLength();
-          return(
-            <div className={classes.shipContainer} key={`shipContainer${index}`}>
-              <div className={classes.shipName} key={`shipName${index}`}>{key}</div>
-              <div key={`${index} ship`}className={classes.ship}  onClick={e => highlightShip(e, key)} length={length} name={key}>{renderShip(length, key)}</div>
-            </div>
-          )
-      })}
-      </div>
+      {Object.keys(ships).map((key, index) => {
+        const length = ships[key].getLength();
+        return(
+          <div className={classes.shipContainer} key={`shipContainer${index}`}>
+            <div className={classes.shipName} key={`shipName${index}`}>{key}</div>
+            <div key={`${index} ship`}className={classes.ship}  onClick={e => highlightShip(e, key)} length={length} name={key}>{renderShip(length, key)}</div>
+          </div>
+        )
+    })}
     </div>
-  )
+    )
+  }
+  if (selectedShip == false) {
+    return(
+      <div className={classes.wrapper}>
+        <h2>Place Ships</h2>
+        <ShipGalley/>
+      </div>
+    )
+  } else {
+    return(
+      <div className={classes.wrapper}>
+        <h2>Place Ships</h2>
+        <div className={classes.selectedShip}>
+          <div className={classes.shipContainer}>
+            <div className={classes.shipName}>{selectedShip.name}</div>
+            <div className={`${classes.ship} ${classes.selected}`}>{renderShip(selectedShip.ship.length, "selected")}</div>
+          </div>
+        </div>
+        <ShipGalley/>
+      </div>
+    )
+  }
+
+
   
 
 

@@ -37,7 +37,17 @@ function Board(props) {
         <div className= {classes.gameBoard}>
           {gameBoard.board.map((row, y) =>
             row.map((square, x) =>
-            <GameSquare key={x} value={square} position={`${incrementLetter(x)}${y + 1}`} players={players} setPlayers={setPlayers} selectedShip={selectedShip} selectShip={selectShip}/> 
+            <GameSquare 
+              key={x} 
+              value={square} 
+              position={`${incrementLetter(x)}${y + 1}`} 
+              players={players} 
+              setPlayers={setPlayers} 
+              selectedShip={selectedShip} 
+              selectShip={selectShip}
+              ships={props.ships} 
+              setShips={props.setShips}
+            /> 
             )) }
         </div>
     </div>

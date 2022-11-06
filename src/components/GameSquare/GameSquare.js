@@ -32,21 +32,35 @@ function GameSquare(props) {
   const classes = useStyles();
   const players = props.players;
   const setPlayers = props.setPlayers;
+  const ships = props.ships;
+  const setShips = props.setShips;
   const selectShip = props.selectShip;
   const selectedShip = props.selectedShip;
   const gameState = useContext(GameContext);
   const currentPlayer = players[0];
   const myGameBoard = currentPlayer.myGameBoard;
-
+  const removePlacedShip = function() {
+    const updatedShips = {    }
+    for (const shipName in ships) {
+      if (shipName != selectedShip.name)
+      updatedShips[shipName] = ships[shipName];
+    }
+    console.log(updatedShips);
+    setShips(updatedShips);
+  }
 
   const placeShip = function() {
-    console.log(selectedShip);
-    myGameBoard.placeShip(smallShip, props.position, "y");
+    if (selectedShip == false) {return} 
+    myGameBoard.placeShip(ship, props.position, "y");
     setPlayers(players);
     gameState.update();
+    // Update Ships
+    removePlacedShip();    
+    // Prevent ship being placed twice
+    selectShip(false);
   }
   const squareType =  () => myGameBoard.lookupPosition(props.position);
-  const smallShip = selectedShip;
+  const ship = selectedShip.ship;
 
   if(squareType() === 0) {
     return(
