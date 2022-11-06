@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import GameContext from '../Game/GameContext';
 import { createUseStyles } from 'react-jss';
 import {Ship} from '../GameLogic/Ship';
@@ -21,6 +21,7 @@ const useStyles = createUseStyles({
   shipContainer: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
   },
   shipName: {
     textAlign: 'center',
@@ -28,8 +29,11 @@ const useStyles = createUseStyles({
   ship:{
     display: 'flex',
     height: '2rem',
-    justifyContent: 'center'
-    
+    justifyContent: 'center',
+    backgroundColor: 'orange',
+    '&:hover': {
+      backgroundColor: 'pink',
+    },
   },
   square:{
     border: 'solid 1px darkblue',
@@ -38,7 +42,12 @@ const useStyles = createUseStyles({
     height: '100%',
     boxSizing: 'border-box',
     aspectRatio: '1/1',
-    backgroundColor: 'orange'
+  },
+  selected: {
+    backgroundColor: 'purple',
+    '&:hover': {
+      backgroundColor: 'purple',
+    },
   }
 })
 
@@ -47,6 +56,7 @@ function PlaceShips(props) {
   const classes = useStyles();
   const ships = props.ships;
   const setShips = props.setShips;
+  const [selectedShip, updateSelectedShip] = useState();
 
   const renderShip = (length, key) => {
     let ship = [];
@@ -54,6 +64,12 @@ function PlaceShips(props) {
       ship.push(<div key={`${key}[${i}]`} className={classes.square}></div>)
     }
     return ship;
+  }
+
+  const selectShip = function(event){
+    selectedShip.classList.remove(classes.selected);
+    updateSelectedShip(event.currentTarget);
+    selectedShip.classList.add(classes.selected);
   }
 
   return(
@@ -65,7 +81,7 @@ function PlaceShips(props) {
           return(
             <div className={classes.shipContainer} key={`shipContainer${index}`}>
               <div className={classes.shipName} key={`shipName${index}`}>{key}</div>
-              <div key={`${index} ship`}className={classes.ship}>{renderShip(length, key)}</div>
+              <div key={`${index} ship`}className={classes.ship}  onClick={selectShip} length={length} name={key}>{renderShip(length, key)}</div>
             </div>
           )
       })}
