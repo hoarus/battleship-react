@@ -43,17 +43,18 @@ playerOne.myGameBoard = gameBoardOne;
 playerTwo.myGameBoard = gameBoardTwo;
 
 
-const ships = {
-  destroyer: (new Ship(2)),
-  submarine: (new Ship(3)),
-  cruiser: (new Ship(3)),
-  battleship: (new Ship(4)),
-  carrier: (new Ship(5)),
+const startingShips = {
+  Destroyer: (new Ship(2)),
+  Submarine: (new Ship(3)),
+  Cruiser: (new Ship(3)),
+  Battleship: (new Ship(4)),
+  Carrier: (new Ship(5)),
 }
 
 
 function Game() {
   const [players, setPlayers] = useState([playerOne, playerTwo]);
+  const [ships, setShips] = useState(startingShips);
   const classes = useStyles();
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []); 
@@ -82,7 +83,7 @@ function Game() {
       <GameContext.Provider value={gameState}>
         <div className={classes.gameWrapper}>
           <PlayerDetails players={players}/>
-          <PlaceShips/>
+          <PlaceShips ships={ships} setShips={setShips}/>
           <Board players={players} setPlayers={setPlayers}/>
         </div>
       </GameContext.Provider>
