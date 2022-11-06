@@ -25,7 +25,7 @@ const useStyles = createUseStyles({
 function Board() {
   const classes = useStyles();
   const gameState = useContext(GameContext);
-  const gameBoard = gameState.gameBoard;
+  const gameBoard = gameState.gameBoardOne
 
   return(
     <div className={classes.wrapper}>

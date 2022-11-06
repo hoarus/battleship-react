@@ -14,9 +14,9 @@ export default function PlayerInputs(props){
   }
   const createPlayers = event => {
     event.preventDefault();
-    const playerOne = new Player(names.playerOne);
-    const playerTwo = new Player(names.playerTwo);
-    gameState.setPlayers([playerOne, playerTwo]);
+    (names.playerOne == undefined) || (gameState.playerOne.name = names.playerOne);
+    (names.playerTwo == undefined) || (gameState.playerTwo.name = names.playerTwo);
+    gameState.setPlayers([gameState.playerOne, gameState.playerTwo]);
   }
 
    return(

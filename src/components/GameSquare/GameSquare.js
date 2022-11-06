@@ -32,7 +32,7 @@ function GameSquare(props) {
 
   const classes = useStyles();
   const gameState = useContext(GameContext);
-  const gameBoard = gameState.gameBoard;
+  const gameBoard = gameState.gameBoardOne;
   const placeShip = function() {
     gameBoard.placeShip(smallShip, props.position, "y");
     gameState.update();

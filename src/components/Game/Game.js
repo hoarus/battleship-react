@@ -3,7 +3,7 @@ import Board from '../GameBoard/Board';
 import {GameBoard} from '../GameLogic/GameBoard';
 import GameContext from '../Game/GameContext';
 import PlaceShips from '../PlaceShips/PlaceShips';
-
+import {Player} from '../GameLogic/Player';
 import PlayerInputs from '../PlayerInputs/PlayerInputs';
 import {Ship} from '../GameLogic/Ship';
 import { createUseStyles } from 'react-jss';
@@ -24,7 +24,21 @@ const useStyles = createUseStyles({
   }
 })
 
-const gameBoard = new GameBoard();
+
+
+const togglePlayer = function (currentPlayer, pOne, pTwo) {
+  if (currentPlayer == pOne) {
+    currentPlayer = pTwo;
+  } else {
+    currentPlayer = pOne;
+  }
+}
+
+
+const gameBoardOne = new GameBoard();
+const gameBoardTwo = new GameBoard();
+const playerOne = new Player();
+const playerTwo = new Player();
 
 
 const ships = {
@@ -42,17 +56,21 @@ function Game() {
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []); 
   const gameState = {
-    gameBoard: gameBoard,
+    gameBoardOne: gameBoardOne,
+    gameBoardTwo: gameBoardTwo,
+    playerOne: playerOne,
+    playerTwo: playerTwo,
     update: forceUpdate,
     players: players,
     setPlayers: setPlayers,
+    currentPlayer: playerOne,
+    togglePlayer: togglePlayer(playerOne, playerOne, playerTwo),
   }
 
 
-  const playerOne = gameState.players[0];
-  const playerTwo = gameState.players[1];
 
-  if (gameState.players.length == 0) {
+
+  if (gameState.playerOne.name == "AI") {
     return (
       <GameContext.Provider value={gameState}>
         <div className={classes.gameWrapper}>
