@@ -23,6 +23,8 @@ const useStyles = createUseStyles({
 function Board(props) {
   const players = props.players;
   const setPlayers = props.setPlayers;
+  const selectShip = props.selectShip;
+  const selectedShip = props.selectedShip;
   const playerOne = props.players[0];
   const playerTwo = props.players[1];
 
@@ -35,7 +37,7 @@ function Board(props) {
         <div className= {classes.gameBoard}>
           {gameBoard.board.map((row, y) =>
             row.map((square, x) =>
-            <GameSquare key={x} value={square} position={`${incrementLetter(x)}${y + 1}`} players={players} setPlayers={setPlayers}/> 
+            <GameSquare key={x} value={square} position={`${incrementLetter(x)}${y + 1}`} players={players} setPlayers={setPlayers} selectedShip={selectedShip} selectShip={selectShip}/> 
             )) }
         </div>
     </div>

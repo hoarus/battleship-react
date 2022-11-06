@@ -56,7 +56,10 @@ function PlaceShips(props) {
   const classes = useStyles();
   const ships = props.ships;
   const setShips = props.setShips;
-  let selectedShip = false;
+  const selectShip = props.selectShip;
+  const selectedShip = props.selectedShip;
+  const [selectedShipName, setSelectedShipName] = useState();
+  let highlightedShip = false;
 
   const renderShip = (length, key) => {
     let ship = [];
@@ -67,22 +70,33 @@ function PlaceShips(props) {
   }
 
 
-  const selectShip = function(event){
-    (selectedShip == false)|| selectedShip.classList.remove(classes.selected);
-    selectedShip = event.currentTarget;
-    selectedShip.classList.add(classes.selected);
+  const highlightShip = function(event, shipName){
+    // Remove previously highlighted ship
+    // (highlightedShip == false)|| highlightedShip.classList.remove(classes.selected);
+    // console.log(highlightedShip);
+    // Highlight selected ship
+    // highlightedShip = event.currentTarget;
+    // highlightedShip.classList.add(classes.selected);
+    // Select highlighted ship in Game
+    selectShip(ships[shipName]);
+    setSelectedShipName(shipName);
   }
 
   return(
     <div className={classes.wrapper}>
       <h2>Place Ships</h2>
+      <div className={classes.selectedShip}></div>
+        <div className={classes.shipContainer}>
+          <div className={classes.shipName}>{selectedShipName}</div>
+          <div className={`${classes.ship} ${classes.selected}`}>{renderShip(selectedShip.length, "selected")}</div>
+        </div>
       <div className= {classes.shipGalley}>
         {Object.keys(ships).map((key, index) => {
           const length = ships[key].getLength();
           return(
             <div className={classes.shipContainer} key={`shipContainer${index}`}>
               <div className={classes.shipName} key={`shipName${index}`}>{key}</div>
-              <div key={`${index} ship`}className={classes.ship}  onClick={selectShip} length={length} name={key}>{renderShip(length, key)}</div>
+              <div key={`${index} ship`}className={classes.ship}  onClick={e => highlightShip(e, key)} length={length} name={key}>{renderShip(length, key)}</div>
             </div>
           )
       })}

@@ -32,18 +32,21 @@ function GameSquare(props) {
   const classes = useStyles();
   const players = props.players;
   const setPlayers = props.setPlayers;
+  const selectShip = props.selectShip;
+  const selectedShip = props.selectedShip;
   const gameState = useContext(GameContext);
   const currentPlayer = players[0];
   const myGameBoard = currentPlayer.myGameBoard;
 
 
   const placeShip = function() {
+    console.log(selectedShip);
     myGameBoard.placeShip(smallShip, props.position, "y");
     setPlayers(players);
     gameState.update();
   }
   const squareType =  () => myGameBoard.lookupPosition(props.position);
-  const smallShip = new Ship(2);
+  const smallShip = selectedShip;
 
   if(squareType() === 0) {
     return(
