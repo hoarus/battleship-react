@@ -70,13 +70,7 @@ function PlaceShips(props) {
 
 
   const highlightShip = function(event, shipName){
-    // Remove previously highlighted ship
-    // (highlightedShip == false)|| highlightedShip.classList.remove(classes.selected);
-    // console.log(highlightedShip);
-    // Highlight selected ship
-    // highlightedShip = event.currentTarget;
-    // highlightedShip.classList.add(classes.selected);
-    // Select highlighted ship in Game
+
     selectShip({
       name: shipName,
       ship: ships[shipName],
@@ -88,37 +82,44 @@ function PlaceShips(props) {
       <div className= {classes.shipGalley}>
       {Object.keys(ships).map((key, index) => {
         const length = ships[key].getLength();
+        if(key != selectedShip.name) {
         return(
           <div className={classes.shipContainer} key={`shipContainer${index}`}>
             <div className={classes.shipName} key={`shipName${index}`}>{key}</div>
             <div key={`${index} ship`}className={classes.ship}  onClick={e => highlightShip(e, key)} length={length} name={key}>{renderShip(length, key)}</div>
           </div>
         )
+        }
     })}
     </div>
     )
   }
-  if (selectedShip == false) {
-    return(
-      <div className={classes.wrapper}>
-        <h2>Place Ships</h2>
-        <ShipGalley/>
-      </div>
-    )
-  } else {
-    return(
-      <div className={classes.wrapper}>
-        <h2>Place Ships</h2>
+
+  const SelectedShipContainer = function() {
+    if (!selectedShip == false) {
+      return(
         <div className={classes.selectedShip}>
           <div className={classes.shipContainer}>
             <div className={classes.shipName}>{selectedShip.name}</div>
             <div className={`${classes.ship} ${classes.selected}`}>{renderShip(selectedShip.ship.length, "selected")}</div>
           </div>
         </div>
+      )
+    } else {
+      return(
+        <div></div>
+      )
+    }
+  }
+
+    return(
+      <div className={classes.wrapper}>
+        <h2>Place Ships</h2>
+        <SelectedShipContainer/>
         <ShipGalley/>
       </div>
     )
-  }
+
 
 
   

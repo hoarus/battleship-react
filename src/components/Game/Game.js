@@ -85,7 +85,6 @@ function Game() {
         <div className={classes.gameWrapper}>
           <PlayerDetails players={players}/>
           <PlaceShips ships={ships} setShips={setShips} selectedShip={selectedShip}  selectShip={selectShip}/>
-          <div>Ship Length: {selectShip.length}</div>
           <Board players={players} setPlayers={setPlayers} selectedShip={selectedShip} selectShip={selectShip} ships={ships} setShips={setShips}/>
         </div>
       </GameContext.Provider>
