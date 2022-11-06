@@ -51,7 +51,7 @@ const ships = {
 
 
 function Game() {
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState([playerOne, playerTwo]);
   const classes = useStyles();
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []); 
@@ -63,6 +63,8 @@ function Game() {
     update: forceUpdate,
     players: players,
     setPlayers: setPlayers,
+    //Need to find some way to create a function in the context which enables toggling between players
+    //Actually, maybe I don't. Maybe it only needs to be a single function which is passed down to a specific "Turn Over" button component
     currentPlayer: playerOne,
     togglePlayer: togglePlayer(playerOne, playerOne, playerTwo),
   }
@@ -74,7 +76,7 @@ function Game() {
     return (
       <GameContext.Provider value={gameState}>
         <div className={classes.gameWrapper}>
-          <PlayerInputs/>
+          <PlayerInputs players={players} setPlayers={setPlayers}/>
         </div>
       </GameContext.Provider>
     );
@@ -82,7 +84,7 @@ function Game() {
     return(
       <GameContext.Provider value={gameState}>
         <div className={classes.gameWrapper}>
-          <PlayerDetails/>
+          <PlayerDetails players={players}/>
           <PlaceShips/>
           <Board/>
         </div>

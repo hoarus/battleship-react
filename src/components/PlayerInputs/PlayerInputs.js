@@ -1,10 +1,9 @@
-import React, { useState, useContext } from 'react';
-import {Player} from '../GameLogic/Player';
-import GameContext from '../Game/GameContext';
+import React, { useState } from 'react';
 
 export default function PlayerInputs(props){
+  const players = props.players;
+  const setPlayers = props.setPlayers;
 
-  const gameState = useContext(GameContext);
   const [names, setNames] = useState('');
   const setName = function(event) {
     setNames({
@@ -14,9 +13,9 @@ export default function PlayerInputs(props){
   }
   const createPlayers = event => {
     event.preventDefault();
-    (names.playerOne == undefined) || (gameState.playerOne.name = names.playerOne);
-    (names.playerTwo == undefined) || (gameState.playerTwo.name = names.playerTwo);
-    gameState.setPlayers([gameState.playerOne, gameState.playerTwo]);
+    (names.playerOne == undefined) || (players[0].name = names.playerOne);
+    (names.playerTwo == undefined) || (players[1].name = names.playerTwo);
+    setPlayers([players[0], players[1]]);
   }
 
    return(
