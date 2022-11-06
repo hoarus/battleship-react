@@ -8,6 +8,7 @@ import PlayerInputs from '../PlayerInputs/PlayerInputs';
 import {Ship} from '../GameLogic/Ship';
 import { createUseStyles } from 'react-jss';
 import PlayerDetails from '../PlayerDetails/PlayerDetails';
+import NextTurn from '../NextTurn/NextTurn';
 
 
 const useStyles = createUseStyles({
@@ -54,9 +55,11 @@ const startingShips = {
 
 function Game() {
   const [players, setPlayers] = useState([playerOne, playerTwo]);
+  const [currentPlayer, setCurrentPlayer] = useState(players[0]);
   const [ships, setShips] = useState(startingShips);
   const [selectedShip, selectShip] = useState(false);
   const [shipOrientation, setShipOrientation] = useState("x");
+  const [turnOver, setTurnOver] = useState(false);
   const classes = useStyles();
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []); 
@@ -80,7 +83,7 @@ function Game() {
         </div>
       </GameContext.Provider>
     );
-  } else {
+  } else if (turnOver==false) {
     return(
       <GameContext.Provider value={gameState}>
         <div className={classes.gameWrapper}>
@@ -102,9 +105,20 @@ function Game() {
             setShips={setShips}
             shipOrientation={shipOrientation}
             setShipOrientation={setShipOrientation}
+            turnOver = {turnOver}
+            setTurnOver = {setTurnOver}
           />
         </div>
       </GameContext.Provider>
+    )
+  } else {
+    return(
+      <NextTurn
+        players={players}
+        currentPlayer={currentPlayer}
+        setCurrentPlayer={setCurrentPlayer}
+        setTurnOver = {setTurnOver}
+      />
     )
   }
 }

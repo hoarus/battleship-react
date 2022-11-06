@@ -15,7 +15,17 @@ const useStyles = createUseStyles({
   },
   wrapper: {
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'center',
+    gap: '2rem',
+    padding: '2rem',
+    flexGrow: 0,
+  },
+
+  button: {
+    flexGrow: '0',
+    padding: '0.2rem 2rem',
   }
 })
 
@@ -27,10 +37,15 @@ function Board(props) {
   const selectedShip = props.selectedShip;
   const playerOne = props.players[0];
   const playerTwo = props.players[1];
+  const setTurnOver = props.setTurnOver;
 
 
   const classes = useStyles();
   const gameBoard = playerOne.myGameBoard;
+
+  const endTurn = function() {
+    setTurnOver();
+  }
 
   return(
     <div className={classes.wrapper}>
@@ -52,6 +67,7 @@ function Board(props) {
             /> 
             )) }
         </div>
+        <button className={classes.button} onClick={endTurn}>End Turn</button>
     </div>
   )
 }
