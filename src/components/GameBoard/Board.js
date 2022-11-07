@@ -50,6 +50,11 @@ function Board(props) {
     setTurnOver();
   }
 
+  const endTurnConditionsMet = function() {
+    // No available ships remaining
+    return Object.keys(currentPlayer.availableShips).length == 0;
+  }
+
   return(
     <div className={classes.wrapper}>
         <div className= {classes.gameBoard}>
@@ -71,7 +76,9 @@ function Board(props) {
             /> 
             )) }
         </div>
-        <button className={classes.button} onClick={endTurn}>End Turn</button>
+        {endTurnConditionsMet() &&
+          <button className={classes.button} onClick={endTurn}>End Turn</button>
+        }
     </div>
   )
 }
