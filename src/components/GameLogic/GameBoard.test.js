@@ -306,12 +306,24 @@ test('Gameboard confirms all ships have been sunk 2', () => {
   let ship2 = new Ship(3);
   board.placeShip(ship1, "D3", "y");
   board.placeShip(ship2, "A1", "x");
-  ship1.hit();
-  ship1.hit();
-  ship2.hit();
-  ship2.hit();
-  ship2.hit();
+  board.receiveAttack("D3");
+  board.receiveAttack("D4");
+  board.receiveAttack("A1");
+  board.receiveAttack("B1");
+  board.receiveAttack("C1");
   expect(board.allShipsSunk()).toBe(true
+    );
+}); 
+
+test('Gameboard accurately tracks ship health 1', () => {
+  let board = new GameBoard();
+  let ship1 = new Ship(2);
+  let ship2 = new Ship(3);
+  board.placeShip(ship1, "D3", "y");
+  board.placeShip(ship2, "A1", "x");
+  board.receiveAttack("D3");
+  board.receiveAttack("A1");
+  expect(ship1.health).toBe(1
     );
 }); 
 

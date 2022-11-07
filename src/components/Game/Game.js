@@ -34,10 +34,7 @@ const togglePlayer = function (currentPlayer, pOne, pTwo) {
     currentPlayer = pOne;
   }
 }
-// Temporary Starting Ships
-const startingShips = {
-  Destroyer: (new Ship(2)),
-}
+
 // Disabled Starting Ships
 const disableStartingShips = {
   Destroyer: (new Ship(2)),
@@ -54,8 +51,13 @@ playerOne.myGameBoard = gameBoardOne;
 playerTwo.myGameBoard = gameBoardTwo;
 playerOne.enemyGameBoard = gameBoardTwo;
 playerTwo.enemyGameBoard = gameBoardOne;
-playerOne.availableShips = startingShips;
-playerTwo.availableShips = startingShips;
+//Ship assignment has to be duplicate to ensure players are not sharing a set of ships
+playerOne.availableShips = {
+  Destroyer: (new Ship(2)),
+}
+playerTwo.availableShips = {
+  Destroyer: (new Ship(2)),
+}
 
 
 
@@ -64,7 +66,7 @@ playerTwo.availableShips = startingShips;
 function Game() {
   const [players, setPlayers] = useState([playerOne, playerTwo]);
   const [currentPlayer, setCurrentPlayer] = useState(players[0]);
-  const [ships, setShips] = useState(startingShips);
+  const [ships, setShips] = useState();
   const [selectedShip, selectShip] = useState(false);
   const [shipOrientation, setShipOrientation] = useState("x");
   const [turnOver, setTurnOver] = useState(false);
