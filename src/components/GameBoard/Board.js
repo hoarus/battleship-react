@@ -45,7 +45,8 @@ function Board(props) {
   const setShipOrientation = props.setShipOrientation
   const classes = useStyles();
   const gameBoard = currentPlayer.myGameBoard;
-  const [shotTaken, setShotTaken] = useState();
+  const shotTaken = props.shotTaken;
+  const setShotTaken = props.setShotTaken;
   const turnCount = props.turnCount;
 
   const endTurn = function() {
@@ -104,6 +105,7 @@ function Board(props) {
         setShips={setShips}
         shipOrientation={shipOrientation}
         setShipOrientation={setShipOrientation}
+        shotTaken = {shotTaken}
         setShotTaken={setShotTaken}
       /> 
       )
@@ -119,7 +121,6 @@ function Board(props) {
             <ApplicableSquareType key={x} square={square} x={x} y={y} /> 
             )) }
         </div>
-        <button>Hello</button>
         {endTurnConditionsMet() &&
           <button className={classes.button} onClick={endTurn}>End Turn</button>
         }

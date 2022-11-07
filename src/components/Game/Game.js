@@ -69,6 +69,7 @@ function Game() {
   const [shipOrientation, setShipOrientation] = useState("x");
   const [turnOver, setTurnOver] = useState(false);
   const [turnCount, setTurnCount] = useState(0);
+  const [shotTaken, setShotTaken] = useState();
   const classes = useStyles();
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []); 
@@ -123,6 +124,8 @@ function Game() {
             turnOver = {turnOver}
             setTurnOver = {setTurnOver}
             turnCount = {turnCount}
+            shotTaken = {shotTaken}
+            setShotTaken = {setShotTaken}
           />
           }
           <Board
@@ -139,6 +142,8 @@ function Game() {
             turnOver = {turnOver}
             setTurnOver = {setTurnOver}
             turnCount = {turnCount}
+            shotTaken = {shotTaken}
+            setShotTaken = {setShotTaken}
           />
         </div>
       </GameContext.Provider>
@@ -152,6 +157,7 @@ function Game() {
         setTurnOver = {setTurnOver}
         turnCount = {turnCount}
         setTurnCount = {setTurnCount}
+        setShotTaken = {setShotTaken}
       />
     )
   }

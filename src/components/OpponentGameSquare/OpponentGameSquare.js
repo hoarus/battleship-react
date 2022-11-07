@@ -54,9 +54,13 @@ function OpponentGameSquare(props) {
   const inactiveSquare = false;
   const squareType =  () => enemyGameBoard.lookupPosition(props.position);
   const setShotTaken = props.setShotTaken;
+  const shotTaken = props.shotTaken;
 
 
   const fireShot = function(){
+    if (shotTaken) {
+      return
+    }
     currentPlayer.fireShot(position);
     setShotTaken(true);
     gameState.update();

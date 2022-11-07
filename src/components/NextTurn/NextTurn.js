@@ -37,6 +37,7 @@ export default function NextTurn(props){
   const setTurnOver = props.setTurnOver;
   const turnCount = props.turnCount;
   const setTurnCount = props.setTurnCount;
+  const setShotTaken = props.setShotTaken;
 
   let nextPlayer = "";
   if (players[0] === currentPlayer) {
@@ -49,6 +50,7 @@ export default function NextTurn(props){
     setCurrentPlayer(nextPlayer);
     setTurnCount(turnCount + 1);
     setTurnOver(false);
+    setShotTaken(false);
   }
 
 
