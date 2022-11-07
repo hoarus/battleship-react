@@ -70,7 +70,6 @@ function Game() {
   }
   const allShipsPlaced = function() {
     // No available ships remaining
-    console.log(Object.keys(currentPlayer.availableShips).length > 0);
     return Object.keys(currentPlayer.availableShips).length == 0;
   }
 
@@ -101,8 +100,24 @@ function Game() {
             setShipOrientation={setShipOrientation}
           />
           }
+          {allShipsPlaced()&&
           <Board
-            boardTitle="Your Board" 
+            boardType="Opponent" 
+            players={players} 
+            setPlayers={setPlayers} 
+            currentPlayer={currentPlayer}
+            selectedShip={selectedShip} 
+            selectShip={selectShip} 
+            ships={ships} 
+            setShips={setShips}
+            shipOrientation={shipOrientation}
+            setShipOrientation={setShipOrientation}
+            turnOver = {turnOver}
+            setTurnOver = {setTurnOver}
+          />
+          }
+          <Board
+            boardType="Own" 
             players={players} 
             setPlayers={setPlayers} 
             currentPlayer={currentPlayer}

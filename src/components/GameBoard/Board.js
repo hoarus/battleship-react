@@ -31,6 +31,7 @@ const useStyles = createUseStyles({
 
 
 function Board(props) {
+  const boardType = props.boardType;
   const players = props.players;
   const currentPlayer = props.currentPlayer
   const setPlayers = props.setPlayers;
@@ -41,8 +42,6 @@ function Board(props) {
   const setShips = props.setShips
   const shipOrientation = props.shipOrientation
   const setShipOrientation = props.setShipOrientation
-
-
   const classes = useStyles();
   const gameBoard = currentPlayer.myGameBoard;
 
@@ -54,10 +53,20 @@ function Board(props) {
     // No available ships remaining
     return Object.keys(currentPlayer.availableShips).length == 0;
   }
+  let boardTitle = "";
+  if (boardType == "Own") {
+    boardTitle ="Your Board";
+   } else {
+    boardTitle = "Opponent's Board";
+   }
+
+  const ApplicableSquareType = function(){
+
+  }
 
   return(
     <div className={classes.wrapper}>
-        <h2>Your Board</h2>
+        <h2>{boardTitle}</h2>
         <div className= {classes.gameBoard}>
           {gameBoard.board.map((row, y) =>
             row.map((square, x) =>

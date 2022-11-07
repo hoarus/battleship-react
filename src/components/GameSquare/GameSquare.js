@@ -51,7 +51,6 @@ function GameSquare(props) {
   const position = props.position;
   const inactiveSquare = () => Object.keys(currentPlayer.availableShips).length == 0;
   const squareType =  () => myGameBoard.lookupPosition(props.position);
-  console.log(squareType());
   const ship = selectedShip.ship;
   
   const removePlacedShip = function() {

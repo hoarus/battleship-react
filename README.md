@@ -24,6 +24,16 @@ React Components:
     - Player Board
   - Change Player Button
     
+Next Steps:
+- Create a "Next Player" component
+  -- hide board and bring up "Next Player"
+- Repeat steps for Next Player with Place Ships
+
+- Hide Place Ships when Ships is empty
+- Render Enemy's Board
+- Enable functionality to attack enemy's board
+- Display hits/misses on  enemy's board
+- Display hits/misses on own board
 
 
 # Getting Started with Create React App
