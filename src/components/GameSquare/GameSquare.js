@@ -6,30 +6,40 @@ import {Ship} from '../GameLogic/Ship';
 const useStyles = createUseStyles({
   gameSquare: {
     border: 'solid 1px darkblue',
-    backgroundColor: 'lightgreen',
+    display: 'flex',
     color: 'black',
     width: '100%',
     height: '100%',
     boxSizing: 'border-box',
     aspectRatio: '1/1',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  activeSquare: {
+    backgroundColor: 'lightgreen',
     '&:hover': {
       backgroundColor: 'pink'
     },
-  }, inactiveSquare: {
-    border: 'solid 1px darkblue',
+  }, 
+  inactiveSquare: {
     backgroundColor: 'lightgreen',
-    color: 'black',
-    width: '100%',
-    height: '100%',
-    boxSizing: 'border-box',
-    aspectRatio: '1/1',
   },
   shipSquare: {
-    border: 'solid 1px darkblue',
     backgroundColor: 'orange',
-    width: '100%',
-    height: '100%',
-    boxSizing: 'border-box',
+  }, 
+  miss: {
+    border: 'solid 1px darkblue',
+    backgroundColor: 'white',
+    borderRadius: '50%',
+    width: '80%',
+    aspectRatio: '1/1',
+  },
+  hit: {
+    border: 'solid 1px darkblue',
+    backgroundColor: 'red',
+    borderRadius: '50%',
+    width: '80%',
     aspectRatio: '1/1',
   }
 })
@@ -75,18 +85,29 @@ function GameSquare(props) {
     }
   }
 
-  if(typeof squareType() == "object") {
+  if(typeof squareType() == "object") /*ship*/{
     return(
-      <div className={classes.shipSquare} onClick = {placeShip}>{props.position}</div>
+      <div className={`${classes.gameSquare} ${classes.shipSquare}`}>{props.position}</div>
     );
-  }
-  if(inactiveSquare()){
+  } else if(squareType()=== 1) /*miss*/{
     return(
-      <div className={classes.inactiveSquare} onClick = {placeShip}>{props.position}</div>
+    <div className={`${classes.gameSquare} ${classes.inactiveSquare}`}>
+      <div className={classes.miss}></div>
+    </div>
+    )
+  } else if(squareType()=== 2)/*hit*/{
+    return(
+    <div className={`${classes.gameSquare} ${classes.shipSquare}`}>
+      <div className={classes.hit}></div>
+    </div>
+    )
+  } else if (inactiveSquare()){
+    return(
+      <div className={`${classes.gameSquare} ${classes.inactiveSquare}`}>{props.position}</div>
     )
   } else if (squareType() === 0) {
     return(
-      <div className={classes.gameSquare} onClick = {placeShip}>{props.position}</div>
+      <div className={`${classes.gameSquare} ${classes.activeSquare}`} onClick = {placeShip}>{props.position}</div>
     );
     } else {
     return(
