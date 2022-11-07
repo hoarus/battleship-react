@@ -55,7 +55,7 @@ class GameBoard {
     let board = this.board;
     // Break function if not a possible move
     if (!isPlacementPossible()) {
-      return "Impossible Move";
+      return "Illegal Move";
     }
 
     (this.ships).push(ship);

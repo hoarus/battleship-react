@@ -215,6 +215,13 @@ test('Prohibits impossible ship placement 4', () => {
   );
 }); 
 
+test('Impossible ship placement return "Illegal Move"', () => {
+  let board = new GameBoard();
+  let ship = new Ship(5);
+  expect(board.placeShip(ship, "A9", "y")).toBe("Illegal Move"
+  );
+}); 
+
 
 test('Receive attack updates coordinates with miss 1', () => {
   let board = new GameBoard();

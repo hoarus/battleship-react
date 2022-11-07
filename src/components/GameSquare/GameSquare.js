@@ -55,13 +55,14 @@ function GameSquare(props) {
 
   const placeShip = function() {
     if (selectedShip == false) {return} 
-    myGameBoard.placeShip(ship, position, shipOrientation);
-    setPlayers(players);
-    gameState.update();
-    // Update Ships
-    removePlacedShip();    
-    // Prevent ship being placed twice
-    selectShip(false);
+    else if (myGameBoard.placeShip(ship, position, shipOrientation) != "Illegal Move") {
+      setPlayers(players);
+      gameState.update();
+      // Update Ships
+      removePlacedShip();    
+      // Prevent ship being placed twice
+      selectShip(false);
+    }
   }
   const squareType =  () => myGameBoard.lookupPosition(props.position);
   const ship = selectedShip.ship;
