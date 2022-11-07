@@ -87,7 +87,7 @@ function Game() {
     return(
       <GameContext.Provider value={gameState}>
         <div className={classes.gameWrapper}>
-          <PlayerDetails players={players}/>
+          <PlayerDetails players={players} currentPlayer={currentPlayer}/>
           <PlaceShips 
             ships={ships} 
             setShips={setShips} 
@@ -99,6 +99,7 @@ function Game() {
           <Board 
             players={players} 
             setPlayers={setPlayers} 
+            currentPlayer={currentPlayer}
             selectedShip={selectedShip} 
             selectShip={selectShip} 
             ships={ships} 

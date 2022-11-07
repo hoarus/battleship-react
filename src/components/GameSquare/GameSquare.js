@@ -30,6 +30,7 @@ const useStyles = createUseStyles({
 
 function GameSquare(props) {
   const classes = useStyles();
+  const currentPlayer = props.currentPlayer;
   const players = props.players;
   const setPlayers = props.setPlayers;
   const ships = props.ships;
@@ -37,11 +38,9 @@ function GameSquare(props) {
   const selectShip = props.selectShip;
   const selectedShip = props.selectedShip;
   const gameState = useContext(GameContext);
-  const currentPlayer = players[0];
   const myGameBoard = currentPlayer.myGameBoard;
   const shipOrientation = props.shipOrientation;
   const position = props.position;
-  const setShipOrientation = props.setShipOrientation;
   
   const removePlacedShip = function() {
     const updatedShips = {    }

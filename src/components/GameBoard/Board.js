@@ -32,16 +32,15 @@ const useStyles = createUseStyles({
 
 function Board(props) {
   const players = props.players;
+  const currentPlayer = props.currentPlayer
   const setPlayers = props.setPlayers;
   const selectShip = props.selectShip;
   const selectedShip = props.selectedShip;
-  const playerOne = props.players[0];
-  const playerTwo = props.players[1];
   const setTurnOver = props.setTurnOver;
 
 
   const classes = useStyles();
-  const gameBoard = playerOne.myGameBoard;
+  const gameBoard = currentPlayer.myGameBoard;
 
   const endTurn = function() {
     setTurnOver();
@@ -57,6 +56,7 @@ function Board(props) {
               value={square} 
               position={`${incrementLetter(x)}${y + 1}`} 
               players={players} 
+              currentPlayer = {currentPlayer}
               setPlayers={setPlayers} 
               selectedShip={selectedShip} 
               selectShip={selectShip}
