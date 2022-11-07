@@ -57,6 +57,7 @@ function Board(props) {
 
   return(
     <div className={classes.wrapper}>
+        <h2>Your Board</h2>
         <div className= {classes.gameBoard}>
           {gameBoard.board.map((row, y) =>
             row.map((square, x) =>

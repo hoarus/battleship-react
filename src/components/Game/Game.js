@@ -68,10 +68,10 @@ function Game() {
   const gameState = {
     update: forceUpdate,
   }
-  const shipsAreAvailable = function() {
+  const allShipsPlaced = function() {
     // No available ships remaining
     console.log(Object.keys(currentPlayer.availableShips).length > 0);
-    return Object.keys(currentPlayer.availableShips).length > 0;
+    return Object.keys(currentPlayer.availableShips).length == 0;
   }
 
 
@@ -92,7 +92,7 @@ function Game() {
       <GameContext.Provider value={gameState}>
         <div className={classes.gameWrapper}>
           <PlayerDetails players={players} currentPlayer={currentPlayer}/>
-          {shipsAreAvailable() &&
+          {!allShipsPlaced() &&
           <PlaceShips 
             currentPlayer={currentPlayer}
             selectedShip={selectedShip}  
@@ -101,7 +101,8 @@ function Game() {
             setShipOrientation={setShipOrientation}
           />
           }
-          <Board 
+          <Board
+            boardTitle="Your Board" 
             players={players} 
             setPlayers={setPlayers} 
             currentPlayer={currentPlayer}

@@ -15,8 +15,16 @@ const useStyles = createUseStyles({
     '&:hover': {
       backgroundColor: 'pink'
     },
+  }, inactiveSquare: {
+    border: 'solid 1px darkblue',
+    backgroundColor: 'lightgreen',
+    color: 'black',
+    width: '100%',
+    height: '100%',
+    boxSizing: 'border-box',
+    aspectRatio: '1/1',
   },
-  gameSquare2: {
+  shipSquare: {
     border: 'solid 1px darkblue',
     backgroundColor: 'orange',
     width: '100%',
@@ -41,7 +49,10 @@ function GameSquare(props) {
   const myGameBoard = currentPlayer.myGameBoard;
   const shipOrientation = props.shipOrientation;
   const position = props.position;
-
+  const inactiveSquare = () => Object.keys(currentPlayer.availableShips).length == 0;
+  const squareType =  () => myGameBoard.lookupPosition(props.position);
+  console.log(squareType());
+  const ship = selectedShip.ship;
   
   const removePlacedShip = function() {
     const updatedShips = {    }
@@ -64,16 +75,23 @@ function GameSquare(props) {
       selectShip(false);
     }
   }
-  const squareType =  () => myGameBoard.lookupPosition(props.position);
-  const ship = selectedShip.ship;
 
-  if(squareType() === 0) {
+  if(typeof squareType() == "object") {
+    return(
+      <div className={classes.shipSquare} onClick = {placeShip}>{props.position}</div>
+    );
+  }
+  if(inactiveSquare()){
+    return(
+      <div className={classes.inactiveSquare} onClick = {placeShip}>{props.position}</div>
+    )
+  } else if (squareType() === 0) {
     return(
       <div className={classes.gameSquare} onClick = {placeShip}>{props.position}</div>
     );
-  } else {
+    } else {
     return(
-      <div className={classes.gameSquare2} onClick = {placeShip}>{props.position}</div>
+      <div>Error</div>
     );
   }
   
