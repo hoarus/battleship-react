@@ -48,6 +48,7 @@ function Board(props) {
   const shotTaken = props.shotTaken;
   const setShotTaken = props.setShotTaken;
   const turnCount = props.turnCount;
+  const [shotResult, setShotResult] = useState("");
 
   const endTurn = function() {
     setTurnOver();
@@ -92,7 +93,7 @@ function Board(props) {
       )
     } else {
       return(
-        <OpponentGameSquare 
+        <OpponentGameSquare
         key={`opponent[${x}:${y}]`} 
         value={square} 
         position={`${incrementLetter(x)}${y + 1}`} 
@@ -107,6 +108,7 @@ function Board(props) {
         setShipOrientation={setShipOrientation}
         shotTaken = {shotTaken}
         setShotTaken={setShotTaken}
+        setShotResult={setShotResult}
       /> 
       )
     }
@@ -115,6 +117,9 @@ function Board(props) {
   return(
     <div className={classes.wrapper}>
         <h2>{boardTitle}</h2>
+        {(boardType=="Opponent") &&
+        <div>Shot Result: {shotResult}</div>
+        }
         <div className= {classes.gameBoard}>
           {gameBoard.board.map((row, y) =>
             row.map((square, x) =>

@@ -55,13 +55,28 @@ function OpponentGameSquare(props) {
   const squareType =  () => enemyGameBoard.lookupPosition(props.position);
   const setShotTaken = props.setShotTaken;
   const shotTaken = props.shotTaken;
+  const setShotResult = props.setShotResult;
 
+  const shotResult = function(target){
+    console.log(target);
+    console.log(target.health);
+
+    if (target == 0) {
+      return "Miss!"
+    } else if (target.health > 0) {
+      return "Hit!"
+    } else if (target.health == 0) {
+      return "Sunk!"
+    } else {
+      return "Error!"
+    }
+  }
 
   const fireShot = function(){
     if (shotTaken) {
       return
     }
-    currentPlayer.fireShot(position);
+    setShotResult(shotResult(currentPlayer.fireShot(position)));
     setShotTaken(true);
     gameState.update();
   }
