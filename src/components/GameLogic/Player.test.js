@@ -27,6 +27,23 @@ test('player can access its enemy gameboard', () => {
   expect(player.enemyGameBoard).toEqual(enemyGameBoard);
 }); 
 
+
+test('player can accept ships', () => {
+  let player = new Player();
+  let startingShips = {
+    Destroyer: (new Ship(2)),
+    Submarine: (new Ship(3)),
+    Cruiser: (new Ship(3)),
+    Battleship: (new Ship(4)),
+    Carrier: (new Ship(5)),
+  }
+  player.availableShips = startingShips;
+  expect(player.availableShips).toEqual(startingShips);
+}); 
+
+
+
+
 test('player can fire shot at enemy gameboard', () => {
   let player = new Player();
   let enemyGameBoard = new GameBoard();

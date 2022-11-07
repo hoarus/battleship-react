@@ -37,6 +37,10 @@ function Board(props) {
   const selectShip = props.selectShip;
   const selectedShip = props.selectedShip;
   const setTurnOver = props.setTurnOver;
+  const ships = props.ships
+  const setShips = props.setShips
+  const shipOrientation = props.shipOrientation
+  const setShipOrientation = props.setShipOrientation
 
 
   const classes = useStyles();
@@ -60,10 +64,10 @@ function Board(props) {
               setPlayers={setPlayers} 
               selectedShip={selectedShip} 
               selectShip={selectShip}
-              ships={props.ships} 
-              setShips={props.setShips}
-              shipOrientation={props.shipOrientation}
-              setShipOrientation={props.setShipOrientation}
+              ships={ships}
+              setShips={setShips}
+              shipOrientation={shipOrientation}
+              setShipOrientation={setShipOrientation}
             /> 
             )) }
         </div>

@@ -33,7 +33,7 @@ function GameSquare(props) {
   const currentPlayer = props.currentPlayer;
   const players = props.players;
   const setPlayers = props.setPlayers;
-  const ships = props.ships;
+  const ships = currentPlayer.availableShips;
   const setShips = props.setShips;
   const selectShip = props.selectShip;
   const selectedShip = props.selectedShip;
@@ -41,6 +41,7 @@ function GameSquare(props) {
   const myGameBoard = currentPlayer.myGameBoard;
   const shipOrientation = props.shipOrientation;
   const position = props.position;
+
   
   const removePlacedShip = function() {
     const updatedShips = {    }
@@ -48,7 +49,7 @@ function GameSquare(props) {
       if (shipName != selectedShip.name)
       updatedShips[shipName] = ships[shipName];
     }
-    setShips(updatedShips);
+    currentPlayer.availableShips = updatedShips;
   }
 
 

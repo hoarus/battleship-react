@@ -35,15 +35,6 @@ const togglePlayer = function (currentPlayer, pOne, pTwo) {
   }
 }
 
-
-const gameBoardOne = new GameBoard();
-const gameBoardTwo = new GameBoard();
-const playerOne = new Player();
-const playerTwo = new Player();
-playerOne.myGameBoard = gameBoardOne;
-playerTwo.myGameBoard = gameBoardTwo;
-
-
 const startingShips = {
   Destroyer: (new Ship(2)),
   Submarine: (new Ship(3)),
@@ -51,6 +42,17 @@ const startingShips = {
   Battleship: (new Ship(4)),
   Carrier: (new Ship(5)),
 }
+const gameBoardOne = new GameBoard();
+const gameBoardTwo = new GameBoard();
+const playerOne = new Player();
+const playerTwo = new Player();
+playerOne.myGameBoard = gameBoardOne;
+playerTwo.myGameBoard = gameBoardTwo;
+playerOne.availableShips = startingShips;
+playerTwo.availableShips = startingShips;
+
+
+
 
 
 function Game() {
@@ -67,11 +69,8 @@ function Game() {
     update: forceUpdate,
   }
 
-      //Need to find some way to create a function in the context which enables toggling between players
-    //Actually, maybe I don't. Maybe it only needs to be a single function which is passed down to a specific "Turn Over" button component
-    //currentPlayer: playerOne,
-    //togglePlayer: togglePlayer(playerOne, playerOne, playerTwo),
 
+  
 
 
 
@@ -89,8 +88,7 @@ function Game() {
         <div className={classes.gameWrapper}>
           <PlayerDetails players={players} currentPlayer={currentPlayer}/>
           <PlaceShips 
-            ships={ships} 
-            setShips={setShips} 
+            currentPlayer={currentPlayer}
             selectedShip={selectedShip}  
             selectShip={selectShip}
             shipOrientation={shipOrientation}

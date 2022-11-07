@@ -72,12 +72,13 @@ const useStyles = createUseStyles({
 
 function PlaceShips(props) {
   const classes = useStyles();
-  const ships = props.ships;
-  const setShips = props.setShips;
+  const currentPlayer= props.currentPlayer;
+  const ships = currentPlayer.availableShips;
   const selectShip = props.selectShip;
   const selectedShip = props.selectedShip;
   const shipOrientation = props.shipOrientation;
   const setShipOrientation = props.setShipOrientation;
+
 
   const renderShip = (length, key) => {
     let ship = [];
@@ -160,7 +161,7 @@ function PlaceShips(props) {
 
     return(
       <div className={classes.wrapper}>
-        <h2>Place Ships</h2>
+        <h2>Available Ships</h2>
         <SelectedShipContainer/>
         <ShipGalley/>
       </div>
