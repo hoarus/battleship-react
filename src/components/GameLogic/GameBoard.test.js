@@ -237,20 +237,6 @@ test('Receive attack updates coordinates with miss 2', () => {
     );
 }); 
 
-test('Receive attack return miss', () => {
-  let board = new GameBoard();
-  expect(board.receiveAttack("A6")).toBe("Miss"
-    );
-}); 
-
-test('Receive attack return hit', () => {
-  let board = new GameBoard();
-  let ship = new Ship(2);
-  board.placeShip(ship, "C1", "x");
-  expect(board.receiveAttack("C1")).toBe("Hit"
-    );
-}); 
-
 
 test('Receive attack updates coordinates with hit 1', () => {
   let board = new GameBoard();

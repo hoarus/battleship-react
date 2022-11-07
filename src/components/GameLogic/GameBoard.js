@@ -71,7 +71,7 @@ class GameBoard {
         return ((pos[1] + ship.length <= 10) && shipPathIsClear());
       } else  {
         return (pos[0] + ship.length <= 10 && shipPathIsClear());
-      }
+      } 
     }
 
     function shipPathIsClear(){

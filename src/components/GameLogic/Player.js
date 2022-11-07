@@ -27,8 +27,10 @@ class Player {
   }
 
   fireShot(coordinates){
-    this.mostRecentTarget = this.enemyGameBoard.receiveAttack(coordinates);
+    let target = this.enemyGameBoard.receiveAttack(coordinates)
+    this.mostRecentTarget = target;
     this.allShots.push(coordinates);
+    return target
   }
 
   aiTurn(){

@@ -59,22 +59,22 @@ test('player records all shots fired', () => {
   expect(player.allShots).toEqual(["C1", "C2", "C3"]);
 }); 
 
-test('player firing shot at enemy ship returns "Hit"', () => {
+test('player firing shot at enemy ship returns object', () => {
   let player = new Player();
   let enemyGameBoard = new GameBoard();
   let ship = new Ship(5);
   enemyGameBoard.placeShip(ship, "C1", "y");
   player.enemyGameBoard = enemyGameBoard;
-  expect(player.fireShot("C1")).toBe("Hit");
+  expect(typeof player.fireShot("C1")).toBe("object");
 }); 
 
-test('player firing shot and missing enemy ship returns "Miss"', () => {
+test('player firing shot and missing enemy ship returns 0', () => {
   let player = new Player();
   let enemyGameBoard = new GameBoard();
   let ship = new Ship(5);
   enemyGameBoard.placeShip(ship, "C2", "y");
   player.enemyGameBoard = enemyGameBoard;
-  expect(player.fireShot("C1")).toBe("Miss");
+  expect(player.fireShot("C1")).toBe(0);
 }); 
 
 test('ai turn takes only legal shot', () => {
