@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import GameSquare from '../GameSquare/GameSquare';
 import OpponentGameSquare from '../OpponentGameSquare/OpponentGameSquare'
@@ -45,15 +45,22 @@ function Board(props) {
   const setShipOrientation = props.setShipOrientation
   const classes = useStyles();
   const gameBoard = currentPlayer.myGameBoard;
+  const [shotTaken, setShotTaken] = useState();
+  const turnCount = props.turnCount;
 
   const endTurn = function() {
     setTurnOver();
   }
 
   const endTurnConditionsMet = function() {
-    // No available ships remaining
-    return Object.keys(currentPlayer.availableShips).length == 0;
+    if (turnCount <= 1 ) {
+      // No available ships remaining
+      return (Object.keys(currentPlayer.availableShips).length == 0);
+    } else {
+      return (shotTaken);
+    }
   }
+
   let boardTitle = "";
   if (boardType == "Own") {
     boardTitle ="Your Board";
@@ -97,6 +104,7 @@ function Board(props) {
         setShips={setShips}
         shipOrientation={shipOrientation}
         setShipOrientation={setShipOrientation}
+        setShotTaken={setShotTaken}
       /> 
       )
     }
@@ -111,6 +119,7 @@ function Board(props) {
             <ApplicableSquareType key={x} square={square} x={x} y={y} /> 
             )) }
         </div>
+        <button>Hello</button>
         {endTurnConditionsMet() &&
           <button className={classes.button} onClick={endTurn}>End Turn</button>
         }

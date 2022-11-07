@@ -33,8 +33,10 @@ const useStyles = createUseStyles({
 export default function NextTurn(props){
   const players = props.players;
   const currentPlayer = props.currentPlayer;
-  const setCurrentPlayer = props.setCurrentPlayer
-  const setTurnOver = props.setTurnOver
+  const setCurrentPlayer = props.setCurrentPlayer;
+  const setTurnOver = props.setTurnOver;
+  const turnCount = props.turnCount;
+  const setTurnCount = props.setTurnCount;
 
   let nextPlayer = "";
   if (players[0] === currentPlayer) {
@@ -45,6 +47,7 @@ export default function NextTurn(props){
 
   const endTurn = function() {
     setCurrentPlayer(nextPlayer);
+    setTurnCount(turnCount + 1);
     setTurnOver(false);
   }
 

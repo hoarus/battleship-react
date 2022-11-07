@@ -47,53 +47,19 @@ function OpponentGameSquare(props) {
   const classes = useStyles();
   const currentPlayer = props.currentPlayer;
   const players = props.players;
-  const setPlayers = props.setPlayers;
-  const ships = currentPlayer.availableShips;
-  const selectShip = props.selectShip;
   const selectedShip = props.selectedShip;
   const gameState = useContext(GameContext);
   const enemyGameBoard = currentPlayer.enemyGameBoard;
-  const shipOrientation = props.shipOrientation;
   const position = props.position;
   const inactiveSquare = false;
   const squareType =  () => enemyGameBoard.lookupPosition(props.position);
-  const ship = selectedShip.ship;
+  const setShotTaken = props.setShotTaken;
 
-  const enemyPlayer = function(){
-    if (currentPlayer == players[0]){
-      return players[1]
-    } else {
-      return players[0]
-    }
-  }
-  
-  const removePlacedShip = function() {
-    const updatedShips = {    }
-    for (const shipName in ships) {
-      if (shipName != selectedShip.name)
-      updatedShips[shipName] = ships[shipName];
-    }
-    currentPlayer.availableShips = updatedShips;
-  }
-
-
-  const placeShip = function() {
-    if (selectedShip == false) {return} 
-    else if (enemyGameBoard.placeShip(ship, position, shipOrientation) != "Illegal Move") {
-      setPlayers(players);
-      gameState.update();
-      // Update Ships
-      removePlacedShip();    
-      // Prevent ship being placed twice
-      selectShip(false);
-    }
-  }
 
   const fireShot = function(){
-    console.log("fired");
-    console.log(currentPlayer.fireShot(position));
+    currentPlayer.fireShot(position);
+    setShotTaken(true);
     gameState.update();
-    console.log(squareType());
   }
 
   // square is a miss

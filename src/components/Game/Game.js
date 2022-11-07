@@ -34,8 +34,12 @@ const togglePlayer = function (currentPlayer, pOne, pTwo) {
     currentPlayer = pOne;
   }
 }
-
+// Temporary Starting Ships
 const startingShips = {
+  Destroyer: (new Ship(2)),
+}
+// Disabled Starting Ships
+const disableStartingShips = {
   Destroyer: (new Ship(2)),
   Submarine: (new Ship(3)),
   Cruiser: (new Ship(3)),
@@ -64,6 +68,7 @@ function Game() {
   const [selectedShip, selectShip] = useState(false);
   const [shipOrientation, setShipOrientation] = useState("x");
   const [turnOver, setTurnOver] = useState(false);
+  const [turnCount, setTurnCount] = useState(0);
   const classes = useStyles();
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []); 
@@ -91,6 +96,7 @@ function Game() {
   } else if (turnOver==false) {
     return(
       <GameContext.Provider value={gameState}>
+        <div>Turn: {turnCount}</div>
         <div className={classes.gameWrapper}>
           <PlayerDetails players={players} currentPlayer={currentPlayer}/>
           {!allShipsPlaced() &&
@@ -102,7 +108,7 @@ function Game() {
             setShipOrientation={setShipOrientation}
           />
           }
-          {allShipsPlaced()&&
+          {(turnCount >1)&&
           <Board
             boardType="Opponent" 
             players={players} 
@@ -116,6 +122,7 @@ function Game() {
             setShipOrientation={setShipOrientation}
             turnOver = {turnOver}
             setTurnOver = {setTurnOver}
+            turnCount = {turnCount}
           />
           }
           <Board
@@ -131,6 +138,7 @@ function Game() {
             setShipOrientation={setShipOrientation}
             turnOver = {turnOver}
             setTurnOver = {setTurnOver}
+            turnCount = {turnCount}
           />
         </div>
       </GameContext.Provider>
@@ -142,6 +150,8 @@ function Game() {
         currentPlayer={currentPlayer}
         setCurrentPlayer={setCurrentPlayer}
         setTurnOver = {setTurnOver}
+        turnCount = {turnCount}
+        setTurnCount = {setTurnCount}
       />
     )
   }
