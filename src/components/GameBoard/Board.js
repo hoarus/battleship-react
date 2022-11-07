@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { createUseStyles } from 'react-jss';
 import GameSquare from '../GameSquare/GameSquare';
+import OpponentGameSquare from '../OpponentGameSquare/OpponentGameSquare'
 
 const incrementLetter = function(i) {
   return String.fromCharCode('A'.charCodeAt(0) + i)
@@ -60,8 +61,45 @@ function Board(props) {
     boardTitle = "Opponent's Board";
    }
 
-  const ApplicableSquareType = function(){
-
+  const ApplicableSquareType = function(props){
+    const square = props.square;
+    const x = props.x;
+    const y = props.y
+    if(boardType == "Own") {
+      return(
+        <GameSquare 
+        key={`own[${x}:${y}]`} 
+        value={square} 
+        position={`${incrementLetter(x)}${y + 1}`} 
+        players={players} 
+        currentPlayer = {currentPlayer}
+        setPlayers={setPlayers} 
+        selectedShip={selectedShip} 
+        selectShip={selectShip}
+        ships={ships}
+        setShips={setShips}
+        shipOrientation={shipOrientation}
+        setShipOrientation={setShipOrientation}
+      /> 
+      )
+    } else {
+      return(
+        <OpponentGameSquare 
+        key={`opponent[${x}:${y}]`} 
+        value={square} 
+        position={`${incrementLetter(x)}${y + 1}`} 
+        players={players} 
+        currentPlayer = {currentPlayer}
+        setPlayers={setPlayers} 
+        selectedShip={selectedShip} 
+        selectShip={selectShip}
+        ships={ships}
+        setShips={setShips}
+        shipOrientation={shipOrientation}
+        setShipOrientation={setShipOrientation}
+      /> 
+      )
+    }
   }
 
   return(
@@ -70,20 +108,7 @@ function Board(props) {
         <div className= {classes.gameBoard}>
           {gameBoard.board.map((row, y) =>
             row.map((square, x) =>
-            <GameSquare 
-              key={x} 
-              value={square} 
-              position={`${incrementLetter(x)}${y + 1}`} 
-              players={players} 
-              currentPlayer = {currentPlayer}
-              setPlayers={setPlayers} 
-              selectedShip={selectedShip} 
-              selectShip={selectShip}
-              ships={ships}
-              setShips={setShips}
-              shipOrientation={shipOrientation}
-              setShipOrientation={setShipOrientation}
-            /> 
+            <ApplicableSquareType key={x} square={square} x={x} y={y} /> 
             )) }
         </div>
         {endTurnConditionsMet() &&

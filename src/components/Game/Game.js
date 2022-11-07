@@ -48,6 +48,8 @@ const playerOne = new Player();
 const playerTwo = new Player();
 playerOne.myGameBoard = gameBoardOne;
 playerTwo.myGameBoard = gameBoardTwo;
+playerOne.enemyGameBoard = gameBoardTwo;
+playerTwo.enemyGameBoard = gameBoardOne;
 playerOne.availableShips = startingShips;
 playerTwo.availableShips = startingShips;
 
