@@ -10,7 +10,6 @@ const useStyles = createUseStyles({
 export default function PlayerDetails(props){
   const classes = useStyles();
   const currentPlayer = props.currentPlayer;
-  const enemyBoard = currentPlayer.enemyGameBoard.board;
   const enemyGameBoard = currentPlayer.enemyGameBoard;
   let countInArray = function (inputArr, test) {
     let count = 0;
@@ -34,16 +33,15 @@ export default function PlayerDetails(props){
     return count;
   };
   const shotsTaken = enemyGameBoard.totalShotsReceived();
-  const hits = countInArray(enemyBoard, (e) => e === 2);
+  // const hits = countInArray(enemyBoard, (e) => e === 2);
 
 
   return(
     <div>
       <h2 className={classes.header}>{currentPlayer.name}'s Turn</h2>
-      <div>Shots Fired: {shotsTaken}</div>
-      <div>Succesful Hits: {hits}</div>
-      <div>Ships Sunk: {hits}</div>
-      <div>Ships Remaining: {hits}</div>
+      <div>Shots Fired: {enemyGameBoard.totalShotsReceived()}</div>
+      <div>Ships Sunk: {enemyGameBoard.shipsSunk()}</div>
+      <div>Ships Remaining: {enemyGameBoard.shipsRemaining()}</div>
     </div>
   )
 }
