@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Board from '../GameBoard/Board';
 import {GameBoard} from '../GameLogic/GameBoard';
 import GameContext from '../Game/GameContext';
+import GameOver from '../GameOver/GameOver';
 import PlaceShips from '../PlaceShips/PlaceShips';
 import {Player} from '../GameLogic/Player';
 import PlayerInputs from '../PlayerInputs/PlayerInputs';
@@ -72,6 +73,7 @@ function Game() {
   const [turnOver, setTurnOver] = useState(false);
   const [turnCount, setTurnCount] = useState(0);
   const [shotTaken, setShotTaken] = useState();
+  const [gameOver, setGameOver] = useState(false);
   const classes = useStyles();
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []); 
@@ -82,6 +84,15 @@ function Game() {
     // No available ships remaining
     return Object.keys(currentPlayer.availableShips).length == 0;
   }
+  const playerOneLost = function() {
+    return (playerOne.myGameBoard.allShipsSunk() && (playerOne.myGameBoard.totalShips() > 0))
+  }
+
+  const playerTwoLost = function() {
+    return (playerTwoLost.myGameBoard.allShipsSunk() && (playerOne.myGameBoard.totalShips() > 0))
+  }
+
+  const losingPlayer = () => playerOneLost()? playerOne : playerTwo
 
 
   
@@ -99,6 +110,9 @@ function Game() {
   } else if (turnOver==false) {
     return(
       <GameContext.Provider value={gameState}>
+        {gameOver&& 
+        <GameOver/>
+        }
         <div>Turn: {turnCount}</div>
         <div className={classes.gameWrapper}>
           <PlayerDetails players={players} currentPlayer={currentPlayer}/>
@@ -128,6 +142,7 @@ function Game() {
             turnCount = {turnCount}
             shotTaken = {shotTaken}
             setShotTaken = {setShotTaken}
+            setGameOver = {setGameOver}
           />
           }
           <Board

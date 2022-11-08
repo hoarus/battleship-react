@@ -147,6 +147,11 @@ class GameBoard {
     return totalShips - sunkShips
   }
 
+  totalShips(){
+    let totalShips = this.ships.length;
+    return totalShips
+  }
+
 
 
 }

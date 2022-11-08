@@ -47,6 +47,7 @@ function Board(props) {
   const gameBoard = currentPlayer.myGameBoard;
   const shotTaken = props.shotTaken;
   const setShotTaken = props.setShotTaken;
+  const setGameOver = props.setGameOver;
   const turnCount = props.turnCount;
   const [shotResult, setShotResult] = useState("");
 
@@ -109,6 +110,7 @@ function Board(props) {
         shotTaken = {shotTaken}
         setShotTaken={setShotTaken}
         setShotResult={setShotResult}
+        setGameOver = {setGameOver}
       /> 
       )
     }

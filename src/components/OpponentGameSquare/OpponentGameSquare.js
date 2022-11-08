@@ -56,6 +56,7 @@ function OpponentGameSquare(props) {
   const setShotTaken = props.setShotTaken;
   const shotTaken = props.shotTaken;
   const setShotResult = props.setShotResult;
+  const setGameOver = props.setGameOver;
 
   const shotResult = function(target){
 
@@ -76,6 +77,9 @@ function OpponentGameSquare(props) {
     }
     setShotResult(shotResult(currentPlayer.fireShot(position)));
     setShotTaken(true);
+    if(currentPlayer.enemyGameBoard.allShipsSunk() == true) {
+      setGameOver(true);
+    }
     gameState.update();
   }
 

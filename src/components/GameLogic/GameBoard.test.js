@@ -369,6 +369,7 @@ test('Gameboard returns how many shots received 2', () => {
 }); 
 
 
+
 test('Gameboard returns how many ships sunk 1', () => {
   let board = new GameBoard();
   let ship1 = new Ship(2);
@@ -440,5 +441,17 @@ test('Gameboard returns how many ships remaining 3', () => {
   ship2.hit();
   ship2.hit();
   expect(board.shipsRemaining()).toBe(1
+    );
+}); 
+
+test('Gameboard returns total ships', () => {
+  let board = new GameBoard();
+  let ship1 = new Ship(2);
+  let ship2 = new Ship(3);
+  let ship3 = new Ship(1);
+  board.placeShip(ship1, "D3", "y");
+  board.placeShip(ship2, "A1", "x");
+  board.placeShip(ship3, "J1", "x");
+  expect(board.totalShips()).toBe(3
     );
 }); 
