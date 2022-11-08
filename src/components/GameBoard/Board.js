@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import GameSquare from '../GameSquare/GameSquare';
 import OpponentGameSquare from '../OpponentGameSquare/OpponentGameSquare'
+import BoardTab from '../BoardTab/BoardTab'
 
 const incrementLetter = function(i) {
   return String.fromCharCode('A'.charCodeAt(0) + i)
@@ -23,7 +24,9 @@ const useStyles = createUseStyles({
     padding: '2rem',
     flexGrow: 0,
   },
-
+  boardWrapper: {
+    width: '100%',
+  },
   button: {
     flexGrow: '0',
     padding: '0.2rem 2rem',
@@ -122,11 +125,14 @@ function Board(props) {
         {(boardType=="Opponent") &&
         <div>Shot Result: {shotResult}</div>
         }
-        <div className= {classes.gameBoard}>
-          {gameBoard.board.map((row, y) =>
-            row.map((square, x) =>
-            <ApplicableSquareType key={x} square={square} x={x} y={y} /> 
-            )) }
+        <div className={classes.boardWrapper}>
+        <BoardTab/>
+          <div className= {classes.gameBoard}>
+            {gameBoard.board.map((row, y) =>
+              row.map((square, x) =>
+              <ApplicableSquareType key={x} square={square} x={x} y={y} /> 
+              )) }
+          </div>
         </div>
         {endTurnConditionsMet() &&
           <button className={classes.button} onClick={endTurn}>End Turn</button>
