@@ -9,23 +9,27 @@ const incrementLetter = function(i) {
 }
 
 const useStyles = createUseStyles({
-  gameBoard: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(10, 1fr)',
-    border: 'solid 2px darkblue',
-    width: '100%',
-  },
+
   wrapper: {
+    boxSizing:'border-box',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     gap: '2rem',
     padding: '2rem',
-    flexGrow: 0,
+    maxHeight: '70vh',
   },
   boardWrapper: {
+    width:'40%',
+    
+  },
+  gameBoard: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(10, 1fr)',
+    border: 'solid 2px darkblue',
     width: '100%',
+    
   },
   button: {
     flexGrow: '0',
@@ -69,13 +73,6 @@ function Board(props) {
       return (shotTaken);
     }
   }
-
-  let boardTitle = "";
-  if (boardType == "Own") {
-    boardTitle ="Your Board";
-   } else {
-    boardTitle = "Opponent's Board";
-   }
 
   const ApplicableSquareType = function(props){
     const square = props.square;
@@ -124,7 +121,6 @@ function Board(props) {
 
   return(
     <div className={classes.wrapper}>
-        <h2>{boardTitle}</h2>
         {(boardType=="Opponent") &&
         <div>Shot Result: {shotResult}</div>
         }

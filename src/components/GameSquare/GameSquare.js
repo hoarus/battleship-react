@@ -5,7 +5,7 @@ import {Ship} from '../GameLogic/Ship';
 
 const useStyles = createUseStyles({
   gameSquare: {
-    border: 'solid 1px darkblue',
+    border: 'outset 3px lightgreen',
     display: 'flex',
     color: 'black',
     width: '100%',
@@ -18,15 +18,19 @@ const useStyles = createUseStyles({
   },
   activeSquare: {
     backgroundColor: 'lightgreen',
+    borderColor: 'lightgreen',
     '&:hover': {
-      backgroundColor: 'pink'
+      backgroundColor: 'pink',
+      borderColor: 'pink',
     },
   }, 
   inactiveSquare: {
     backgroundColor: 'lightgreen',
+    borderColor: 'lightgreen',
   },
   shipSquare: {
     backgroundColor: 'orange',
+    borderColor: 'orange',
   }, 
   miss: {
     border: 'solid 1px darkblue',

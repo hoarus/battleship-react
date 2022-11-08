@@ -11,7 +11,7 @@ const useStyles = createUseStyles({
     alignItems: 'center',
     border: 'solid 2px blue',
     margin: ' 1rem 0rem',
-    minHeight: '30vh',
+    maxHeight: '30vh',
   },
   shipGalley: {
     padding: '1rem',

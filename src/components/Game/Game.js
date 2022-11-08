@@ -22,7 +22,8 @@ const useStyles = createUseStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    width: '80%'
+    width: '80%',
+    maxHeight: '80vh',
   }
 })
 
@@ -158,7 +159,6 @@ function Game() {
         {gameOver&& 
         <GameOver/>
         }
-        <div>Turn: {turnCount}</div>
         <div className={classes.gameWrapper}>
           <PlayerDetails players={players} currentPlayer={currentPlayer}/>
           {!allShipsPlaced() &&

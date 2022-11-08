@@ -4,7 +4,7 @@ import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
   gameSquare: {
-    border: 'solid 1px darkblue',
+    border: 'outset 3px gray',
     backgroundColor: 'gray',
     color: 'blue',
     width: '100%',
@@ -12,27 +12,19 @@ const useStyles = createUseStyles({
     boxSizing: 'border-box',
     aspectRatio: '1/1',
     '&:hover': {
-      backgroundColor: 'pink'
+      backgroundColor: 'pink',
+      borderColor: 'pink',
     },
-  }, inactiveSquare: {
-    border: 'solid 1px darkblue',
-    backgroundColor: 'lightgreen',
-    color: 'black',
-    width: '100%',
-    height: '100%',
-    boxSizing: 'border-box',
-    aspectRatio: '1/1',
-  },
-  shipSquare: {
-    border: 'solid 1px darkblue',
+  }, shipSquare: {
     backgroundColor: 'orange',
+    border: 'outset 3px orange',
     width: '100%',
     height: '100%',
     boxSizing: 'border-box',
     aspectRatio: '1/1',
   },
   missSquare: {
-    border: 'solid 1px darkblue',
+    border: 'outset 3px blue',
     backgroundColor: 'blue',
     width: '100%',
     height: '100%',
