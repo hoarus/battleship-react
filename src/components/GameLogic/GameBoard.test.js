@@ -367,3 +367,78 @@ test('Gameboard returns how many shots received 2', () => {
   expect(board.totalShotsReceived()).toBe(2
     );
 }); 
+
+
+test('Gameboard returns how many ships sunk 1', () => {
+  let board = new GameBoard();
+  let ship1 = new Ship(2);
+  let ship2 = new Ship(3);
+  board.placeShip(ship1, "D3", "y");
+  board.placeShip(ship2, "A1", "x");
+  ship1.hit();
+  ship1.hit();
+  ship2.hit();
+  expect(board.shipsSunk()).toBe(1
+    );
+}); 
+
+test('Gameboard returns how many ships sunk 2', () => {
+  let board = new GameBoard();
+  let ship1 = new Ship(2);
+  let ship2 = new Ship(3);
+  board.placeShip(ship1, "D3", "y");
+  board.placeShip(ship2, "A1", "x");
+  ship1.hit();
+  ship1.hit();
+  ship2.hit();
+  ship2.hit();
+  ship2.hit();
+  expect(board.shipsSunk()).toBe(2
+    );
+}); 
+
+test('Gameboard returns how many ships remaining 1', () => {
+  let board = new GameBoard();
+  let ship1 = new Ship(2);
+  let ship2 = new Ship(3);
+  board.placeShip(ship1, "D3", "y");
+  board.placeShip(ship2, "A1", "x");
+  ship1.hit();
+  ship1.hit();
+  ship2.hit();
+  expect(board.shipsRemaining()).toBe(1
+    );
+}); 
+
+test('Gameboard returns how many ships remaining 2', () => {
+  let board = new GameBoard();
+  let ship1 = new Ship(2);
+  let ship2 = new Ship(3);
+  board.placeShip(ship1, "D3", "y");
+  board.placeShip(ship2, "A1", "x");
+  ship1.hit();
+  ship1.hit();
+  ship2.hit();
+  ship2.hit();
+  ship2.hit();
+  expect(board.shipsRemaining()).toBe(0
+    );
+}); 
+
+
+test('Gameboard returns how many ships remaining 3', () => {
+  let board = new GameBoard();
+  let ship1 = new Ship(2);
+  let ship2 = new Ship(3);
+  let ship3 = new Ship(1);
+  board.placeShip(ship1, "D3", "y");
+  board.placeShip(ship2, "A1", "x");
+  board.placeShip(ship3, "J1", "x");
+  ship1.hit();
+  ship1.hit();
+  ship2.hit();
+  ship2.hit();
+  ship2.hit();
+  expect(board.shipsRemaining()).toBe(1
+    );
+}); 

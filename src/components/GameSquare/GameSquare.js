@@ -76,7 +76,6 @@ function GameSquare(props) {
   const placeShip = function() {
     if (selectedShip == false) {return} 
     else if (myGameBoard.placeShip(ship, position, shipOrientation) != "Illegal Move") {
-      console.log(ship.health)
       setPlayers(players);
       gameState.update();
       // Update Ships

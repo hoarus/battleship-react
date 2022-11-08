@@ -135,6 +135,20 @@ class GameBoard {
     return this.shotsReceived
   }
 
+  shipsSunk(){
+    let sunkShips = (this.ships.filter((ship) => ship.isSunk() == true )).length;
+    return sunkShips;
+  }
+
+
+  shipsRemaining(){
+    let totalShips = this.ships.length;
+    let sunkShips = (this.ships.filter((ship) => ship.isSunk() == true )).length;
+    return totalShips - sunkShips
+  }
+
+
+
 }
 
 export { GameBoard }

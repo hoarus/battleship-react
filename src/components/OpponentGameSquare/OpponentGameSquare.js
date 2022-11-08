@@ -58,8 +58,6 @@ function OpponentGameSquare(props) {
   const setShotResult = props.setShotResult;
 
   const shotResult = function(target){
-    console.log(target);
-    console.log(target.health);
 
     if (target == 0) {
       return "Miss!"
