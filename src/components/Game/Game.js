@@ -74,6 +74,7 @@ function Game() {
   const [turnCount, setTurnCount] = useState(0);
   const [shotTaken, setShotTaken] = useState();
   const [gameOver, setGameOver] = useState(false);
+  const [currentBoard, setCurrentBoard] = useState("My Board");
   const classes = useStyles();
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []); 
@@ -94,10 +95,54 @@ function Game() {
 
   const losingPlayer = () => playerOneLost()? playerOne : playerTwo
 
-
-  
-
-
+  const SelectedBoard = function(props){
+    if (turnCount < 2 || currentBoard == "My Board") {
+      return(
+        <Board
+        boardType="Own" 
+        players={players} 
+        setPlayers={setPlayers} 
+        currentPlayer={currentPlayer}
+        selectedShip={selectedShip} 
+        selectShip={selectShip} 
+        ships={ships} 
+        setShips={setShips}
+        shipOrientation={shipOrientation}
+        setShipOrientation={setShipOrientation}
+        turnOver = {turnOver}
+        setTurnOver = {setTurnOver}
+        turnCount = {turnCount}
+        shotTaken = {shotTaken}
+        setShotTaken = {setShotTaken}
+        currentBoard = {currentBoard}
+        setCurrentBoard = {setCurrentBoard}
+      />
+      )
+    } else {
+      return(
+        <Board
+        boardType="Opponent" 
+        players={players} 
+        setPlayers={setPlayers} 
+        currentPlayer={currentPlayer}
+        selectedShip={selectedShip} 
+        selectShip={selectShip} 
+        ships={ships} 
+        setShips={setShips}
+        shipOrientation={shipOrientation}
+        setShipOrientation={setShipOrientation}
+        turnOver = {turnOver}
+        setTurnOver = {setTurnOver}
+        turnCount = {turnCount}
+        shotTaken = {shotTaken}
+        setShotTaken = {setShotTaken}
+        setGameOver = {setGameOver}
+        currentBoard = {currentBoard}
+        setCurrentBoard = {setCurrentBoard}
+      />
+      )
+    }
+  }
 
   if (players[0].name == "AI") {
     return (
@@ -125,43 +170,7 @@ function Game() {
             setShipOrientation={setShipOrientation}
           />
           }
-          {(turnCount >1)&&
-          <Board
-            boardType="Opponent" 
-            players={players} 
-            setPlayers={setPlayers} 
-            currentPlayer={currentPlayer}
-            selectedShip={selectedShip} 
-            selectShip={selectShip} 
-            ships={ships} 
-            setShips={setShips}
-            shipOrientation={shipOrientation}
-            setShipOrientation={setShipOrientation}
-            turnOver = {turnOver}
-            setTurnOver = {setTurnOver}
-            turnCount = {turnCount}
-            shotTaken = {shotTaken}
-            setShotTaken = {setShotTaken}
-            setGameOver = {setGameOver}
-          />
-          }
-          <Board
-            boardType="Own" 
-            players={players} 
-            setPlayers={setPlayers} 
-            currentPlayer={currentPlayer}
-            selectedShip={selectedShip} 
-            selectShip={selectShip} 
-            ships={ships} 
-            setShips={setShips}
-            shipOrientation={shipOrientation}
-            setShipOrientation={setShipOrientation}
-            turnOver = {turnOver}
-            setTurnOver = {setTurnOver}
-            turnCount = {turnCount}
-            shotTaken = {shotTaken}
-            setShotTaken = {setShotTaken}
-          />
+        <SelectedBoard/>
         </div>
       </GameContext.Provider>
     )

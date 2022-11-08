@@ -53,6 +53,9 @@ function Board(props) {
   const setGameOver = props.setGameOver;
   const turnCount = props.turnCount;
   const [shotResult, setShotResult] = useState("");
+  const currentBoard = props.currentBoard;
+  const setCurrentBoard = props.setCurrentBoard;
+
 
   const endTurn = function() {
     setTurnOver();
@@ -126,7 +129,12 @@ function Board(props) {
         <div>Shot Result: {shotResult}</div>
         }
         <div className={classes.boardWrapper}>
-        <BoardTab/>
+        {(turnCount > 1) &&
+          <BoardTab
+            currentBoard = {currentBoard}
+            setCurrentBoard = { setCurrentBoard }
+          />
+        }
           <div className= {classes.gameBoard}>
             {gameBoard.board.map((row, y) =>
               row.map((square, x) =>

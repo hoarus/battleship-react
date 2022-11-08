@@ -16,16 +16,41 @@ const useStyles = createUseStyles({
     borderTopLeftRadius: '20%',
     borderTopRightRadius: '20%',
     boxSizing: 'border-box',
+    '&:hover': {
+      backgroundColor: 'pink'
+    },
+  },
+
+  selectedTab: {
+    backgroundColor: 'blue',
+    color: 'white',
+    '&:hover': {
+      backgroundColor: 'blue'
+    },
   }
 })
 
-export default function BoardTab() {
-
+export default function BoardTab(props) {
+  const currentBoard = props.currentBoard;
+  const setCurrentBoard = props.setCurrentBoard;
   const classes = useStyles();
-  return(
-    <div className={classes.tabsContainer}>
-      <div className={classes.boardTab}>My Board</div>
-      <div className={classes.boardTab}>Enemy Board</div>
-    </div>
-  )
+
+  const displayMyBoard = () => setCurrentBoard("My Board")
+  const displayEnemyBoard = () => setCurrentBoard("Enemy Board")
+
+  if (currentBoard == "Enemy Board") {
+    return(
+      <div className={classes.tabsContainer}>
+        <div className={classes.boardTab} onClick={displayMyBoard}>My Board</div>
+        <div className={`${classes.boardTab} ${classes.selectedTab}`}>Enemy Board</div>
+      </div>
+    )
+  } else {
+    return(
+      <div className={classes.tabsContainer}>
+        <div className={`${classes.boardTab} ${classes.selectedTab}`}>My Board</div>
+        <div className={classes.boardTab} onClick={displayEnemyBoard}>Enemy Board</div>
+      </div>
+    )
+  }
 }
