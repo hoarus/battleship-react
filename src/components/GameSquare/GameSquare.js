@@ -91,7 +91,7 @@ function GameSquare(props) {
 
   if(typeof squareType() == "object") /*ship*/{
     return(
-      <div className={`${classes.gameSquare} ${classes.shipSquare}`}>{props.position}</div>
+      <div className={`${classes.gameSquare} ${classes.shipSquare}`}></div>
     );
   } else if(squareType()=== 1) /*miss*/{
     return(
@@ -107,11 +107,11 @@ function GameSquare(props) {
     )
   } else if (inactiveSquare()){
     return(
-      <div className={`${classes.gameSquare} ${classes.inactiveSquare}`}>{props.position}</div>
+      <div className={`${classes.gameSquare} ${classes.inactiveSquare}`}></div>
     )
   } else if (squareType() === 0) {
     return(
-      <div className={`${classes.gameSquare} ${classes.activeSquare}`} onClick = {placeShip}>{props.position}</div>
+      <div className={`${classes.gameSquare} ${classes.activeSquare}`} onClick = {placeShip}></div>
     );
     } else {
     return(

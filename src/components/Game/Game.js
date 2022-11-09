@@ -19,12 +19,16 @@ const useStyles = createUseStyles({
     alignItems: 'center',
   },
   gameWrapper: {
+    boxSizing: 'border-box',
     display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'center',
-    width: '80%',
-    maxHeight: '80vh',
+    padding: '5%',
+    width: '100%',
+  },
+  additionalDetails: {
+    width: '30%',
   }
+
 })
 
 
@@ -76,6 +80,7 @@ function Game() {
   const [shotTaken, setShotTaken] = useState();
   const [gameOver, setGameOver] = useState(false);
   const [currentBoard, setCurrentBoard] = useState("My Board");
+  const [shotResult, setShotResult] = useState("");
   const classes = useStyles();
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []); 
@@ -117,6 +122,8 @@ function Game() {
         setShotTaken = {setShotTaken}
         currentBoard = {currentBoard}
         setCurrentBoard = {setCurrentBoard}
+        shotResult = {shotResult}
+        setShotResult = {setShotResult}
       />
       )
     } else {
@@ -140,6 +147,8 @@ function Game() {
         setGameOver = {setGameOver}
         currentBoard = {currentBoard}
         setCurrentBoard = {setCurrentBoard}
+        shotResult = {shotResult}
+        setShotResult = {setShotResult}
       />
       )
     }
@@ -160,16 +169,25 @@ function Game() {
         <GameOver/>
         }
         <div className={classes.gameWrapper}>
-          <PlayerDetails players={players} currentPlayer={currentPlayer}/>
-          {!allShipsPlaced() &&
-          <PlaceShips 
-            currentPlayer={currentPlayer}
-            selectedShip={selectedShip}  
-            selectShip={selectShip}
-            shipOrientation={shipOrientation}
-            setShipOrientation={setShipOrientation}
+          <div className={classes.additionalDetails}>
+            <PlayerDetails 
+            players={players} 
+            currentPlayer={currentPlayer} 
+            turnCount={turnCount}
+            shotResult = {shotResult}
+            shotTaken = {shotTaken}
+            setTurnOver = {setTurnOver}
           />
-          }
+            {!allShipsPlaced() &&
+            <PlaceShips 
+              currentPlayer={currentPlayer}
+              selectedShip={selectedShip}  
+              selectShip={selectShip}
+              shipOrientation={shipOrientation}
+              setShipOrientation={setShipOrientation}
+            />
+            }
+          </div>
         <SelectedBoard/>
         </div>
       </GameContext.Provider>

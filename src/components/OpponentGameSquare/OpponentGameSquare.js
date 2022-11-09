@@ -51,7 +51,6 @@ function OpponentGameSquare(props) {
   const setGameOver = props.setGameOver;
 
   const shotResult = function(target){
-
     if (target == 0) {
       return "Miss!"
     } else if (target.health > 0) {
@@ -81,10 +80,10 @@ function OpponentGameSquare(props) {
       <div className={classes.missSquare}>{props.position}</div>
     );
   } else if(squareType()==2) {
-    return(<div className={classes.shipSquare} onClick = {fireShot}>{props.position}</div>)
+    return(<div className={classes.shipSquare} onClick = {fireShot}></div>)
   } else {
     return(
-      <div className={classes.gameSquare} onClick = {fireShot}>{props.position}</div>
+      <div className={classes.gameSquare} onClick = {fireShot}></div>
     );
   }
   

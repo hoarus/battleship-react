@@ -18,13 +18,14 @@ const useStyles = createUseStyles({
     alignItems: 'center',
     gap: '2rem',
     padding: '2rem',
-    maxHeight: '70vh',
+    width: '70%'
   },
   boardWrapper: {
-    width:'40%',
+    width: '80%',
     
   },
   gameBoard: {
+    flex: '2 1 auto',
     display: 'grid',
     gridTemplateColumns: 'repeat(10, 1fr)',
     border: 'solid 2px darkblue',
@@ -56,7 +57,8 @@ function Board(props) {
   const setShotTaken = props.setShotTaken;
   const setGameOver = props.setGameOver;
   const turnCount = props.turnCount;
-  const [shotResult, setShotResult] = useState("");
+  const shotResult = props.shotResult;
+  const setShotResult = props.setShotResult;
   const currentBoard = props.currentBoard;
   const setCurrentBoard = props.setCurrentBoard;
 
@@ -65,14 +67,6 @@ function Board(props) {
     setTurnOver();
   }
 
-  const endTurnConditionsMet = function() {
-    if (turnCount <= 1 ) {
-      // No available ships remaining
-      return (Object.keys(currentPlayer.availableShips).length == 0);
-    } else {
-      return (shotTaken);
-    }
-  }
 
   const ApplicableSquareType = function(props){
     const square = props.square;
@@ -121,9 +115,6 @@ function Board(props) {
 
   return(
     <div className={classes.wrapper}>
-        {(boardType=="Opponent") &&
-        <div>Shot Result: {shotResult}</div>
-        }
         <div className={classes.boardWrapper}>
         {(turnCount > 1) &&
           <BoardTab
@@ -138,9 +129,6 @@ function Board(props) {
               )) }
           </div>
         </div>
-        {endTurnConditionsMet() &&
-          <button className={classes.button} onClick={endTurn}>End Turn</button>
-        }
     </div>
   )
 }
