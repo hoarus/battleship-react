@@ -45,7 +45,22 @@ const useStyles = createUseStyles({
     borderRadius: '50%',
     width: '80%',
     aspectRatio: '1/1',
-  }
+  },
+  '@keyframes slideRight': {
+    from: {
+      backgroundColor: 'white',
+    },
+    to: {
+      backgroundColor: 'pink'
+    }
+  },
+  blinkingSquare: {
+    animationName: '$slideRight',
+    animationDuration: '0.3s',
+    animationIterationCount: 'infinite',
+    animationDirection: 'alternate-reverse',
+    animationTimingFunction: 'linear',
+  },
 })
 
 
@@ -96,7 +111,7 @@ function GameSquare(props) {
   } else if(squareType()=== 1) /*miss*/{
     return(
     <div className={`${classes.gameSquare} ${classes.inactiveSquare}`}>
-      <div className={classes.miss}></div>
+      <div className={`${classes.miss}  ${classes.blinkingSquare}`}></div>
     </div>
     )
   } else if(squareType()=== 2)/*hit*/{
