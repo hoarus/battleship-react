@@ -61,6 +61,8 @@ function Board(props) {
   const setShotResult = props.setShotResult;
   const currentBoard = props.currentBoard;
   const setCurrentBoard = props.setCurrentBoard;
+  const mostRecentShot = props.mostRecentShot
+  const setMostRecentShot = props.setMostRecentShot
 
 
   const endTurn = function() {
@@ -87,6 +89,8 @@ function Board(props) {
         setShips={setShips}
         shipOrientation={shipOrientation}
         setShipOrientation={setShipOrientation}
+        mostRecentShot = {mostRecentShot}
+        setMostRecentShot = {setMostRecentShot}
       /> 
       )
     } else {
@@ -108,6 +112,8 @@ function Board(props) {
         setShotTaken={setShotTaken}
         setShotResult={setShotResult}
         setGameOver = {setGameOver}
+        mostRecentShot = {mostRecentShot}
+        setMostRecentShot = {setMostRecentShot}
       /> 
       )
     }

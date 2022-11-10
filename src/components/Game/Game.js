@@ -81,6 +81,7 @@ function Game() {
   const [gameOver, setGameOver] = useState(false);
   const [currentBoard, setCurrentBoard] = useState("My Board");
   const [shotResult, setShotResult] = useState("");
+  const [mostRecentShot, setMostRecentShot] = useState("");
   const classes = useStyles();
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []); 
@@ -124,6 +125,8 @@ function Game() {
         setCurrentBoard = {setCurrentBoard}
         shotResult = {shotResult}
         setShotResult = {setShotResult}
+        mostRecentShot = {mostRecentShot}
+        setMostRecentShot = {setMostRecentShot}
       />
       )
     } else {
@@ -149,6 +152,8 @@ function Game() {
         setCurrentBoard = {setCurrentBoard}
         shotResult = {shotResult}
         setShotResult = {setShotResult}
+        mostRecentShot = {mostRecentShot}
+        setMostRecentShot = {setMostRecentShot}
       />
       )
     }

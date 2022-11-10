@@ -46,7 +46,7 @@ const useStyles = createUseStyles({
     width: '80%',
     aspectRatio: '1/1',
   },
-  '@keyframes slideRight': {
+  '@keyframes blinkMiss': {
     from: {
       backgroundColor: 'white',
     },
@@ -54,8 +54,23 @@ const useStyles = createUseStyles({
       backgroundColor: 'pink'
     }
   },
-  blinkingSquare: {
-    animationName: '$slideRight',
+  '@keyframes blinkHit': {
+    from: {
+      backgroundColor: 'red',
+    },
+    to: {
+      backgroundColor: 'pink'
+    }
+  },
+  blinkingMiss: {
+    animationName: '$blinkMiss',
+    animationDuration: '0.3s',
+    animationIterationCount: 'infinite',
+    animationDirection: 'alternate-reverse',
+    animationTimingFunction: 'linear',
+  },
+  blinkingHit: {
+    animationName: '$blinkHit',
     animationDuration: '0.3s',
     animationIterationCount: 'infinite',
     animationDirection: 'alternate-reverse',
@@ -78,6 +93,8 @@ function GameSquare(props) {
   const myGameBoard = currentPlayer.myGameBoard;
   const shipOrientation = props.shipOrientation;
   const position = props.position;
+  const mostRecentShot = props.mostRecentShot
+  const setMostRecentShot = props.setMostRecentShot
   const inactiveSquare = () => Object.keys(currentPlayer.availableShips).length == 0;
   const squareType =  () => myGameBoard.lookupPosition(props.position);
   const ship = selectedShip.ship;
@@ -111,13 +128,23 @@ function GameSquare(props) {
   } else if(squareType()=== 1) /*miss*/{
     return(
     <div className={`${classes.gameSquare} ${classes.inactiveSquare}`}>
-      <div className={`${classes.miss}  ${classes.blinkingSquare}`}></div>
+      {mostRecentShot == position && 
+        <div className={`${classes.miss}  ${classes.blinkingMiss}`}></div>
+      }
+      {mostRecentShot != position && 
+        <div className={`${classes.miss}`}></div>
+      }
     </div>
     )
   } else if(squareType()=== 2)/*hit*/{
     return(
-    <div className={`${classes.gameSquare} ${classes.shipSquare}`}>
-      <div className={classes.hit}></div>
+      <div className={`${classes.gameSquare} ${classes.shipSquare}`}>
+      {mostRecentShot == position && 
+        <div className={`${classes.hit}  ${classes.blinkingHit}`}></div>
+      }
+      {mostRecentShot != position && 
+        <div className={`${classes.hit}`}></div>
+      }
     </div>
     )
   } else if (inactiveSquare()){
