@@ -53,7 +53,7 @@ export default function PlayerDetails(props){
           <div>Ships Remaining: {enemyGameBoard.shipsRemaining()}</div>
         </div>
       }
-      {endTurnConditionsMet &&
+      {endTurnConditionsMet() &&
         <button onClick={setTurnOver} className={classes.endTurn}>End Turn</button>
        }
     </div>

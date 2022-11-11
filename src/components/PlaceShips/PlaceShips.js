@@ -9,9 +9,8 @@ const useStyles = createUseStyles({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    border: 'solid 2px blue',
-    margin: ' 1rem 0rem',
-    maxHeight: '30vh',
+    border: 'solid 2px #0E3744',
+    borderRadius: '5px',
   },
   shipGalley: {
     padding: '1rem',
@@ -30,42 +29,43 @@ const useStyles = createUseStyles({
   },
   ship:{
     display: 'flex',
-
+    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'orange',
+    backgroundColor: '#FBA346',
     '&:hover': {
-      backgroundColor: 'pink',
+      backgroundColor: '#d24531',
     },
   },
   verticalShip:{
     display: 'flex',
     flexDirection: 'column',
-
     justifyContent: 'center',
-    backgroundColor: 'orange',
-    '&:hover': {
-      backgroundColor: 'pink',
-    },
+
   },
   square:{
-    border: 'solid 1px darkblue',
+    border: 'solid 1px #0E3744',
     display: 'inline-block',
     marginLeft:'-1px',
-    height: '100%',
     boxSizing: 'border-box',
     aspectRatio: '1/1',
-    height: '2rem',
+    width: '5rem',
   },
   selected: {
-    backgroundColor: 'purple',
+    backgroundColor: '#d24531',
     '&:hover': {
-      backgroundColor: 'purple',
+      backgroundColor: '#d24531',
     },
   },
   selectedShipContainer: {
     display: 'flex',
     flexDirection: 'column',
     gap: '1rem',
+  },
+  rotateShip: {
+    width: '100%',
+    padding: '1rem',
+    textAlign: 'center',
+    fontSize: '1rem',
   }
 })
 
@@ -125,7 +125,7 @@ function PlaceShips(props) {
 
     }
     return(
-      <button onClick={toggleOrientation}>Rotate Ship</button>
+      <button className={classes.rotateShip} onClick={toggleOrientation}>Rotate Ship</button>
     )
 
   }
@@ -136,7 +136,7 @@ function PlaceShips(props) {
       if (shipOrientation == "x") {
         return(classes.ship)
       } else {
-        return(classes.verticalShip)
+        return(`${classes.ship} ${classes.verticalShip}`)
       }
     }
 

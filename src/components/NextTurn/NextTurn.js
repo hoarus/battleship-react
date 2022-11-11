@@ -5,27 +5,37 @@ import {createUseStyles} from 'react-jss';
 
 const useStyles = createUseStyles({
   wrapper: {
+    color: '0E3744',
+    boxSizing: 'border-box',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#0E3744',
     width: '100%',
     height: '80vh',
     border: 'solid 2px black',
-    justifyContent: 'center',
+    padding: '10%',
   },
   messageContainer: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: 'darkgray',
-    border: 'solid 2px black',
-    width: '80%',
+    backgroundColor: '#CCE8E6',
+    border: 'solid 0.3rem #A8BDC5',
+    borderRadius: '5px',
+    width: '40%',
     padding: '2rem',
     textAlign: 'center',
   },
   button: {
-    padding: '0.2rem 2rem'
+    width: '50%',
+    padding: '1rem',
+    textAlign: 'center',
+    fontSize: '1rem',
+    margin: '1rem',
+  },
+  darkBlue: {
+    color: '#0E3744',
   }
 })
 
@@ -60,7 +70,7 @@ export default function NextTurn(props){
   return(
     <div className={classes.wrapper}>
       <div className={classes.messageContainer}>
-        <h2>Next Player's Turn</h2>
+        <h2 className={classes.darkBlue}>Next Player's Turn</h2>
         <p>Please pass the game to {nextPlayer.name}.</p>
         <button className={classes.button} onClick={endTurn}>Start {nextPlayer.name}'s Turn</button>
       </div>
