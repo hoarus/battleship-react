@@ -7,15 +7,19 @@ const useStyles = createUseStyles({
     display: 'flex',
   },
   boardTab: {
-    backgroundColor: 'red',
+    backgroundColor: '#d24531',
     margin: '0px',
     width: '20%',
-    padding: '0.2rem',
+    padding: '0.5rem',
+    color: 'white',
     textAlign: 'center',
     border: 'solid 1px blue',
     borderTopLeftRadius: '20%',
     borderTopRightRadius: '20%',
     boxSizing: 'border-box',
+    '-webkit-user-select': 'none', /* Safari */
+    '-ms-user-select': 'none', /* IE 10 and IE 11 */
+    'user-select': 'none', /* Standard syntax */
     '&:hover': {
       backgroundColor: 'pink'
     },

@@ -2,9 +2,24 @@ import React from 'react';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
+  summaryDetails: {
+    '-webkit-user-select': 'none', /* Safari */
+    '-ms-user-select': 'none', /* IE 10 and IE 11 */
+    'user-select': 'none', /* Standard syntax */
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
   header: {
     textAlign: 'center',
-  }
+  },
+  endTurn: {
+    width: '50%',
+    padding: '1rem',
+    textAlign: 'center',
+    fontSize: '1rem',
+    margin: '1rem',
+  }  
 })
 
 export default function PlayerDetails(props){
@@ -26,7 +41,7 @@ export default function PlayerDetails(props){
   }
 
   return(
-    <div>
+    <div className={classes.summaryDetails}>
       <h2 className={classes.header}>{currentPlayer.name}'s Turn</h2>
       {turnCount > 1 &&
         <div>
@@ -34,12 +49,12 @@ export default function PlayerDetails(props){
             <h2>{shotResult}</h2>
           }
           <div>Shots Fired: {enemyGameBoard.totalShotsReceived()}</div>
-          <div>Ships Sunk: {enemyGameBoard.shipsSunk()}</div>\
+          <div>Ships Sunk: {enemyGameBoard.shipsSunk()}</div>
           <div>Ships Remaining: {enemyGameBoard.shipsRemaining()}</div>
         </div>
       }
       {endTurnConditionsMet &&
-        <button onClick={setTurnOver}>End Turn</button>
+        <button onClick={setTurnOver} className={classes.endTurn}>End Turn</button>
        }
     </div>
   )

@@ -4,28 +4,28 @@ import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
   gameSquare: {
-    border: 'outset 3px gray',
-    backgroundColor: 'gray',
+    border: 'outset 3px #A8BDC5',
+    backgroundColor: '#A8BDC5',
     color: 'blue',
     width: '100%',
     height: '100%',
     boxSizing: 'border-box',
     aspectRatio: '1/1',
     '&:hover': {
-      backgroundColor: 'pink',
-      borderColor: 'pink',
+      backgroundColor: '#d24531',
+      borderColor: '#d24531',
     },
   }, shipSquare: {
-    backgroundColor: 'orange',
-    border: 'outset 3px orange',
+    backgroundColor: '#FBA346',
+    border: 'outset 3px #FBA346',
     width: '100%',
     height: '100%',
     boxSizing: 'border-box',
     aspectRatio: '1/1',
   },
   missSquare: {
-    border: 'outset 3px blue',
-    backgroundColor: 'blue',
+    border: 'outset 3px #0E3744',
+    backgroundColor: '#0E3744',
     width: '100%',
     height: '100%',
     boxSizing: 'border-box',
@@ -80,7 +80,7 @@ function OpponentGameSquare(props) {
   // square is a miss
   if(squareType() === 1) {
     return(
-      <div className={classes.missSquare}>{props.position}</div>
+      <div className={classes.missSquare}></div>
     );
   } else if(squareType()==2) {
     return(<div className={classes.shipSquare} onClick = {fireShot}></div>)

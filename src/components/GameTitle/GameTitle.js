@@ -3,7 +3,8 @@ import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
   gameTitle: {
-    color: 'darkblue'
+    color: '#0E3744',
+    margin: '2rem',
   },
   wrapper: {
     display: 'flex',
@@ -17,7 +18,7 @@ export default function GameTitle(){
   
   return(
     <div className={classes.wrapper}>
-      <h1 className={classes.gameTitle}>Battleship</h1>
+      <h1 className={classes.gameTitle}>BATTLESHIP</h1>
     </div>
   )
 }

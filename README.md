@@ -1,25 +1,12 @@
 # Planned Architecture
 
-## High Level
-There is a game.
-The game has 2 players.
-Each player has 1 gameboard (your and opponent's render differently, but same board).
-Each gameboard has 5 ships.
+## Color Themes
 
-Context needs to exist at the Game level.
-Context should create 2 players.
-
-React Components:
-- App
-- Page Title
-- Game:
-  - Player:
-    - Input player name (Temporary)
-    - Then, display:
-      - Player name
-      - Score (hits, etc.)
-
-
+Light: #CCE8E6
+SecondLight: #A8BDC5
+DarkBlue: #0E3744
+Red: #d24531
+Ship: #FBA346
 
 # Getting Started with Create React App
 

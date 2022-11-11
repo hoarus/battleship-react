@@ -17,20 +17,20 @@ const useStyles = createUseStyles({
     justifyContent: 'center',
   },
   activeSquare: {
-    backgroundColor: 'lightgreen',
-    borderColor: 'lightgreen',
+    backgroundColor: '#0E3744',
+    borderColor: '#0E3744',
     '&:hover': {
-      backgroundColor: 'pink',
-      borderColor: 'pink',
+      backgroundColor: '#d24531',
+      borderColor: '#d24531',
     },
   }, 
   inactiveSquare: {
-    backgroundColor: 'lightgreen',
-    borderColor: 'lightgreen',
+    backgroundColor: '#0E3744',
+    borderColor: '#0E3744',
   },
   shipSquare: {
-    backgroundColor: 'orange',
-    borderColor: 'orange',
+    backgroundColor: '#FBA346',
+    borderColor: '#FBA346',
   }, 
   miss: {
     border: 'solid 1px darkblue',

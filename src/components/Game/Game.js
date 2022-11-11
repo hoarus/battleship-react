@@ -22,12 +22,14 @@ const useStyles = createUseStyles({
     boxSizing: 'border-box',
     display: 'flex',
     justifyContent: 'center',
-    padding: '5%',
+    padding: '2% 5%',
     width: '100%',
   },
   additionalDetails: {
     width: '30%',
-  }
+  },
+
+
 
 })
 
