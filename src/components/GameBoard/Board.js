@@ -28,7 +28,7 @@ const useStyles = createUseStyles({
     flex: '2 1 auto',
     display: 'grid',
     gridTemplateColumns: 'repeat(10, 1fr)',
-    border: 'solid 2px darkblue',
+    border: 'solid 2px #0E3744',
     width: '100%',
     
   },
@@ -62,7 +62,8 @@ function Board(props) {
   const currentBoard = props.currentBoard;
   const setCurrentBoard = props.setCurrentBoard;
   const mostRecentShot = props.mostRecentShot
-  const setMostRecentShot = props.setMostRecentShot
+  const setMostRecentShot = props.setMostRecentShot;
+  const [highlightedShipSquares, setHighlightedShipSquares] = useState([]);
 
 
   const endTurn = function() {
@@ -91,6 +92,8 @@ function Board(props) {
         setShipOrientation={setShipOrientation}
         mostRecentShot = {mostRecentShot}
         setMostRecentShot = {setMostRecentShot}
+        highlightedShipSquares = {highlightedShipSquares}
+        setHighlightedShipSquares = {setHighlightedShipSquares}
       /> 
       )
     } else {

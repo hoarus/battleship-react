@@ -23,7 +23,11 @@ const useStyles = createUseStyles({
       backgroundColor: '#d24531',
       borderColor: '#d24531',
     },
-  }, 
+  },
+  highlightedSquare: {
+    backgroundColor: '#d24531',
+    borderColor: '#d24531',
+  },
   inactiveSquare: {
     backgroundColor: '#0E3744',
     borderColor: '#0E3744',
@@ -95,6 +99,8 @@ function GameSquare(props) {
   const position = props.position;
   const mostRecentShot = props.mostRecentShot
   const setMostRecentShot = props.setMostRecentShot
+  const highlightedShipSquares = props.highlightedShipSquares;
+  const setHighlightedShipSquares = props.setHighlightedShipSquares;
   const inactiveSquare = () => Object.keys(currentPlayer.availableShips).length == 0;
   const squareType =  () => myGameBoard.lookupPosition(props.position);
   const ship = selectedShip.ship;
@@ -120,6 +126,39 @@ function GameSquare(props) {
       selectShip(false);
     }
   }
+
+  const getYHighlightCoordinates = function() {
+    let yHighlightCoordinates = [];
+    for (let i = 0; i < ship.length; i++) {
+      let y = Number(position.slice(1)) + i;
+      let coordinates = position[0].concat(y);
+      yHighlightCoordinates.push(coordinates);
+    }
+    return yHighlightCoordinates;
+  }
+
+  const getXHighlightCoordinates = function() {
+    let xHighlightCoordinates = [];
+    for (let i = 0; i < ship.length; i++) {
+      let x = Number(position.slice(1));
+      let y = String.fromCharCode(position.charCodeAt(0) + i);
+      let coordinates = y.concat(x);
+      xHighlightCoordinates.push(coordinates);
+    }
+    return xHighlightCoordinates;
+  }
+
+  const highlightSquares = function() {
+    if (shipOrientation=="x") {
+      setHighlightedShipSquares(getXHighlightCoordinates());
+    } else {
+      setHighlightedShipSquares(getYHighlightCoordinates());
+    }
+    
+  }
+
+  const unHighlightSquares = () => setHighlightedShipSquares([]);
+
 
   if(typeof squareType() == "object") /*ship*/{
     return(
@@ -151,9 +190,13 @@ function GameSquare(props) {
     return(
       <div className={`${classes.gameSquare} ${classes.inactiveSquare}`}></div>
     )
+  } else if (squareType() === 0 && highlightedShipSquares.includes(position)) {
+    return(
+      <div className={`${classes.gameSquare} ${classes.highlightedSquare}`} onClick = {placeShip} onMouseEnter = {highlightSquares}></div>
+    );
   } else if (squareType() === 0) {
     return(
-      <div className={`${classes.gameSquare} ${classes.activeSquare}`} onClick = {placeShip}></div>
+      <div className={`${classes.gameSquare} ${classes.activeSquare}`} onClick = {placeShip} onMouseEnter = {highlightSquares}></div>
     );
     } else {
     return(

@@ -13,7 +13,7 @@ const useStyles = createUseStyles({
     padding: '0.5rem',
     color: 'white',
     textAlign: 'center',
-    border: 'solid 1px blue',
+    border: 'solid 1px #CCE8E6',
     borderTopLeftRadius: '20%',
     borderTopRightRadius: '20%',
     boxSizing: 'border-box',
@@ -26,10 +26,10 @@ const useStyles = createUseStyles({
   },
 
   selectedTab: {
-    backgroundColor: 'blue',
+    backgroundColor: '#0E3744',
     color: 'white',
     '&:hover': {
-      backgroundColor: 'blue'
+      backgroundColor: '#0E3744'
     },
   }
 })

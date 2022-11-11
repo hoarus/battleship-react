@@ -62,17 +62,9 @@ playerTwo.enemyGameBoard = gameBoardOne;
 //Ship assignment has to be duplicate to ensure players are not sharing a set of ships
 playerOne.availableShips = {
   Destroyer: (new Ship(2)),
-  Submarine: (new Ship(3)),
-  Cruiser: (new Ship(3)),
-  Battleship: (new Ship(4)),
-  Carrier: (new Ship(5)),
 }
 playerTwo.availableShips = {
   Destroyer: (new Ship(2)),
-  Submarine: (new Ship(3)),
-  Cruiser: (new Ship(3)),
-  Battleship: (new Ship(4)),
-  Carrier: (new Ship(5)),
 }
 
 
