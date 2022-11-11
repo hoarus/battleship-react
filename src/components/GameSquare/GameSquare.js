@@ -104,7 +104,8 @@ function GameSquare(props) {
   const inactiveSquare = () => Object.keys(currentPlayer.availableShips).length == 0;
   const squareType =  () => myGameBoard.lookupPosition(props.position);
   const ship = selectedShip.ship;
-  
+
+   
   const removePlacedShip = function() {
     const updatedShips = {    }
     for (const shipName in ships) {
@@ -116,6 +117,7 @@ function GameSquare(props) {
 
 
   const placeShip = function() {
+    console.log("ehllo");
     if (selectedShip == false) {return} 
     else if (myGameBoard.placeShip(ship, position, shipOrientation) != "Illegal Move") {
       setPlayers(players);
@@ -191,13 +193,13 @@ function GameSquare(props) {
       <div className={`${classes.gameSquare} ${classes.inactiveSquare}`}></div>
     )
   } else if (squareType() === 0 && highlightedShipSquares.includes(position)) {
-    return(
-      <div className={`${classes.gameSquare} ${classes.highlightedSquare}`} onClick = {placeShip} onMouseEnter = {highlightSquares}></div>
-    );
-  } else if (squareType() === 0) {
-    return(
-      <div className={`${classes.gameSquare} ${classes.activeSquare}`} onClick = {placeShip} onMouseEnter = {highlightSquares}></div>
-    );
+      return(
+        <div className={`${classes.gameSquare} ${classes.activeSquare} ${classes.highlightedSquare}`} onClick = {placeShip} ></div>
+      );
+    } else if (squareType() === 0) {
+      return(
+        <div className={`${classes.gameSquare} ${classes.activeSquare}`} onClick = {() => placeShip()} onMouseEnter = {highlightSquares}></div>
+      );
     } else {
     return(
       <div>Error</div>

@@ -75,7 +75,7 @@ function Game() {
   const [players, setPlayers] = useState([playerOne, playerTwo]);
   const [currentPlayer, setCurrentPlayer] = useState(players[0]);
   const [ships, setShips] = useState();
-  const [selectedShip, selectShip] = useState(false);
+  const [selectedShip, selectShip] = useState({name: 'Destroyer', ship: (new Ship(2))});
   const [shipOrientation, setShipOrientation] = useState("x");
   const [turnOver, setTurnOver] = useState(false);
   const [turnCount, setTurnCount] = useState(0);
