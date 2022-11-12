@@ -89,8 +89,6 @@ function GameSquare(props) {
   const currentPlayer = props.currentPlayer;
   const players = props.players;
   const setPlayers = props.setPlayers;
-  const ships = currentPlayer.availableShips;
-  const setShips = props.setShips;
   const selectShip = props.selectShip;
   const selectedShip = props.selectedShip;
   const gameState = useContext(GameContext);

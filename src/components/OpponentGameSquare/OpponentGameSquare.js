@@ -38,18 +38,14 @@ const useStyles = createUseStyles({
 function OpponentGameSquare(props) {
   const classes = useStyles();
   const currentPlayer = props.currentPlayer;
-  const players = props.players;
-  const selectedShip = props.selectedShip;
   const gameState = useContext(GameContext);
   const enemyGameBoard = currentPlayer.enemyGameBoard;
   const position = props.position;
-  const inactiveSquare = false;
   const squareType =  () => enemyGameBoard.lookupPosition(props.position);
   const setShotTaken = props.setShotTaken;
   const shotTaken = props.shotTaken;
   const setShotResult = props.setShotResult;
   const setGameOver = props.setGameOver;
-  const mostRecentShot = props.mostRecentShot
   const setMostRecentShot = props.setMostRecentShot
 
   const shotResult = function(target){

@@ -43,14 +43,6 @@ const togglePlayer = function (currentPlayer, pOne, pTwo) {
   }
 }
 
-// Disabled Starting Ships
-const disableStartingShips = {
-  Destroyer: (new Ship(2)),
-  Submarine: (new Ship(3)),
-  Cruiser: (new Ship(3)),
-  Battleship: (new Ship(4)),
-  Carrier: (new Ship(5)),
-}
 const gameBoardOne = new GameBoard();
 const gameBoardTwo = new GameBoard();
 const playerOne = new Player();
@@ -74,7 +66,6 @@ playerTwo.availableShips = [
 function Game() {
   const [players, setPlayers] = useState([playerOne, playerTwo]);
   const [currentPlayer, setCurrentPlayer] = useState(players[0]);
-  const [ships, setShips] = useState();
   const [selectedShip, selectShip] = useState({name: 'Destroyer', ship: (new Ship(2))});
   const [shipOrientation, setShipOrientation] = useState("x");
   const [turnOver, setTurnOver] = useState(false);
@@ -115,8 +106,6 @@ function Game() {
         currentPlayer={currentPlayer}
         selectedShip={selectedShip} 
         selectShip={selectShip} 
-        ships={ships} 
-        setShips={setShips}
         shipOrientation={shipOrientation}
         setShipOrientation={setShipOrientation}
         turnOver = {turnOver}
@@ -141,8 +130,6 @@ function Game() {
         currentPlayer={currentPlayer}
         selectedShip={selectedShip} 
         selectShip={selectShip} 
-        ships={ships} 
-        setShips={setShips}
         shipOrientation={shipOrientation}
         setShipOrientation={setShipOrientation}
         turnOver = {turnOver}
