@@ -63,9 +63,9 @@ playerTwo.enemyGameBoard = gameBoardOne;
 playerOne.availableShips = [
   new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)
 ]
-playerTwo.availableShips = {
-  Destroyer: (new Ship(2)),
-}
+playerTwo.availableShips = [
+  new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)
+]
 
 
 
@@ -103,6 +103,7 @@ function Game() {
   }
 
   const losingPlayer = () => playerOneLost()? playerOne : playerTwo
+
 
   const SelectedBoard = function(props){
     if (turnCount < 2 || currentBoard == "My Board") {
@@ -206,6 +207,7 @@ function Game() {
         turnCount = {turnCount}
         setTurnCount = {setTurnCount}
         setShotTaken = {setShotTaken}
+        selectShip = {selectShip}
       />
     )
   }

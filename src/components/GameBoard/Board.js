@@ -71,6 +71,8 @@ function Board(props) {
   }
 
 
+
+
   const ApplicableSquareType = function(props){
     const square = props.square;
     const x = props.x;

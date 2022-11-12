@@ -119,8 +119,12 @@ function GameSquare(props) {
       gameState.update();
       // Update Ships
       removePlacedShip();    
-      // Prevent ship being placed twice
-      selectShip(currentPlayer.availableShips[0]);
+      // Load next ship, setting to false if all ships placed
+      if (currentPlayer.availableShips.length == 0) {
+        selectShip(false);
+      } else {
+        selectShip(currentPlayer.availableShips[0]);
+      }
     }
   }
 

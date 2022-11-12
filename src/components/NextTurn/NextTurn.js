@@ -48,6 +48,7 @@ export default function NextTurn(props){
   const turnCount = props.turnCount;
   const setTurnCount = props.setTurnCount;
   const setShotTaken = props.setShotTaken;
+  const selectShip = props.selectShip;
 
   let nextPlayer = "";
   if (players[0] === currentPlayer) {
@@ -57,6 +58,7 @@ export default function NextTurn(props){
   }
 
   const endTurn = function() {
+    selectShip(nextPlayer.availableShips[0]);
     setCurrentPlayer(nextPlayer);
     setTurnCount(turnCount + 1);
     setTurnOver(false);
