@@ -103,21 +103,16 @@ function GameSquare(props) {
   const setHighlightedShipSquares = props.setHighlightedShipSquares;
   const inactiveSquare = () => Object.keys(currentPlayer.availableShips).length == 0;
   const squareType =  () => myGameBoard.lookupPosition(props.position);
-  const ship = selectedShip.ship;
+  const ship = currentPlayer.availableShips[0];
 
    
   const removePlacedShip = function() {
-    const updatedShips = {    }
-    for (const shipName in ships) {
-      if (shipName != selectedShip.name)
-      updatedShips[shipName] = ships[shipName];
-    }
+    const updatedShips = currentPlayer.availableShips.slice(1);
     currentPlayer.availableShips = updatedShips;
   }
 
 
   const placeShip = function() {
-    console.log("ehllo");
     if (selectedShip == false) {return} 
     else if (myGameBoard.placeShip(ship, position, shipOrientation) != "Illegal Move") {
       setPlayers(players);
@@ -125,7 +120,7 @@ function GameSquare(props) {
       // Update Ships
       removePlacedShip();    
       // Prevent ship being placed twice
-      selectShip(false);
+      selectShip(currentPlayer.availableShips[0]);
     }
   }
 

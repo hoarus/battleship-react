@@ -60,9 +60,9 @@ playerTwo.myGameBoard = gameBoardTwo;
 playerOne.enemyGameBoard = gameBoardTwo;
 playerTwo.enemyGameBoard = gameBoardOne;
 //Ship assignment has to be duplicate to ensure players are not sharing a set of ships
-playerOne.availableShips = {
-  Destroyer: (new Ship(2)),
-}
+playerOne.availableShips = [
+  new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)
+]
 playerTwo.availableShips = {
   Destroyer: (new Ship(2)),
 }
@@ -187,9 +187,6 @@ function Game() {
           />
             {!allShipsPlaced() &&
             <PlaceShips 
-              currentPlayer={currentPlayer}
-              selectedShip={selectedShip}  
-              selectShip={selectShip}
               shipOrientation={shipOrientation}
               setShipOrientation={setShipOrientation}
             />
