@@ -21,7 +21,7 @@ const useStyles = createUseStyles({
     width: '70%'
   },
   boardWrapper: {
-    width: '80%',
+    width: '65%',
     
   },
   gameBoard: {

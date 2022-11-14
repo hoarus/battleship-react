@@ -74,7 +74,7 @@ export default function NextTurn(props){
       <div className={classes.messageContainer}>
         <h2 className={classes.darkBlue}>Next Player's Turn</h2>
         <p>Please pass the game to {nextPlayer.name}.</p>
-        <button className={classes.button} onClick={endTurn}>Start {nextPlayer.name}'s Turn</button>
+        <button className={classes.button} onClick={endTurn} autoFocus>Start {nextPlayer.name}'s Turn</button>
       </div>
     </div>
   )

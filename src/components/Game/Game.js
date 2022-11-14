@@ -8,7 +8,7 @@ import {Player} from '../GameLogic/Player';
 import PlayerInputs from '../PlayerInputs/PlayerInputs';
 import {Ship} from '../GameLogic/Ship';
 import { createUseStyles } from 'react-jss';
-import PlayerDetails from '../PlayerDetails/PlayerDetails';
+import ShotResult from '../ShotResult/ShotResult';
 import NextTurn from '../NextTurn/NextTurn';
 
 
@@ -22,13 +22,17 @@ const useStyles = createUseStyles({
     boxSizing: 'border-box',
     display: 'flex',
     justifyContent: 'center',
-    padding: '2% 5%',
+    padding: '0% 5%',
     width: '100%',
   },
   additionalDetails: {
     width: '30%',
   },
-
+  playersTurn: {
+    color: '#0E3744',
+    padding: '0px',
+    margin: '0px',
+  }
 
 
 })
@@ -72,7 +76,7 @@ function Game() {
   const [turnCount, setTurnCount] = useState(0);
   const [shotTaken, setShotTaken] = useState();
   const [gameOver, setGameOver] = useState(false);
-  const [currentBoard, setCurrentBoard] = useState("My Board");
+  const [currentBoard, setCurrentBoard] = useState("My Board")  ;
   const [shotResult, setShotResult] = useState("");
   const [mostRecentShot, setMostRecentShot] = useState("");
   const classes = useStyles();
@@ -80,6 +84,14 @@ function Game() {
   const forceUpdate = React.useCallback(() => updateState({}), []); 
   const gameState = {
     update: forceUpdate,
+  }
+  const endTurnConditionsMet = function() {
+    if (turnCount <= 1 ) {
+      // No available ships remaining
+      return (Object.keys(currentPlayer.availableShips).length == 0);
+    } else {
+      return (shotTaken);
+    }
   }
   const allShipsPlaced = function() {
     // No available ships remaining
@@ -160,12 +172,13 @@ function Game() {
   } else if (turnOver==false) {
     return(
       <GameContext.Provider value={gameState}>
+        <h1 className={classes.playersTurn}>Sam's Turn</h1>
         {gameOver&& 
         <GameOver/>
         }
         <div className={classes.gameWrapper}>
-          <div className={classes.additionalDetails}>
-            <PlayerDetails 
+        {endTurnConditionsMet() &&
+            <ShotResult 
             players={players} 
             currentPlayer={currentPlayer} 
             turnCount={turnCount}
@@ -173,13 +186,7 @@ function Game() {
             shotTaken = {shotTaken}
             setTurnOver = {setTurnOver}
           />
-            {!allShipsPlaced() &&
-            <PlaceShips 
-              shipOrientation={shipOrientation}
-              setShipOrientation={setShipOrientation}
-            />
-            }
-          </div>
+        }
         <SelectedBoard/>
         </div>
       </GameContext.Provider>
