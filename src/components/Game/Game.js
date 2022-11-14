@@ -3,13 +3,14 @@ import Board from '../GameBoard/Board';
 import {GameBoard} from '../GameLogic/GameBoard';
 import GameContext from '../Game/GameContext';
 import GameOver from '../GameOver/GameOver';
-import PlaceShips from '../PlaceShips/PlaceShips';
+import RotateShips from '../RotateShips/Rotate Ships';
 import {Player} from '../GameLogic/Player';
 import PlayerInputs from '../PlayerInputs/PlayerInputs';
 import {Ship} from '../GameLogic/Ship';
 import { createUseStyles } from 'react-jss';
 import ShotResult from '../ShotResult/ShotResult';
 import NextTurn from '../NextTurn/NextTurn';
+
 
 
 const useStyles = createUseStyles({
@@ -21,7 +22,9 @@ const useStyles = createUseStyles({
   gameWrapper: {
     boxSizing: 'border-box',
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'center',
     padding: '0% 5%',
     width: '100%',
   },
@@ -172,7 +175,7 @@ function Game() {
   } else if (turnOver==false) {
     return(
       <GameContext.Provider value={gameState}>
-        <h1 className={classes.playersTurn}>Sam's Turn</h1>
+        <h1 className={classes.playersTurn}>{currentPlayer.name}'s Turn</h1>
         {gameOver&& 
         <GameOver/>
         }
@@ -187,6 +190,11 @@ function Game() {
             setTurnOver = {setTurnOver}
           />
         }
+        <RotateShips
+          shipOrientation = {shipOrientation}
+          setShipOrientation = {setShipOrientation}
+          
+        />
         <SelectedBoard/>
         </div>
       </GameContext.Provider>

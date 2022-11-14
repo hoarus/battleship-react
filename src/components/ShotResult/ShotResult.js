@@ -27,7 +27,7 @@ const useStyles = createUseStyles({
     'user-select': 'none', /* Standard syntax */
     backgroundColor: '#CCE8E6',
     minWidth: '30%',
-    top: '40vh',
+    top: '35vh',
 
   } 
 })

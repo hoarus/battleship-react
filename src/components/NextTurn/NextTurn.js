@@ -17,15 +17,18 @@ const useStyles = createUseStyles({
     padding: '10%',
   },
   messageContainer: {
+    position: 'absolute',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: '#CCE8E6',
-    border: 'solid 0.3rem #A8BDC5',
-    borderRadius: '5px',
-    width: '40%',
+    border: 'solid 0.3rem #0E3744',
     padding: '2rem',
-    textAlign: 'center',
+    '-webkit-user-select': 'none', /* Safari */
+    '-ms-user-select': 'none', /* IE 10 and IE 11 */
+    'user-select': 'none', /* Standard syntax */
+    backgroundColor: '#CCE8E6',
+    minWidth: '30%',
+    top: '35vh',
   },
   button: {
     width: '50%',
