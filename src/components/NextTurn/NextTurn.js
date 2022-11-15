@@ -10,7 +10,7 @@ const useStyles = createUseStyles({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: '#0E3744',
+    backgroundColor: '#CCE8E6',
     width: '100%',
     height: '80vh',
     border: 'solid 2px black',
@@ -22,6 +22,7 @@ const useStyles = createUseStyles({
     flexDirection: 'column',
     alignItems: 'center',
     border: 'solid 0.3rem #0E3744',
+    borderRadius: '3%',
     padding: '2rem',
     '-webkit-user-select': 'none', /* Safari */
     '-ms-user-select': 'none', /* IE 10 and IE 11 */

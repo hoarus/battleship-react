@@ -63,7 +63,7 @@ playerOne.availableShips = [
   new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)
 ]
 playerTwo.availableShips = [
-  new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)
+  new Ship(2)
 ]
 
 
@@ -176,9 +176,6 @@ function Game() {
     return(
       <GameContext.Provider value={gameState}>
         <h1 className={classes.playersTurn}>{currentPlayer.name}'s Turn</h1>
-        {gameOver&& 
-        <GameOver/>
-        }
         <div className={classes.gameWrapper}>
         {endTurnConditionsMet() &&
             <ShotResult 
@@ -193,11 +190,17 @@ function Game() {
         <RotateShips
           shipOrientation = {shipOrientation}
           setShipOrientation = {setShipOrientation}
-          
+
         />
         <SelectedBoard/>
         </div>
       </GameContext.Provider>
+    )
+  } else if (gameOver){
+    return(
+    <GameOver
+      currentPlayer={currentPlayer}
+    />
     )
   } else {
     return(
