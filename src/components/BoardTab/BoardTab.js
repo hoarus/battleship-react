@@ -5,11 +5,12 @@ import { createUseStyles } from 'react-jss';
 const useStyles = createUseStyles({
   tabsContainer: {
     display: 'flex',
+    width: '100%',
   },
   boardTab: {
     backgroundColor: '#d24531',
     margin: '0px',
-    width: '20%',
+    width: '50%',
     padding: '0.5rem',
     color: 'white',
     textAlign: 'center',

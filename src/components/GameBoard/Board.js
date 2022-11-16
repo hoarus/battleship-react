@@ -16,15 +16,15 @@ const useStyles = createUseStyles({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: '2rem',
-    padding: '2rem',
-    width: '70%'
+    padding: '7% 2%',
+    width: '90%'
   },
   boardWrapper: {
-    width: '65%',
+    width: '100%',
     
   },
   gameBoard: {
+    boxSizing: 'border-box',
     flex: '2 1 auto',
     display: 'grid',
     gridTemplateColumns: 'repeat(10, 1fr)',
@@ -34,7 +34,7 @@ const useStyles = createUseStyles({
   },
   button: {
     flexGrow: '0',
-    padding: '0.2rem 2rem',
+    padding: '0.2rem 1rem',
   }
 })
 

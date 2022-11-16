@@ -13,8 +13,8 @@ const useStyles = createUseStyles({
     color: '#0E3744',
   },
   rotateShip: {
-    width: '100%',
-    padding: '1rem',
+    width: '90%',
+    padding: '0.5rem',
     textAlign: 'center',
     fontSize: '1rem',
   }
@@ -27,7 +27,7 @@ function PlaceShips(props) {
   const setShipOrientation = props.setShipOrientation;
   const toggleOrientation = function() {
     if (shipOrientation == "x") {
-      setShipOrientation("y")
+      setShipOrientation("y");
     } else {
       setShipOrientation("x")
     }

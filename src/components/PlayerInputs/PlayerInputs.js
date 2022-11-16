@@ -23,7 +23,11 @@ const useStyles = createUseStyles({
   centerText: {
     textAlign: 'center',
     margin: '0px',
-  } 
+  },
+  error: {
+    marginBottom: '0px',
+    color: 'darkRed',
+  }
 })
 
 export default function PlayerInputs(props){
@@ -86,7 +90,7 @@ export default function PlayerInputs(props){
               type='text' 
               placeholder='Player One'
               onChange={setName}/>
-            <p>{formErrors.playerOne}</p>
+            <p className={classes.error}>{formErrors.playerOne}</p>
          </label>
           <label>
           <input 
@@ -96,7 +100,7 @@ export default function PlayerInputs(props){
               type='text' 
               placeholder='Player Two'
               onChange={setName}/>
-            <p>{formErrors.playerTwo}</p>
+            <p className={classes.error}>{formErrors.playerTwo}</p>
          </label>
         <button type='submit' className={classes.button}>Get Started</button>
       </form>

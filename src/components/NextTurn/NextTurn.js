@@ -13,10 +13,10 @@ const useStyles = createUseStyles({
     backgroundColor: '#CCE8E6',
     width: '100%',
     height: '80vh',
-    border: 'solid 2px black',
     padding: '10%',
   },
   messageContainer: {
+    boxSizing: 'border-box',
     position: 'absolute',
     display: 'flex',
     flexDirection: 'column',
@@ -28,11 +28,12 @@ const useStyles = createUseStyles({
     '-ms-user-select': 'none', /* IE 10 and IE 11 */
     'user-select': 'none', /* Standard syntax */
     backgroundColor: '#CCE8E6',
+    width: '90%',
     minWidth: '30%',
     top: '35vh',
   },
   button: {
-    width: '50%',
+
     padding: '1rem',
     textAlign: 'center',
     fontSize: '1rem',
