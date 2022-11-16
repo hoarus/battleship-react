@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
@@ -28,7 +28,7 @@ const useStyles = createUseStyles({
     backgroundColor: '#CCE8E6',
     width: '90%',
     minWidth: '30%',
-    top: '35vh',
+    top: '25vh',
 
   } 
 })
@@ -41,6 +41,13 @@ export default function PlayerDetails(props){
   const shotResult = props.shotResult;
   const shotTaken = props.shotTaken;
   const setTurnOver = props.setTurnOver;
+  const [loading, setLoading] = useState(true);
+  useEffect( () => {
+    setTimeout( () => {
+      setLoading(false)
+    }, 500)
+  }, [])
+
 
   const endTurnConditionsMet = function() {
     if (turnCount <= 1 ) {
@@ -51,7 +58,11 @@ export default function PlayerDetails(props){
     }
   }
 
-  return(
+  if(loading){
+    return(
+      <div></div>
+    )
+  } else return(
       <div className={classes.popUp}>
         {turnCount <= 1 &&
         <h2>Ships Placed</h2>
@@ -65,6 +76,7 @@ export default function PlayerDetails(props){
         </Fragment>
         }
         <button onClick={setTurnOver} className={classes.endTurn} autoFocus>End Turn</button>
-      </div>   
+    </div>  
+ 
   )
 }

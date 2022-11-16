@@ -187,7 +187,7 @@ function Game() {
             setTurnOver = {setTurnOver}
           />
         }
-        {!allShipsPlaced() &&
+        {turnCount <=1 &&
           <RotateShips
             shipOrientation = {shipOrientation}
             setShipOrientation = {setShipOrientation}

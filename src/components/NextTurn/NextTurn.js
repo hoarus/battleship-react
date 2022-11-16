@@ -30,7 +30,7 @@ const useStyles = createUseStyles({
     backgroundColor: '#CCE8E6',
     width: '90%',
     minWidth: '30%',
-    top: '35vh',
+    top: '25vh',
   },
   button: {
 
