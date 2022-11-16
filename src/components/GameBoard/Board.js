@@ -41,6 +41,7 @@ const useStyles = createUseStyles({
 
 
 function Board(props) {
+  const classes = useStyles();
   const boardType = props.boardType;
   const players = props.players;
   const currentPlayer = props.currentPlayer
@@ -48,7 +49,6 @@ function Board(props) {
   const selectShip = props.selectShip;
   const selectedShip = props.selectedShip;
   const shipOrientation = props.shipOrientation
-  const classes = useStyles();
   const gameBoard = currentPlayer.myGameBoard;
   const shotTaken = props.shotTaken;
   const setShotTaken = props.setShotTaken;
