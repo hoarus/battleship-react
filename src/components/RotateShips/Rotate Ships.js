@@ -26,7 +26,7 @@ function PlaceShips(props) {
   const shipOrientation = props.shipOrientation;
   const setShipOrientation = props.setShipOrientation;
   const toggleOrientation = function() {
-    if (shipOrientation == "x") {
+    if (shipOrientation === "x") {
       setShipOrientation("y");
     } else {
       setShipOrientation("x")

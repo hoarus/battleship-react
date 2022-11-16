@@ -49,16 +49,6 @@ export default function PlayerDetails(props){
     }, 500)
   }, [])
 
-
-  const endTurnConditionsMet = function() {
-    if (turnCount <= 1 ) {
-      // No available ships remaining
-      return (Object.keys(currentPlayer.availableShips).length == 0);
-    } else {
-      return (shotTaken);
-    }
-  }
-
   if(loading){
     return(
       <div></div>
@@ -68,7 +58,7 @@ export default function PlayerDetails(props){
         {turnCount <= 1 &&
         <h2>Ships Placed</h2>
         }
-        {turnCount > 1 && shotResult != "" && shotTaken &&
+        {turnCount > 1 && shotResult !== "" && shotTaken &&
         <Fragment>
         <h2>{shotResult}</h2>
         <div>Shots Fired: {enemyGameBoard.totalShotsReceived()}</div>

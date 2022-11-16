@@ -42,7 +42,7 @@ export default function BoardTab(props) {
   const displayMyBoard = () => setCurrentBoard("My Board")
   const displayEnemyBoard = () => setCurrentBoard("Enemy Board")
 
-  if (currentBoard == "Enemy Board") {
+  if (currentBoard === "Enemy Board") {
     return(
       <div className={classes.tabsContainer}>
         <div className={classes.boardTab} onClick={displayMyBoard}>My Board</div>

@@ -86,7 +86,7 @@ export default function GameSquare(props) {
   const highlightedShipSquares = props.highlightedShipSquares;
   const setHighlightedShipSquares = props.setHighlightedShipSquares;
   const myGameBoard = currentPlayer.myGameBoard;
-  const inactiveSquare = () => Object.keys(currentPlayer.availableShips).length == 0;
+  const inactiveSquare = () => Object.keys(currentPlayer.availableShips).length === 0;
   const squareType =  () => myGameBoard.lookupPosition(props.position);
   const ship = currentPlayer.availableShips[0];
 
@@ -98,14 +98,14 @@ export default function GameSquare(props) {
 
 
   const placeShip = function() {
-    if (selectedShip == false) {return} 
-    else if (myGameBoard.placeShip(ship, position, shipOrientation) != "Illegal Move") {
+    if (selectedShip === false) {return} 
+    else if (myGameBoard.placeShip(ship, position, shipOrientation) !== "Illegal Move") {
       setPlayers(players);
       gameState.update();
       // Update Ships
       removePlacedShip();    
       // Load next ship, setting to false if all ships placed
-      if (currentPlayer.availableShips.length == 0) {
+      if (currentPlayer.availableShips.length === 0) {
         selectShip(false);
       } else {
         selectShip(currentPlayer.availableShips[0]);
@@ -135,7 +135,7 @@ export default function GameSquare(props) {
   }
 
   const highlightSquares = function() {
-    if (shipOrientation=="x") {
+    if (shipOrientation==="x") {
       setHighlightedShipSquares(getXHighlightCoordinates());
     } else {
       setHighlightedShipSquares(getYHighlightCoordinates());
@@ -143,42 +143,42 @@ export default function GameSquare(props) {
     
   }
 
-
-  if(typeof squareType() == "object") /*ship*/{
+  
+  if(typeof squareType() === "object"){ //If Ship
     return(
       <div className={`${classes.gameSquare} ${classes.shipSquare}`}></div>
     );
-  } else if(squareType()=== 1) /*miss*/{
+  } else if(squareType()=== 1){ // If Miss
     return(
     <div className={`${classes.gameSquare}`}>
-      {mostRecentShot == position && 
+      {mostRecentShot === position && 
         <div className={`${classes.shot}  ${classes.blinkingMiss}`}>❌</div>
       }
-      {mostRecentShot != position && 
+      {mostRecentShot !== position && 
         <div className={`${classes.shot}`}>❌</div>
       }
     </div>
     )
-  } else if(squareType()=== 2)/*hit*/{
+  } else if(squareType()=== 2){ // If Hit
     return(
       <div className={`${classes.gameSquare} ${classes.shipSquare}`}>
-      {mostRecentShot == position && 
+      {mostRecentShot === position && 
         <div className={`${classes.shot}  ${classes.blinkingHit}`}>❌</div>
       }
-      {mostRecentShot != position && 
+      {mostRecentShot !== position && 
         <div className={`${classes.shot}`}>❌</div>
       }
     </div>
     )
-  } else if (inactiveSquare()){
+  } else if (inactiveSquare()){ // Test if inactive (i.e. ships already placed)
     return(
       <div className={`${classes.gameSquare}`}></div>
     )
-  } else if (squareType() === 0 && highlightedShipSquares.includes(position)) {
+  } else if (squareType() === 0 && highlightedShipSquares.includes(position)) { //Highlight ship placement
       return(
         <div className={`${classes.gameSquare} ${classes.activeSquare} ${classes.highlightedSquare}`} onClick = {placeShip} ></div>
       );
-    } else if (squareType() === 0) {
+    } else if (squareType() === 0) { // Empty Square
       return(
         <div className={`${classes.gameSquare} ${classes.activeSquare}`} onClick = {() => placeShip()} onMouseEnter = {highlightSquares}></div>
       );

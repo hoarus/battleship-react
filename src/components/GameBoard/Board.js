@@ -66,7 +66,7 @@ function Board(props) {
   const ApplicableSquareType = function(props){
     const x = props.x;
     const y = props.y
-    if(boardType == "Own") {
+    if(boardType === "Own") {
       return(
         <GameSquare 
         key={`own[${x}:${y}]`} 
@@ -101,19 +101,19 @@ function Board(props) {
 
   return(
     <div className={classes.wrapper}>
-        <div className={classes.boardWrapper}>
+      <div className={classes.boardWrapper}>
         {(turnCount > 1) &&
           <BoardTab
             currentBoard = {currentBoard}
             setCurrentBoard = { setCurrentBoard }
           />
         }
-          <div className= {classes.gameBoard}>
-            {gameBoard.board.map((row, y) =>
-              row.map((square, x) =>
-              <ApplicableSquareType key={x} x={x} y={y} /> 
-              )) }
-          </div>
+        <div className= {classes.gameBoard}>
+          {gameBoard.board.map((row, y) =>
+            row.map((square, x) =>
+            <ApplicableSquareType key={x} x={x} y={y} /> 
+            )) }
+        </div>
         </div>
     </div>
   )

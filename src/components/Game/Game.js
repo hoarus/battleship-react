@@ -29,13 +29,6 @@ const useStyles = createUseStyles({
   }
 })
 
-const togglePlayer = function (currentPlayer, pOne, pTwo) {
-  if (currentPlayer == pOne) {
-    currentPlayer = pTwo;
-  } else {
-    currentPlayer = pOne;
-  }
-}
 
 // Create all GameLogic components
 const gameBoardOne = new GameBoard();
@@ -57,7 +50,7 @@ playerTwo.availableShips = [
 export default function Game() {
   const [players, setPlayers] = useState([playerOne, playerTwo]);
   const [currentPlayer, setCurrentPlayer] = useState(players[0]);
-  const [selectedShip, selectShip] = useState({name: 'Destroyer', ship: (new Ship(2))});
+  const [selectedShip, selectShip] = useState();
   const [shipOrientation, setShipOrientation] = useState("x");
   const [turnOver, setTurnOver] = useState(false);
   const [turnCount, setTurnCount] = useState(0);
@@ -72,73 +65,72 @@ export default function Game() {
   const gameState = {
     update: forceUpdate,
   }
+  const commonBoardProps = {
+    players: players,
+    setPlayers: setPlayers,
+    currentPlayer: currentPlayer,
+    selectedShip: selectedShip,
+    selectShip: selectShip,
+    shipOrientation: shipOrientation,
+    turnCount: turnCount,
+    shotTaken: shotTaken,
+    setShotTaken: setShotTaken,
+    currentBoard: currentBoard,
+    setCurrentBoard: setCurrentBoard,
+    setShotResult: setShotResult,
+    mostRecentShot: mostRecentShot,
+    setMostRecentShot: setMostRecentShot,
+    setGameOver: setGameOver,
+  };
+
   const endTurnConditionsMet = function() {
-    if (turnCount <= 1 ) {
-      // No available ships remaining
-      return (Object.keys(currentPlayer.availableShips).length == 0);
-    } else {
+    if (turnCount <= 1 ) { // Test if no available ships remaining
+      return (Object.keys(currentPlayer.availableShips).length === 0);
+    } else { // Test if shotTaken
       return (shotTaken);
     }
   }
 
   const SelectedBoard = function(){
-    if (turnCount < 2 || currentBoard == "My Board") {
+    if (turnCount < 2 || currentBoard === "My Board") {
       return(
         <Board
-        boardType="Own" 
-        players={players} 
-        setPlayers={setPlayers} 
-        currentPlayer={currentPlayer}
-        selectedShip={selectedShip} 
-        selectShip={selectShip} 
-        shipOrientation={shipOrientation}
-        turnCount = {turnCount}
-        shotTaken = {shotTaken}
-        setShotTaken = {setShotTaken}
-        currentBoard = {currentBoard}
-        setCurrentBoard = {setCurrentBoard}
-        setShotResult = {setShotResult}
-        mostRecentShot = {mostRecentShot}
-        setMostRecentShot = {setMostRecentShot}
-      />
+          boardType="Own" 
+          {...commonBoardProps}
+        />
       )
     } else {
       return(
         <Board
-        boardType="Opponent" 
-        players={players} 
-        setPlayers={setPlayers} 
-        currentPlayer={currentPlayer}
-        selectedShip={selectedShip} 
-        selectShip={selectShip} 
-        shipOrientation={shipOrientation}
-        turnCount = {turnCount}
-        shotTaken = {shotTaken}
-        setShotTaken = {setShotTaken}
-        setGameOver = {setGameOver}
-        currentBoard = {currentBoard}
-        setCurrentBoard = {setCurrentBoard}
-        setShotResult = {setShotResult}
-        mostRecentShot = {mostRecentShot}
-        setMostRecentShot = {setMostRecentShot}
-      />
+          boardType="Opponent" 
+          {...commonBoardProps}
+        />
       )
     }
   }
 
-  if (players[0].name == "AI") {
+  // If players have not been created, remain on Player Inputs screen
+  if (players[0].name === "AI") {
     return (
       <div className={classes.gameWrapper}>
         <PlayerInputs players={players} setPlayers={setPlayers}/>
       </div>
     );
-  } else if (turnOver==false) {
+  } else if (turnOver===false) { // If turn is not over, render main game
     return(
       <GameContext.Provider value={gameState}>
         <h1 className={classes.playersTurn}>{currentPlayer.name}'s Turn</h1>
         <div className={classes.gameWrapper}>
-        {endTurnConditionsMet() &&
-            <ShotResult 
+          {turnCount <=1 && // Only render Rotate Ships button if during place ships phase of game
+            <RotateShips
+              shipOrientation = {shipOrientation}
+              setShipOrientation = {setShipOrientation}
+            />
+          }
+          <SelectedBoard/>
+        </div>
+        {endTurnConditionsMet() && // Only render Shot Result is turn over
+          <ShotResult 
             players={players} 
             currentPlayer={currentPlayer} 
             turnCount={turnCount}
@@ -147,23 +139,15 @@ export default function Game() {
             setTurnOver = {setTurnOver}
           />
         }
-        {turnCount <=1 &&
-          <RotateShips
-            shipOrientation = {shipOrientation}
-            setShipOrientation = {setShipOrientation}
-          />
-        }
-        <SelectedBoard/>
-        </div>
       </GameContext.Provider>
     )
-  } else if (gameOver){
+  } else if (gameOver){ // Render Game Over
     return(
     <GameOver
       currentPlayer={currentPlayer}
     />
     )
-  } else {
+  } else { // Proceed to next turn
     return(
       <NextTurn
         players={players}

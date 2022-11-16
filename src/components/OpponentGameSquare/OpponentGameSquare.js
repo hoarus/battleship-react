@@ -42,11 +42,11 @@ function OpponentGameSquare(props) {
   const squareType =  () => enemyGameBoard.lookupPosition(props.position);
 
   const shotResult = function(target){
-    if (target == 0) {
+    if (target === 0) {
       return "Miss!"
     } else if (target.health > 0) {
       return "Hit!"
-    } else if (target.health == 0) {
+    } else if (target.health === 0) {
       return "Sunk!"
     } else {
       return "Error!"
@@ -60,7 +60,7 @@ function OpponentGameSquare(props) {
     setShotResult(shotResult(currentPlayer.fireShot(position)));
     setMostRecentShot(position);
     setShotTaken(true);
-    if(currentPlayer.enemyGameBoard.allShipsSunk() == true) {
+    if(currentPlayer.enemyGameBoard.allShipsSunk() === true) {
       setGameOver(true);
     }
     gameState.update();
@@ -71,7 +71,7 @@ function OpponentGameSquare(props) {
     return(
       <div className={`${classes.gameSquare} ${classes.missSquare}`}></div>
     );
-  } else if(squareType()==2) {
+  } else if(squareType()===2) {
     return(<div className={`${classes.gameSquare} ${classes.shipSquare}`} onClick = {fireShot}></div>)
   } else {
     return(

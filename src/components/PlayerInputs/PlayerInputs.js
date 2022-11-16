@@ -46,13 +46,13 @@ export default function PlayerInputs(props){
 
 
   const validateNames = function() {
-    if (names.playerOne == "") {
+    if (names.playerOne === "") {
       setFormErrors({
         ...formErrors,
         playerOne: "Please enter a name."
       })
       return false;
-    } else if (names.playerTwo == "") {
+    } else if (names.playerTwo === "") {
       setFormErrors({
         ...formErrors,
         playerOne: "",
