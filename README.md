@@ -1,7 +1,9 @@
 # README: Basic Battleship
 
 ## Overview
-I developed this project as part of the [Odin Project](https://www.theodinproject.com/lessons/javascript-battleship). It is a simple pass-and-play version of the battleship board game. You can play a live version at: _____coming soon____
+I developed this project as part of the [Odin Project](https://www.theodinproject.com/lessons/javascript-battleship). It is a simple pass-and-play version of the battleship board game. 
+
+You can play a live version at: https://hoarus.github.io/battleship-react/
 
 ## Technical Notes
 I developed this project to practice a number of skills:
