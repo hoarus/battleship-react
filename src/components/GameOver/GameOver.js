@@ -47,10 +47,7 @@ const useStyles = createUseStyles({
 export default function GameOver(props){
   const classes = useStyles();
   const currentPlayer = props.currentPlayer;
-
-  const reloadPage = () => {
-    window.location.reload();
-  }
+  const reloadPage = () => window.location.reload();
   
   return(
     <div className={classes.wrapper}>

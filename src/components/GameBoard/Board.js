@@ -47,16 +47,13 @@ function Board(props) {
   const setPlayers = props.setPlayers;
   const selectShip = props.selectShip;
   const selectedShip = props.selectedShip;
-  const setTurnOver = props.setTurnOver;
   const shipOrientation = props.shipOrientation
-  const setShipOrientation = props.setShipOrientation
   const classes = useStyles();
   const gameBoard = currentPlayer.myGameBoard;
   const shotTaken = props.shotTaken;
   const setShotTaken = props.setShotTaken;
   const setGameOver = props.setGameOver;
   const turnCount = props.turnCount;
-  const shotResult = props.shotResult;
   const setShotResult = props.setShotResult;
   const currentBoard = props.currentBoard;
   const setCurrentBoard = props.setCurrentBoard;
@@ -65,22 +62,14 @@ function Board(props) {
   const [highlightedShipSquares, setHighlightedShipSquares] = useState([]);
 
 
-  const endTurn = function() {
-    setTurnOver();
-  }
-
-
-
 
   const ApplicableSquareType = function(props){
-    const square = props.square;
     const x = props.x;
     const y = props.y
     if(boardType == "Own") {
       return(
         <GameSquare 
         key={`own[${x}:${y}]`} 
-        value={square} 
         position={`${incrementLetter(x)}${y + 1}`} 
         players={players} 
         currentPlayer = {currentPlayer}
@@ -88,9 +77,7 @@ function Board(props) {
         selectedShip={selectedShip} 
         selectShip={selectShip}
         shipOrientation={shipOrientation}
-        setShipOrientation={setShipOrientation}
         mostRecentShot = {mostRecentShot}
-        setMostRecentShot = {setMostRecentShot}
         highlightedShipSquares = {highlightedShipSquares}
         setHighlightedShipSquares = {setHighlightedShipSquares}
       /> 
@@ -99,15 +86,8 @@ function Board(props) {
       return(
         <OpponentGameSquare
         key={`opponent[${x}:${y}]`} 
-        value={square} 
         position={`${incrementLetter(x)}${y + 1}`} 
-        players={players} 
         currentPlayer = {currentPlayer}
-        setPlayers={setPlayers} 
-        selectedShip={selectedShip} 
-        selectShip={selectShip}
-        shipOrientation={shipOrientation}
-        setShipOrientation={setShipOrientation}
         shotTaken = {shotTaken}
         setShotTaken={setShotTaken}
         setShotResult={setShotResult}
@@ -131,7 +111,7 @@ function Board(props) {
           <div className= {classes.gameBoard}>
             {gameBoard.board.map((row, y) =>
               row.map((square, x) =>
-              <ApplicableSquareType key={x} square={square} x={x} y={y} /> 
+              <ApplicableSquareType key={x} x={x} y={y} /> 
               )) }
           </div>
         </div>

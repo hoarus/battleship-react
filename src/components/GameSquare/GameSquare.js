@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import GameContext from '../Game/GameContext';
 import { createUseStyles } from 'react-jss';
-import {Ship} from '../GameLogic/Ship';
 
 const useStyles = createUseStyles({
   gameSquare: {
@@ -14,10 +13,10 @@ const useStyles = createUseStyles({
     aspectRatio: '1/1',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  activeSquare: {
     backgroundColor: '#0E3744',
     borderColor: '#0E3744',
+  },
+  activeSquare: {
     '&:hover': {
       backgroundColor: '#d24531',
       borderColor: '#d24531',
@@ -27,23 +26,11 @@ const useStyles = createUseStyles({
     backgroundColor: '#d24531',
     borderColor: '#d24531',
   },
-  inactiveSquare: {
-    backgroundColor: '#0E3744',
-    borderColor: '#0E3744',
-  },
   shipSquare: {
     backgroundColor: '#FBA346',
     borderColor: '#FBA346',
   }, 
-  miss: {
-    color: 'transparent',
-    textShadow: '0 0 0 #d24531',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '2rem',
-  },
-  hit: {
+  shot: {
     color: 'transparent',
     textShadow: '0 0 0 #d24531',
     display: 'flex',
@@ -85,21 +72,20 @@ const useStyles = createUseStyles({
 
 
 
-function GameSquare(props) {
+export default function GameSquare(props) {
   const classes = useStyles();
+  const gameState = useContext(GameContext);
   const currentPlayer = props.currentPlayer;
   const players = props.players;
   const setPlayers = props.setPlayers;
   const selectShip = props.selectShip;
   const selectedShip = props.selectedShip;
-  const gameState = useContext(GameContext);
-  const myGameBoard = currentPlayer.myGameBoard;
   const shipOrientation = props.shipOrientation;
   const position = props.position;
   const mostRecentShot = props.mostRecentShot
-  const setMostRecentShot = props.setMostRecentShot
   const highlightedShipSquares = props.highlightedShipSquares;
   const setHighlightedShipSquares = props.setHighlightedShipSquares;
+  const myGameBoard = currentPlayer.myGameBoard;
   const inactiveSquare = () => Object.keys(currentPlayer.availableShips).length == 0;
   const squareType =  () => myGameBoard.lookupPosition(props.position);
   const ship = currentPlayer.availableShips[0];
@@ -157,8 +143,6 @@ function GameSquare(props) {
     
   }
 
-  const unHighlightSquares = () => setHighlightedShipSquares([]);
-
 
   if(typeof squareType() == "object") /*ship*/{
     return(
@@ -166,12 +150,12 @@ function GameSquare(props) {
     );
   } else if(squareType()=== 1) /*miss*/{
     return(
-    <div className={`${classes.gameSquare} ${classes.inactiveSquare}`}>
+    <div className={`${classes.gameSquare}`}>
       {mostRecentShot == position && 
-        <div className={`${classes.miss}  ${classes.blinkingMiss}`}>❌</div>
+        <div className={`${classes.shot}  ${classes.blinkingMiss}`}>❌</div>
       }
       {mostRecentShot != position && 
-        <div className={`${classes.miss}`}>❌</div>
+        <div className={`${classes.shot}`}>❌</div>
       }
     </div>
     )
@@ -179,16 +163,16 @@ function GameSquare(props) {
     return(
       <div className={`${classes.gameSquare} ${classes.shipSquare}`}>
       {mostRecentShot == position && 
-        <div className={`${classes.hit}  ${classes.blinkingHit}`}>❌</div>
+        <div className={`${classes.shot}  ${classes.blinkingHit}`}>❌</div>
       }
       {mostRecentShot != position && 
-        <div className={`${classes.hit}`}>❌</div>
+        <div className={`${classes.shot}`}>❌</div>
       }
     </div>
     )
   } else if (inactiveSquare()){
     return(
-      <div className={`${classes.gameSquare} ${classes.inactiveSquare}`}></div>
+      <div className={`${classes.gameSquare}`}></div>
     )
   } else if (squareType() === 0 && highlightedShipSquares.includes(position)) {
       return(
@@ -207,5 +191,3 @@ function GameSquare(props) {
 
 
 }
-
-export default GameSquare;

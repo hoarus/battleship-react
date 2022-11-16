@@ -10,7 +10,6 @@ const useStyles = createUseStyles({
     display: 'flex',
     justifyContent: 'center',
   }
-  
 })
 
 export default function GameTitle(){

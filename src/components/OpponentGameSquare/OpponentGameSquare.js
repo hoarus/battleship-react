@@ -19,18 +19,10 @@ const useStyles = createUseStyles({
   }, shipSquare: {
     backgroundColor: '#FBA346',
     border: 'outset 3px #FBA346',
-    width: '100%',
-    height: '100%',
-    boxSizing: 'border-box',
-    aspectRatio: '1/1',
   },
   missSquare: {
     border: 'outset 3px #0E3744',
     backgroundColor: '#0E3744',
-    width: '100%',
-    height: '100%',
-    boxSizing: 'border-box',
-    aspectRatio: '1/1',
   },
 })
 
@@ -38,16 +30,16 @@ const useStyles = createUseStyles({
 
 function OpponentGameSquare(props) {
   const classes = useStyles();
-  const currentPlayer = props.currentPlayer;
   const gameState = useContext(GameContext);
-  const enemyGameBoard = currentPlayer.enemyGameBoard;
+  const currentPlayer = props.currentPlayer;
   const position = props.position;
-  const squareType =  () => enemyGameBoard.lookupPosition(props.position);
   const setShotTaken = props.setShotTaken;
   const shotTaken = props.shotTaken;
   const setShotResult = props.setShotResult;
   const setGameOver = props.setGameOver;
-  const setMostRecentShot = props.setMostRecentShot
+  const setMostRecentShot = props.setMostRecentShot;
+  const enemyGameBoard = currentPlayer.enemyGameBoard;
+  const squareType =  () => enemyGameBoard.lookupPosition(props.position);
 
   const shotResult = function(target){
     if (target == 0) {
@@ -77,10 +69,10 @@ function OpponentGameSquare(props) {
   // square is a miss
   if(squareType() === 1) {
     return(
-      <div className={classes.missSquare}></div>
+      <div className={`${classes.gameSquare} ${classes.missSquare}`}></div>
     );
   } else if(squareType()==2) {
-    return(<div className={classes.shipSquare} onClick = {fireShot}></div>)
+    return(<div className={`${classes.gameSquare} ${classes.shipSquare}`} onClick = {fireShot}></div>)
   } else {
     return(
       <div className={classes.gameSquare} onClick = {fireShot}></div>

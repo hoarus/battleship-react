@@ -1,12 +1,7 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
 
-
 const useStyles = createUseStyles({
-  tabsContainer: {
-    display: 'flex',
-    width: '100%',
-  },
   boardTab: {
     backgroundColor: '#d24531',
     margin: '0px',
@@ -25,20 +20,24 @@ const useStyles = createUseStyles({
       backgroundColor: 'pink'
     },
   },
-
   selectedTab: {
     backgroundColor: '#0E3744',
     color: 'white',
     '&:hover': {
       backgroundColor: '#0E3744'
     },
-  }
+  },
+  tabsContainer: {
+    display: 'flex',
+    width: '100%',
+  },
 })
 
 export default function BoardTab(props) {
+  const classes = useStyles();
   const currentBoard = props.currentBoard;
   const setCurrentBoard = props.setCurrentBoard;
-  const classes = useStyles();
+  
 
   const displayMyBoard = () => setCurrentBoard("My Board")
   const displayEnemyBoard = () => setCurrentBoard("Enemy Board")

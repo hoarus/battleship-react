@@ -1,19 +1,15 @@
-import React, {useState} from 'react';
-
+import React from 'react';
 import {createUseStyles} from 'react-jss';
 
-
 const useStyles = createUseStyles({
-  wrapper: {
-    color: '0E3744',
-    boxSizing: 'border-box',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: '#CCE8E6',
-    width: '100%',
-    height: '80vh',
-    padding: '10%',
+  button: {
+    padding: '1rem',
+    textAlign: 'center',
+    fontSize: '1rem',
+    margin: '1rem',
+  },
+  darkBlue: {
+    color: '#0E3744',
   },
   messageContainer: {
     boxSizing: 'border-box',
@@ -33,28 +29,30 @@ const useStyles = createUseStyles({
     maxWidth: '300px',
     top: '25vh',
   },
-  button: {
-
-    padding: '1rem',
-    textAlign: 'center',
-    fontSize: '1rem',
-    margin: '1rem',
+  wrapper: {
+    color: '0E3744',
+    boxSizing: 'border-box',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: '#CCE8E6',
+    width: '100%',
+    height: '80vh',
+    padding: '10%',
   },
-  darkBlue: {
-    color: '#0E3744',
-  }
 })
 
 
 export default function NextTurn(props){
-  const players = props.players;
+  
   const currentPlayer = props.currentPlayer;
+  const players = props.players; 
+  const selectShip = props.selectShip;
   const setCurrentPlayer = props.setCurrentPlayer;
+  const setShotTaken = props.setShotTaken;
+  const setTurnCount = props.setTurnCount;
   const setTurnOver = props.setTurnOver;
   const turnCount = props.turnCount;
-  const setTurnCount = props.setTurnCount;
-  const setShotTaken = props.setShotTaken;
-  const selectShip = props.selectShip;
 
   let nextPlayer = "";
   if (players[0] === currentPlayer) {
@@ -70,8 +68,6 @@ export default function NextTurn(props){
     setTurnOver(false);
     setShotTaken(false);
   }
-
-
 
   const classes = useStyles();
 

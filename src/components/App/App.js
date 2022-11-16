@@ -1,8 +1,6 @@
-import React, {Fragment}  from 'react';
+import React  from 'react';
 import GameTitle from '../GameTitle/GameTitle';
 import Game from '../Game/Game';
-import './normalize.css';
-
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
@@ -15,8 +13,7 @@ const useStyles = createUseStyles({
   },
 })
 
-
-function App() {
+export default function App() {
   const classes = useStyles();
   return (
     <div className={classes.pageWrapper}>
@@ -25,5 +22,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

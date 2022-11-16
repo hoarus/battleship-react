@@ -11,8 +11,6 @@ import { createUseStyles } from 'react-jss';
 import ShotResult from '../ShotResult/ShotResult';
 import NextTurn from '../NextTurn/NextTurn';
 
-
-
 const useStyles = createUseStyles({
   gameWrapper: {
     boxSizing: 'border-box',
@@ -24,19 +22,12 @@ const useStyles = createUseStyles({
     width: '100%',
     maxWidth: '700px',
   },
-  additionalDetails: {
-    width: '30%',
-  },
   playersTurn: {
     color: '#0E3744',
     padding: '0px',
     margin: '0px',
   }
-
-
 })
-
-
 
 const togglePlayer = function (currentPlayer, pOne, pTwo) {
   if (currentPlayer == pOne) {
@@ -46,6 +37,7 @@ const togglePlayer = function (currentPlayer, pOne, pTwo) {
   }
 }
 
+// Create all GameLogic components
 const gameBoardOne = new GameBoard();
 const gameBoardTwo = new GameBoard();
 const playerOne = new Player();
@@ -59,14 +51,10 @@ playerOne.availableShips = [
   new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)
 ]
 playerTwo.availableShips = [
-  new Ship(2)
+  new Ship(2), 
 ]
 
-
-
-
-
-function Game() {
+export default function Game() {
   const [players, setPlayers] = useState([playerOne, playerTwo]);
   const [currentPlayer, setCurrentPlayer] = useState(players[0]);
   const [selectedShip, selectShip] = useState({name: 'Destroyer', ship: (new Ship(2))});
@@ -92,22 +80,8 @@ function Game() {
       return (shotTaken);
     }
   }
-  const allShipsPlaced = function() {
-    // No available ships remaining
-    return Object.keys(currentPlayer.availableShips).length == 0;
-  }
-  const playerOneLost = function() {
-    return (playerOne.myGameBoard.allShipsSunk() && (playerOne.myGameBoard.totalShips() > 0))
-  }
 
-  const playerTwoLost = function() {
-    return (playerTwoLost.myGameBoard.allShipsSunk() && (playerOne.myGameBoard.totalShips() > 0))
-  }
-
-  const losingPlayer = () => playerOneLost()? playerOne : playerTwo
-
-
-  const SelectedBoard = function(props){
+  const SelectedBoard = function(){
     if (turnCount < 2 || currentBoard == "My Board") {
       return(
         <Board
@@ -162,11 +136,9 @@ function Game() {
 
   if (players[0].name == "AI") {
     return (
-      <GameContext.Provider value={gameState}>
-        <div className={classes.gameWrapper}>
-          <PlayerInputs players={players} setPlayers={setPlayers}/>
-        </div>
-      </GameContext.Provider>
+      <div className={classes.gameWrapper}>
+        <PlayerInputs players={players} setPlayers={setPlayers}/>
+      </div>
     );
   } else if (turnOver==false) {
     return(
@@ -215,4 +187,3 @@ function Game() {
   }
 }
 
-export default Game;
