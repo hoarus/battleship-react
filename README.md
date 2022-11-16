@@ -1,18 +1,42 @@
-# Planned Architecture
+# README: Basic Battleship
 
-## Color Themes
+## Overview
+I developed this project as part of the [Odin Project](https://www.theodinproject.com/lessons/javascript-battleship). It is a simple pass-and-play version of the battleship board game. You can play a live version at: _____coming soon____
 
-Light: #CCE8E6
-SecondLight: #A8BDC5
-DarkBlue: #0E3744
-Red: #d24531
-Ship: #FBA346
+## Technical Notes
+I developed this project to practice a number of skills:
+- Test Driven Deployment: I wrote all the underlying game logic and associated unit tests separately before adding a UI.
+- React: I learned React and associated components to develop a User Interface.
+- Responsive Design: I had to modify not only the styling, but also the underlying game logic and conditional rendering of elements, to provide a user-friendly experience on both mobile and desktop.
 
-# Getting Started with Create React App
+This project leverages the following technologies:
+- React
+- Git & GitHub
+- Jest
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Functionality
 
-## Available Scripts
+### Enter Player Names
+The first screen requires players to input their names before starting the game.
+_Screenshot coming soon_
+
+### Place Ships
+Players are required to place all their ships before their opponent's turn. They can rotate the ship and see where it will be placed before making their decision. 
+_Screenshot coming soon_
+
+### Fire Shots
+Players can click anywhere on their opponent's board to fire a shot. They can also view the shots their opponent has made on their own board. Once they have taken their shot, they can end their turn.
+_Screenshot coming soon_
+
+### Ending the Game
+Once one player has sunk all their opponent's ships, the game comes to an end. Players are prompted to 'Play Again', which reloads the app.
+_Screenshot coming soon_
+
+## Installation
+This project was created with [Create React App](https://github.com/facebook/create-react-app).
+You will need to install the below before getting started:
+- npm `sudo apt install npm`
+- create-react-app `sudo npm -g install create-react-app`
 
 In the project directory, you can run:
 
@@ -38,4 +62,27 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## Support
+For any questions in relation to the project, please reach out to me at [hoarus@gmail.com](mailto:hoarus@gmail.com)
+
+
+## Color Themes
+
+Light: #CCE8E6
+SecondLight: #A8BDC5
+DarkBlue: #0E3744
+Red: #d24531
+Ship: #FBA346
+
+# Backlog
+- Readme
+- Display error color if ship placement illegal
+- Implement single click highlight and double click place (ships & shots) if mobile
+- Show boards side by side if on computer
+- AI as it currently exists
+- Improved AI
+- Improved test suits (including mocks and stubs)
+
+
 
