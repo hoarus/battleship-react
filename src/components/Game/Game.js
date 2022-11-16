@@ -187,11 +187,12 @@ function Game() {
             setTurnOver = {setTurnOver}
           />
         }
-        <RotateShips
-          shipOrientation = {shipOrientation}
-          setShipOrientation = {setShipOrientation}
-
-        />
+        {!allShipsPlaced() &&
+          <RotateShips
+            shipOrientation = {shipOrientation}
+            setShipOrientation = {setShipOrientation}
+          />
+        }
         <SelectedBoard/>
         </div>
       </GameContext.Provider>
