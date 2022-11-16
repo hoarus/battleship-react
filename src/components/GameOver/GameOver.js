@@ -46,13 +46,17 @@ const useStyles = createUseStyles({
 export default function GameOver(props){
   const classes = useStyles();
   const currentPlayer = props.currentPlayer;
+
+  const reloadPage = () => {
+    window.location.reload();
+  }
   
   return(
     <div className={classes.wrapper}>
     <div className={classes.messageContainer}>
       <h2 className={classes.darkBlue}>Game Over</h2>
       <h2 className={classes.darkBlue}>{currentPlayer.name} has won!</h2>
-      <button className={classes.button}> Play Again?</button>
+      <button className={classes.button} onClick={reloadPage}> Play Again?</button>
     </div>
   </div>
   )
