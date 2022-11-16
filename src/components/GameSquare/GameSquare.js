@@ -5,14 +5,13 @@ import {Ship} from '../GameLogic/Ship';
 
 const useStyles = createUseStyles({
   gameSquare: {
+    boxSizing: 'border-box',
     border: 'outset 3px lightgreen',
     display: 'flex',
     color: 'black',
     width: '100%',
     height: '100%',
-    boxSizing: 'border-box',
     aspectRatio: '1/1',
-    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -37,33 +36,35 @@ const useStyles = createUseStyles({
     borderColor: '#FBA346',
   }, 
   miss: {
-    border: 'solid 1px darkblue',
-    backgroundColor: 'white',
-    borderRadius: '50%',
-    width: '80%',
-    aspectRatio: '1/1',
+    color: 'transparent',
+    textShadow: '0 0 0 #d24531',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '2rem',
   },
   hit: {
-    border: 'solid 1px darkblue',
-    backgroundColor: 'red',
-    borderRadius: '50%',
-    width: '80%',
-    aspectRatio: '1/1',
+    color: 'transparent',
+    textShadow: '0 0 0 #d24531',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '2rem',
   },
   '@keyframes blinkMiss': {
     from: {
-      backgroundColor: 'white',
+      textShadow: '0 0 0 #d24531',
     },
     to: {
-      backgroundColor: 'pink'
+      textShadow: '0 0 0 #0E3744',
     }
   },
   '@keyframes blinkHit': {
     from: {
-      backgroundColor: 'red',
+      textShadow: '0 0 0 #d24531',
     },
     to: {
-      backgroundColor: 'pink'
+      textShadow: '0 0 0 #FBA346',
     }
   },
   blinkingMiss: {
@@ -167,10 +168,10 @@ function GameSquare(props) {
     return(
     <div className={`${classes.gameSquare} ${classes.inactiveSquare}`}>
       {mostRecentShot == position && 
-        <div className={`${classes.miss}  ${classes.blinkingMiss}`}></div>
+        <div className={`${classes.miss}  ${classes.blinkingMiss}`}>❌</div>
       }
       {mostRecentShot != position && 
-        <div className={`${classes.miss}`}></div>
+        <div className={`${classes.miss}`}>❌</div>
       }
     </div>
     )
@@ -178,10 +179,10 @@ function GameSquare(props) {
     return(
       <div className={`${classes.gameSquare} ${classes.shipSquare}`}>
       {mostRecentShot == position && 
-        <div className={`${classes.hit}  ${classes.blinkingHit}`}></div>
+        <div className={`${classes.hit}  ${classes.blinkingHit}`}>❌</div>
       }
       {mostRecentShot != position && 
-        <div className={`${classes.hit}`}></div>
+        <div className={`${classes.hit}`}>❌</div>
       }
     </div>
     )

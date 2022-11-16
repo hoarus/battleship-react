@@ -14,11 +14,6 @@ import NextTurn from '../NextTurn/NextTurn';
 
 
 const useStyles = createUseStyles({
-  pageWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
   gameWrapper: {
     boxSizing: 'border-box',
     display: 'flex',
@@ -27,6 +22,7 @@ const useStyles = createUseStyles({
     alignItems: 'center',
     padding: '0% 5%',
     width: '100%',
+    maxWidth: '700px',
   },
   additionalDetails: {
     width: '30%',

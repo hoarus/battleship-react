@@ -11,7 +11,7 @@ const useStyles = createUseStyles({
     flexDirection: 'column',
     alignItems: 'center',
     backgroundColor: '#CCE8E6',
-    minHeight: '100vh'
+    minHeight: '100vh',
   },
 })
 

@@ -4,6 +4,7 @@ import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
   gameSquare: {
+    boxSizing: 'border-box',
     border: 'outset 3px #A8BDC5',
     backgroundColor: '#A8BDC5',
     color: 'blue',

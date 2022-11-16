@@ -18,7 +18,7 @@ export default function GameTitle(){
   
   return(
     <div className={classes.wrapper}>
-      <h1 className={classes.gameTitle}>BATTLESHIP</h1>
+      <h1 className={classes.gameTitle}>BASIC BATTLESHIP</h1>
     </div>
   )
 }

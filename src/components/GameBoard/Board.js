@@ -30,6 +30,7 @@ const useStyles = createUseStyles({
     gridTemplateColumns: 'repeat(10, 1fr)',
     border: 'solid 2px #0E3744',
     width: '100%',
+    maxHeight: '50vh',
     
   },
   button: {
