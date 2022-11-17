@@ -30,6 +30,7 @@ const useStyles = createUseStyles({
   },
   label: {
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
   }
 })
