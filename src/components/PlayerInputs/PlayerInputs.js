@@ -27,6 +27,10 @@ const useStyles = createUseStyles({
   error: {
     marginBottom: '0px',
     color: 'darkRed',
+  },
+  label: {
+    display: 'flex',
+    alignItems: 'center',
   }
 })
 
@@ -82,7 +86,7 @@ export default function PlayerInputs(props){
         <p className={classes.centerText}>Welcome to Basic Battleship!</p>
         <p className={classes.centerText}>Please input player names to get started.</p>
         <h2 className={classes.header}>Player Names</h2>
-          <label>
+          <label className={classes.label}>
             <input 
               className={classes.field}
               autoComplete='off'
@@ -92,7 +96,7 @@ export default function PlayerInputs(props){
               onChange={setName}/>
             <p className={classes.error}>{formErrors.playerOne}</p>
          </label>
-          <label>
+          <label className={classes.label}>
           <input 
               autoComplete='off'
               className={classes.field}
