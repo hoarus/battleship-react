@@ -31,23 +31,33 @@ class Player {
   fireShot(coordinates){
     let target = this.enemyGameBoard.receiveAttack(coordinates)
     this.mostRecentTarget = target;
-    // Save location of ship if a hit
-    if (this.identifiedShip === false && typeof target == "object") {
-      this.identifiedShip = coordinates;
-    }
+    this.updateAIValues(target, coordinates);
     // Save shot
     this.allShots.push(coordinates);
-    if (typeof target == "object") {
-      this.saveShipOrientationIfKnown();
-    };
     return target
+  }
+
+  updateAIValues(target, coordinates) {
+    if (this.identifiedShip === false && typeof target == "object") {
+      // Save location of ship if a hit
+      this.identifiedShip = coordinates;
+    } 
+    if (typeof target == "object") {
+      // Save ship oritentation
+      this.saveShipOrientationIfKnown();
+      if (target.isSunk() === true) {
+        // Clear values
+        this.identifiedShip = false;
+        this.identifiedShipOrientation = false;
+      }
+    };
   }
 
   saveShipOrientationIfKnown(){
     if (this.identifiedShip && this.allShots.length >= 2) {
       // Get two most recent shots
       let arrayLength = this.allShots.length
-      let shotOne = this.allShots[arrayLength - 2];
+      let shotOne = this.identifiedShip;
       let shotTwo = this.allShots[arrayLength - 1];
       // Determine Axis
       if (shotOne[0] == shotTwo[0]) {
@@ -166,6 +176,10 @@ class Player {
       }
     }
 
+    function isIllegalMove(coordinates){
+      return (coordinates.charCodeAt(0) < 65) || (coordinates.charCodeAt(0) > 74) || Number(coordinates.substring(1)) < 1 || Number(coordinates.substring(1)) > 10;
+    }
+
     function generateAdjacentShot(previousShot){
       let illegalMove = true;
       // Generate a number between 1 & 4
@@ -194,8 +208,7 @@ class Player {
             break;
         }
         coordinates = (x).concat(y);
-        illegalMove = (coordinates.charCodeAt(0) < 65) || (coordinates.charCodeAt(0) > 74) || Number(coordinates.substring(1)) < 1 || Number(coordinates.substring(1)) > 10;
-          // Loops to ensure a legal move.
+        illegalMove = isIllegalMove(coordinates);
       } 
       return coordinates;
 

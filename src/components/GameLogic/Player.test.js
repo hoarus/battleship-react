@@ -159,6 +159,34 @@ test('Once AI has determined ship orientation, it will continue firing on orient
 });
 
 
+test('AI will sink 3-piece ship in at least 6 turns', () => {
+  let player = new Player();
+  let enemyGameBoard = new GameBoard();
+  player.enemyGameBoard = enemyGameBoard;
+  let ship = new Ship(3);
+  enemyGameBoard.placeShip(ship, "C3", "x");
+  player.fireShot("C3"); //Hit
+  for (let i =0; i < 5; i++) {
+    player.aiTurn();
+  }
+  expect(ship.isSunk()).toBe(true);
+});
+
+test('AI will sink 3-piece ship in at least 6 turns 2', () => {
+  let player = new Player();
+  let enemyGameBoard = new GameBoard();
+  player.enemyGameBoard = enemyGameBoard;
+  let ship = new Ship(3);
+  enemyGameBoard.placeShip(ship, "C3", "x");
+  player.fireShot("D3"); //Hit
+  for (let i =0; i < 5; i++) {
+    player.aiTurn();
+  }
+  expect(ship.isSunk()).toBe(true);
+});
+
+
+
 
 // Specs
 // AI should keep track of most recent hit
