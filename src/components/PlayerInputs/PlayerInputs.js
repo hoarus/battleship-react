@@ -39,7 +39,7 @@ export default function PlayerInputs(props){
   const classes = useStyles();
   const players = props.players;
   const setPlayers = props.setPlayers;
-
+  const [toggleButtonText, setToggleButtonText] = useState("2-Player");
   const [names, setNames] = useState({playerOne: "", playerTwo: ""});
   const [formErrors, setFormErrors] = useState({playerOne: "", playerTwo: ""});
   const setName = function(event) {
@@ -57,7 +57,7 @@ export default function PlayerInputs(props){
         playerOne: "Please enter a name."
       })
       return false;
-    } else if (names.playerTwo === "") {
+    } else if (names.playerTwo === "" && toggleButtonText === "1-Player") {
       setFormErrors({
         ...formErrors,
         playerOne: "",
@@ -75,10 +75,21 @@ export default function PlayerInputs(props){
     setPlayers([players[0], players[1]]);
   }
 
-  const submitForm = event => {
+  const submitForm = (event) => {
     event.preventDefault();
     if (validateNames()) {
       createPlayers();
+    } else {
+      return;
+    }
+  }
+
+  const toggleTwoPlayer = (event) => {
+    event.preventDefault();
+    if (toggleButtonText == "2-Player") {
+      setToggleButtonText("1-Player");
+    } else {
+      setToggleButtonText("2-Player");
     }
   }
 
@@ -86,6 +97,7 @@ export default function PlayerInputs(props){
       <form onSubmit={submitForm} className={classes.form}>
         <p className={classes.centerText}>Welcome to Basic Battleship!</p>
         <p className={classes.centerText}>Please input player names to get started.</p>
+        <button className={classes.button} onClick={toggleTwoPlayer}>Toggle {toggleButtonText}</button>
         <h2 className={classes.header}>Player Names</h2>
           <label className={classes.label}>
             <input 
@@ -97,16 +109,19 @@ export default function PlayerInputs(props){
               onChange={setName}/>
             <p className={classes.error}>{formErrors.playerOne}</p>
          </label>
+         {toggleButtonText == "1-Player" &&
           <label className={classes.label}>
-          <input 
-              autoComplete='off'
-              className={classes.field}
-              name='playerTwo' 
-              type='text' 
-              placeholder='Player Two'
-              onChange={setName}/>
-            <p className={classes.error}>{formErrors.playerTwo}</p>
-         </label>
+            <input 
+                autoComplete='off'
+                className={classes.field}
+                name='playerTwo' 
+                type='text' 
+                placeholder='Player Two'
+                onChange={setName}/>
+              <p className={classes.error}>{formErrors.playerTwo}</p>
+          </label>
+          }
+         
         <button type='submit' className={classes.button}>Get Started</button>
       </form>
   )
