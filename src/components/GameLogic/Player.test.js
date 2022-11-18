@@ -130,5 +130,44 @@ test('after succesful hit, AI targets adjacent square 2', () => {
   expect(expectedMoves).toContain(lastMove);
 }); 
 
+test('If adjacent shot is a miss, AI tries another adjacent shot', () => {
+  let player = new Player();
+  let enemyGameBoard = new GameBoard();
+  player.enemyGameBoard = enemyGameBoard;
+  let ship = new Ship(3);
+  enemyGameBoard.placeShip(ship, "C3", "x");
+  player.fireShot("C3"); //Hit
+  player.fireShot("C4") //Miss
+  let expectedMoves = ["B3", "D3", "C2"];
+  player.aiTurn();
+  let lastMove = player.allShots[2];
+  expect(expectedMoves).toContain(lastMove);
+});
+
+test('Once AI has determined ship orientation, it will continue firing on orientation', () => {
+  let player = new Player();
+  let enemyGameBoard = new GameBoard();
+  player.enemyGameBoard = enemyGameBoard;
+  let ship = new Ship(3);
+  enemyGameBoard.placeShip(ship, "C3", "x");
+  player.fireShot("C3"); //Hit
+  player.fireShot("D3"); //Hit/
+  let expectedMoves = ["B3", "E3"];
+  player.aiTurn();
+  let lastMove = player.allShots[player.allShots.length - 1];
+  expect(expectedMoves).toContain(lastMove);
+});
+
+
+
+// Specs
+// AI should keep track of most recent hit
+// It should remember this ship and target it until it sinks the ship
+// First, it targets adjacent square
+// Then, it determines if the adjacent square is a hit
+// If so, it determines the direction of the ship
+// It then continues along that direction until the ship is sunk
+// If it reaches a miss, it returns to the original shot and goes in the other direction
+// If it does not sink the ship after completing both directions, it goes to the original source and tries another direction
 
 
