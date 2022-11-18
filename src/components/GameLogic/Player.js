@@ -37,7 +37,9 @@ class Player {
     }
     // Save shot
     this.allShots.push(coordinates);
-    this.saveShipOrientationIfKnown();
+    if (typeof target == "object") {
+      this.saveShipOrientationIfKnown();
+    };
     return target
   }
 
@@ -79,46 +81,47 @@ class Player {
     this.fireShot(coordinates)
 
     function fireOnAxis(originalShot, previousShot, orientation, mostRecentTarget){
+      let reverseDirection = function() {
+        switch(direction){
+          case "Right":
+            return "Left";
+          case "Left":
+            return "Right"
+          case "Up":
+            return "Down";
+          case "Down":
+            return "Up";
+          default:
+            break;
+        }
+      }
+
+      
       // Need to make sure I don't fire again in the same shot
       let direction;
       let coordinates;
-
+      let previousShotSuccessful = (typeof mostRecentTarget == "object")
       // Determine direction of next shot
       if (orientation == "x") {
         if (previousShot.charCodeAt(0) > originalShot.charCodeAt(0)) {
-          if ((typeof mostRecentTarget == "object")) {
             direction = "Right";
           } else {
             direction = "Left"; 
           }
-        } else {
-          if ((typeof mostRecentTarget == "object")) {
-            direction = "Left";
-          } else {
-            direction = "Right";
-          }
-        }
-      };
-      if (orientation == "y") {
+        } else if (orientation == "y") {
         if (previousShot.substring(1) > originalShot.substring(1)) {
-          if ((typeof mostRecentTarget == "object")) {
             direction = "Down";
           } else {
             direction = "Up";
-          }
-        } else {
-          if ((typeof mostRecentTarget == "object")) {
-            direction = "Up";
-          } else {
-            direction = "Down";
           }
         }
-      }
+      // Determine base shot
       let baseShot;
-      if (typeof mostRecentTarget == "object"){
+      if (previousShotSuccessful){
         baseShot = previousShot;
       } else {
         baseShot = originalShot;
+        direction = reverseDirection;
       }
       let x = baseShot[0];
       let y = Number(baseShot.substring(1));
