@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createUseStyles } from 'react-jss';
 import GameSquare from '../GameSquare/GameSquare';
 import OpponentGameSquare from '../OpponentGameSquare/OpponentGameSquare'
@@ -60,6 +60,22 @@ function Board(props) {
   const mostRecentShot = props.mostRecentShot
   const setMostRecentShot = props.setMostRecentShot;
   const [highlightedShipSquares, setHighlightedShipSquares] = useState([]);
+
+
+  //AI implementation - this won't cut it. I need to bring all logic from gamesquare here and also display the animatinons
+  const [loading, setLoading] = useState(true);
+  useEffect( () => {
+    setTimeout( () => {
+      setLoading(false)
+    }, 500)
+  }, [])
+
+
+  if (currentPlayer.name === "AI" && !loading) {
+    currentPlayer.aiTurn();
+
+  }
+  // end of AI excerpt
 
 
 

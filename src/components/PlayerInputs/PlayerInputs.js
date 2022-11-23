@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 
 import { createUseStyles } from 'react-jss';
 
@@ -94,10 +94,14 @@ export default function PlayerInputs(props){
   }
 
    return(
+    <Fragment>
+      <div className={classes.form}>
+          <p className={classes.centerText}>Welcome to Basic Battleship!</p>
+          <p className={classes.centerText}>Please input player names to get started.</p>
+          <button className={classes.button} onClick={toggleTwoPlayer}>Toggle {toggleButtonText}</button>
+      </div>
       <form onSubmit={submitForm} className={classes.form}>
-        <p className={classes.centerText}>Welcome to Basic Battleship!</p>
-        <p className={classes.centerText}>Please input player names to get started.</p>
-        <button className={classes.button} onClick={toggleTwoPlayer}>Toggle {toggleButtonText}</button>
+
         <h2 className={classes.header}>Player Names</h2>
           <label className={classes.label}>
             <input 
@@ -122,7 +126,8 @@ export default function PlayerInputs(props){
           </label>
           }
          
-        <button type='submit' className={classes.button}>Get Started</button>
+        <button type='submit' className={classes.button} autoFocus>Get Started</button>
       </form>
+    </Fragment>
   )
 }
