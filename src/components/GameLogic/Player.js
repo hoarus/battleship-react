@@ -215,10 +215,20 @@ class Player {
     }
   }
 
-
-
-
-
+  aiPlaceShip(ship){
+    let placementResult = "";
+    do {
+      let randY = String.fromCharCode(Math.floor(Math.random() * 10) + 65);
+      let randX = Math.floor(Math.random() * 10) + 1;
+      const coordinates = `${randY}${randX}`
+      let orientation = "x";
+      if (Math.random() > 0.5) {
+        orientation = "y"
+      };
+        placementResult = this.myGameBoard.placeShip(ship, coordinates, orientation)
+      }
+      while (placementResult == "Illegal Move");
+  }
 }
 
 

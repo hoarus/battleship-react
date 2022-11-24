@@ -41,7 +41,9 @@ playerOne.enemyGameBoard = gameBoardTwo;
 playerTwo.enemyGameBoard = gameBoardOne;
 //Ship assignment has to be duplicate to ensure players are not sharing a set of ships
 playerOne.availableShips = [
-  new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)
+  new Ship(2)
+  // Temporarily disabled ships
+  // new Ship(3), new Ship(3), new Ship(4), new Ship(5)
 ]
 playerTwo.availableShips = [
   new Ship(2), 
