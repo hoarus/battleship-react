@@ -69,7 +69,7 @@ function Board(props) {
   const ship = currentPlayer.availableShips[0];
   const placeShip = function(position) {
     if (selectedShip === false) {return} 
-    else if (myGameBoard.placeShip(ship, position, shipOrientation) !== "Illegal Move") {
+    else if (currentPlayer.name !== "AI" && myGameBoard.placeShip(ship, position, shipOrientation) !== "Illegal Move") {
       setPlayers(players);
       gameState.update();
       // Update Ships
