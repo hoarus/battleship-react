@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { createUseStyles } from 'react-jss';
+import GameContext from '../Game/GameContext';
 import GameSquare from '../GameSquare/GameSquare';
 import OpponentGameSquare from '../OpponentGameSquare/OpponentGameSquare'
 import BoardTab from '../BoardTab/BoardTab'
@@ -43,6 +44,7 @@ const useStyles = createUseStyles({
 function Board(props) {
   const classes = useStyles();
   const boardType = props.boardType;
+  
   const players = props.players;
   const currentPlayer = props.currentPlayer
   const setPlayers = props.setPlayers;
@@ -61,8 +63,35 @@ function Board(props) {
   const setMostRecentShot = props.setMostRecentShot;
   const [highlightedShipSquares, setHighlightedShipSquares] = useState([]);
 
+     // Place Ship
+  const myGameBoard = currentPlayer.myGameBoard;
+  const gameState = useContext(GameContext);
+  const ship = currentPlayer.availableShips[0];
+  const placeShip = function(position) {
+    if (selectedShip === false) {return} 
+    else if (myGameBoard.placeShip(ship, position, shipOrientation) !== "Illegal Move") {
+      setPlayers(players);
+      gameState.update();
+      // Update Ships
+      removePlacedShip();    
+      // Load next ship, setting to false if all ships placed
+      if (currentPlayer.availableShips.length === 0) {
+        selectShip(false);
+      } else {
+        selectShip(currentPlayer.availableShips[0]);
+      }
+    }
+  }
 
-  //AI implementation - this won't cut it. I need to bring all logic from gamesquare here and also display the animatinons
+  const removePlacedShip = function() {
+    const updatedShips = currentPlayer.availableShips.slice(1);
+    currentPlayer.availableShips = updatedShips;
+  }
+
+  // AI Implementation
+
+
+
   const [loading, setLoading] = useState(true);
   useEffect( () => {
     setTimeout( () => {
@@ -71,9 +100,15 @@ function Board(props) {
   }, [])
 
 
-  if (currentPlayer.name === "AI" && !loading) {
-    currentPlayer.aiTurn();
-
+  if (currentPlayer.name === "AI" && !loading && currentPlayer.availableShips.length > 0) {
+    for (let ship of currentPlayer.availableShips) {
+      
+      currentPlayer.aiPlaceShip(ship);
+      removePlacedShip();
+    }
+    setTimeout(() => {
+      gameState.update();
+    },500)
   }
   // end of AI excerpt
 
@@ -96,6 +131,7 @@ function Board(props) {
         mostRecentShot = {mostRecentShot}
         highlightedShipSquares = {highlightedShipSquares}
         setHighlightedShipSquares = {setHighlightedShipSquares}
+        placeShip = {placeShip}
       /> 
       )
     } else {

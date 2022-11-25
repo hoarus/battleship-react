@@ -71,7 +71,9 @@ export default function PlayerInputs(props){
 
   const createPlayers = function() {
     (players[0].name = names.playerOne);
-    (players[1].name = names.playerTwo);
+    if (players[1].name != "AI") {
+      (players[1].name = names.playerTwo);
+    }
     setPlayers([players[0], players[1]]);
   }
 
