@@ -58,7 +58,7 @@ export default function Game() {
   const [turnCount, setTurnCount] = useState(0);
   const [shotTaken, setShotTaken] = useState();
   const [gameOver, setGameOver] = useState(false);
-  const [currentBoard, setCurrentBoard] = useState("My Board")  ;
+  const [currentBoard, setCurrentBoard] = useState("Enemy Board")  ;
   const [shotResult, setShotResult] = useState("");
   const [mostRecentShot, setMostRecentShot] = useState("");
   const classes = useStyles();
