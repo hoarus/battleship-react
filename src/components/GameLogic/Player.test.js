@@ -83,7 +83,7 @@ test ('ai places a ship', () => {
   let playerBoard = new GameBoard();
   player.myGameBoard = playerBoard;
   let ship = new Ship(3);
-  console.log(player.aiPlaceShip(ship));
+  player.aiPlaceShip(ship);
   let allSquares =playerBoard.display().flat();
   let shipSquares = 0;
   for (let i = 0; i < allSquares.length; i++) {
@@ -112,7 +112,7 @@ test ('ai places 3 ships', () => {
   expect(shipSquares).toBe(12);
 });
 
-test.skip('ai turn takes only legal shot', () => {
+test('ai turn takes only legal shot', () => {
   let player = new Player();
   let enemyGameBoard = new GameBoard();
   player.enemyGameBoard = enemyGameBoard;
@@ -127,7 +127,7 @@ test.skip('ai turn takes only legal shot', () => {
   expect(test).toEqual(true);
 }); 
 
-test.skip('ai turn never repeats the same shot', () => {
+test('ai turn never repeats the same shot', () => {
   let player = new Player();
   let enemyGameBoard = new GameBoard();
   player.enemyGameBoard = enemyGameBoard;
@@ -139,7 +139,7 @@ test.skip('ai turn never repeats the same shot', () => {
   expect(shotsTaken).toEqual(uniqueShots);
 }); 
 
-test.skip('after succesful hit, AI targets adjacent square 1', () => {
+test('after succesful hit, AI targets adjacent square 1', () => {
   let player = new Player();
   let enemyGameBoard = new GameBoard();
   player.enemyGameBoard = enemyGameBoard;
@@ -152,7 +152,7 @@ test.skip('after succesful hit, AI targets adjacent square 1', () => {
   expect(expectedMoves).toContain(lastMove);
 }); 
 
-test.skip('after succesful hit, AI targets adjacent square 2', () => {
+test('after succesful hit, AI targets adjacent square 2', () => {
   let player = new Player();
   let enemyGameBoard = new GameBoard();
   player.enemyGameBoard = enemyGameBoard;
@@ -165,7 +165,7 @@ test.skip('after succesful hit, AI targets adjacent square 2', () => {
   expect(expectedMoves).toContain(lastMove);
 }); 
 
-test.skip('If adjacent shot is a miss, AI tries another adjacent shot', () => {
+test('If adjacent shot is a miss, AI tries another adjacent shot', () => {
   // This test causes tests to run indefinitely
   let player = new Player();
   let enemyGameBoard = new GameBoard();
@@ -181,7 +181,7 @@ test.skip('If adjacent shot is a miss, AI tries another adjacent shot', () => {
 });
 
 
-test.skip('Once AI has determined ship orientation, it will continue firing on orientation', () => {
+test('Once AI has determined ship orientation, it will continue firing on orientation', () => {
   // This test fails
   let player = new Player();
   let enemyGameBoard = new GameBoard();
@@ -197,7 +197,7 @@ test.skip('Once AI has determined ship orientation, it will continue firing on o
 });
 
 
-test.skip('AI will sink 3-piece ship in at least 6 turns', () => {
+test('AI will sink 3-piece ship in at least 6 turns', () => {
   let player = new Player();
   let enemyGameBoard = new GameBoard();
   player.enemyGameBoard = enemyGameBoard;
@@ -210,7 +210,7 @@ test.skip('AI will sink 3-piece ship in at least 6 turns', () => {
   expect(ship.isSunk()).toBe(true);
 });
 
-test.skip('AI will sink 3-piece ship in at least 6 turns 2', () => {
+test('AI will sink 3-piece ship in at least 6 turns 2', () => {
   let player = new Player();
   let enemyGameBoard = new GameBoard();
   player.enemyGameBoard = enemyGameBoard;

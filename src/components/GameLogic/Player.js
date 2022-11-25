@@ -30,10 +30,10 @@ class Player {
 
   fireShot(coordinates){
     let target = this.enemyGameBoard.receiveAttack(coordinates)
-    this.mostRecentTarget = target;
-    this.updateAIValues(target, coordinates);
     // Save shot
     this.allShots.push(coordinates);
+    this.mostRecentTarget = target;
+    this.updateAIValues(target, coordinates);
     return target
   }
 
@@ -72,11 +72,12 @@ class Player {
     }
   }
 
+
   aiTurn(){
     let coordinates;
       do {
         if (this.identifiedShipOrientation){
-          coordinates = fireOnAxis(this.identifiedShip, this.allShots[this.allShots.length - 1], this.identifiedShipOrientation, this.mostRecentTarget);
+          coordinates = fireOnAxis(this.identifiedShip, this.allShots[this.allShots.length - 1], this.identifiedShipOrientation, this.mostRecentTarget, this.allShots);
         } else if (typeof this.mostRecentTarget == "object") { //If ship hit
           coordinates = generateAdjacentShot(this.allShots[this.allShots.length - 1]);
         } else if (this.identifiedShip) { 
@@ -90,7 +91,7 @@ class Player {
     
     this.fireShot(coordinates)
 
-    function fireOnAxis(originalShot, previousShot, orientation, mostRecentTarget){
+    function fireOnAxis(originalShot, previousShot, orientation, mostRecentTarget, allShots){
       let reverseDirection = function() {
         switch(direction){
           case "Right":
@@ -106,8 +107,6 @@ class Player {
         }
       }
 
-      
-      // Need to make sure I don't fire again in the same shot
       let direction;
       let coordinates;
       let previousShotSuccessful = (typeof mostRecentTarget == "object")
@@ -125,13 +124,13 @@ class Player {
             direction = "Up";
           }
         }
-      // Determine base shot
+      // Determine base shot (i.e. where to base next shot from)
       let baseShot;
       if (previousShotSuccessful){
         baseShot = previousShot;
       } else {
         baseShot = originalShot;
-        direction = reverseDirection;
+        direction = reverseDirection();
       }
       let x = baseShot[0];
       let y = Number(baseShot.substring(1));
