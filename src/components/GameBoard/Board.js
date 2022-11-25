@@ -90,6 +90,17 @@ function Board(props) {
 
   // AI Implementation
 
+  const shotResult = function(target){
+    if (target === 0) {
+      return "Miss!"
+    } else if (target.health > 0) {
+      return "Hit!"
+    } else if (target.health === 0) {
+      return "Sunk!"
+    } else {
+      return "Error!"
+    }
+  }
 
 
   const [loading, setLoading] = useState(true);
@@ -100,15 +111,38 @@ function Board(props) {
   }, [])
 
 
-  if (currentPlayer.name === "AI" && !loading && currentPlayer.availableShips.length > 0) {
-    for (let ship of currentPlayer.availableShips) {
+  if (currentPlayer.name === "AI" && !loading) {
+    if(currentPlayer.availableShips.length > 0) {
+      for (let ship of currentPlayer.availableShips) {
+        
+        currentPlayer.aiPlaceShip(ship);
+        removePlacedShip();
+      };
+      setTimeout(() => {
+        gameState.update();
+      },500)
+    } else if (turnCount > 2 && boardType === "Opponent"){
+ 
+      console.log(shotTaken);
+      // STIL FIGURING THIS OUT - COPIED FROM opponentGameSquare
+      if (shotTaken) {
+        return
+      }
+      console.log("asd");
       
-      currentPlayer.aiPlaceShip(ship);
-      removePlacedShip();
+      currentPlayer.aiTurn();
+      // Why does it execute this twice...?
+        //It's like it forces a render and then rerenders
+      // const coordinates = currentPlayer.aiTurn();
+      // setShotResult(shotResult(coordinates));
+      // setMostRecentShot(coordinates);
+      // Because there are two boards, it takes two shots
+      setShotTaken(true);
+      if(currentPlayer.enemyGameBoard.allShipsSunk() === true) {
+        setGameOver(true);
+      }
     }
-    setTimeout(() => {
-      gameState.update();
-    },500)
+
   }
   // end of AI excerpt
 

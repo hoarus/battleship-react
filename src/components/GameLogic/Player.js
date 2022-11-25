@@ -91,6 +91,8 @@ class Player {
     
     this.fireShot(coordinates)
 
+    return coordinates;
+
     function fireOnAxis(originalShot, previousShot, orientation, mostRecentTarget, allShots){
       let reverseDirection = function() {
         switch(direction){
