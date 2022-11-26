@@ -125,6 +125,8 @@ export default function GameSquare(props) {
     
   }
 
+  const isAI = () => currentPlayer.name === "AI";
+
   
   if(typeof squareType() === "object" && currentPlayer.name !=="AI"){ //If Ship
     return(
@@ -152,7 +154,7 @@ export default function GameSquare(props) {
       }
     </div>
     )
-  } else if (inactiveSquare()){ // Test if inactive (i.e. ships already placed)
+  } else if (inactiveSquare() || isAI()){ // Test if inactive (i.e. ships already placed)
     return(
       <div className={`${classes.gameSquare}`}></div>
     )
