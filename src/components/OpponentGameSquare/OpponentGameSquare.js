@@ -12,11 +12,8 @@ const useStyles = createUseStyles({
     height: '100%',
     boxSizing: 'border-box',
     aspectRatio: '1/1',
-    '&:hover': {
-      backgroundColor: '#d24531',
-      borderColor: '#d24531',
-    },
-  }, shipSquare: {
+  }, 
+  shipSquare: {
     backgroundColor: '#FBA346',
     border: 'outset 3px #FBA346',
   },
@@ -24,6 +21,12 @@ const useStyles = createUseStyles({
     border: 'outset 3px #0E3744',
     backgroundColor: '#0E3744',
   },
+  playerSquare: {
+    '&:hover': {
+      backgroundColor: '#d24531',
+      borderColor: '#d24531',
+    },
+  }
 })
 
 
@@ -54,7 +57,7 @@ function OpponentGameSquare(props) {
   }
 
   const fireShot = function(){
-    if (shotTaken) {
+    if (shotTaken || currentPlayer.name === "AI") {
       return
     }
     setShotResult(shotResult(currentPlayer.fireShot(position)));
@@ -65,17 +68,19 @@ function OpponentGameSquare(props) {
     }
     gameState.update();
   }
+  
+  const isPlayer = () => currentPlayer.name !== "AI";
 
   // square is a miss
   if(squareType() === 1) {
     return(
-      <div className={`${classes.gameSquare} ${classes.missSquare}`}></div>
+      <div className={`${classes.gameSquare} ${classes.missSquare} ${isPlayer() ? classes.playerSquare : ''}`}></div>
     );
   } else if(squareType()===2) {
-    return(<div className={`${classes.gameSquare} ${classes.shipSquare}`} onClick = {fireShot}></div>)
+    return(<div className={`${classes.gameSquare} ${classes.shipSquare} ${isPlayer() ? classes.playerSquare : ''}`}></div>)
   } else {
     return(
-      <div className={classes.gameSquare} onClick = {fireShot}></div>
+      <div className={` ${classes.gameSquare} ${isPlayer() ? classes.playerSquare : ''} `} onClick = {fireShot}></div>
     );
   }
   
