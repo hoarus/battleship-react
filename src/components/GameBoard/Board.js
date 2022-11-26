@@ -111,40 +111,43 @@ function Board(props) {
   }, [])
 
 
-  if (currentPlayer.name === "AI" && !loading) {
-    if(currentPlayer.availableShips.length > 0) {
-      for (let ship of currentPlayer.availableShips) {
+  useEffect(() => {
+    if (currentPlayer.name === "AI" && !loading) {
+      if(currentPlayer.availableShips.length > 0) {
+        for (let ship of currentPlayer.availableShips) {
+          
+          currentPlayer.aiPlaceShip(ship);
+          removePlacedShip();
+        };
+        setTimeout(() => {
+          gameState.update();
+        },500)
+      } else if (turnCount > 2 && boardType === "Opponent"){
+   
+        console.log(shotTaken);
+        // STIL FIGURING THIS OUT - COPIED FROM opponentGameSquare
+        if (shotTaken) {
+          return
+        }
+        console.log("asd");
         
-        currentPlayer.aiPlaceShip(ship);
-        removePlacedShip();
-      };
-      setTimeout(() => {
-        gameState.update();
-      },500)
-    } else if (turnCount > 2 && boardType === "Opponent"){
- 
-      console.log(shotTaken);
-      // STIL FIGURING THIS OUT - COPIED FROM opponentGameSquare
-      if (shotTaken) {
-        return
+        currentPlayer.aiTurn();
+        // Why does it execute this twice...?
+          //It's like it forces a render and then rerenders
+        // const coordinates = currentPlayer.aiTurn();
+        // setShotResult(shotResult(coordinates));
+        // setMostRecentShot(coordinates);
+        // Because there are two boards, it takes two shots
+        setShotTaken(true);
+        if(currentPlayer.enemyGameBoard.allShipsSunk() === true) {
+          setGameOver(true);
+        }
       }
-      console.log("asd");
-      
-      currentPlayer.aiTurn();
-      // Why does it execute this twice...?
-        //It's like it forces a render and then rerenders
-      // const coordinates = currentPlayer.aiTurn();
-      // setShotResult(shotResult(coordinates));
-      // setMostRecentShot(coordinates);
-      // Because there are two boards, it takes two shots
-      setShotTaken(true);
-      if(currentPlayer.enemyGameBoard.allShipsSunk() === true) {
-        setGameOver(true);
-      }
+  
     }
+    // end of AI excerpt
+  })
 
-  }
-  // end of AI excerpt
 
 
 
