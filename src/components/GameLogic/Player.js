@@ -79,10 +79,10 @@ class Player {
         if (this.identifiedShipOrientation){
           coordinates = fireOnAxis(this.identifiedShip, this.allShots[this.allShots.length - 1], this.identifiedShipOrientation, this.mostRecentTarget, this.allShots);
         } else if (typeof this.mostRecentTarget == "object") { //If ship hit
-          coordinates = generateAdjacentShot(this.allShots[this.allShots.length - 1]);
+          coordinates = generateAdjacentShot(this.allShots[this.allShots.length - 1], this.allShots);
         } else if (this.identifiedShip) { 
           // If identified ship has not been sunk, fire adjacent to it
-          coordinates = generateAdjacentShot(this.identifiedShip);
+          coordinates = generateAdjacentShot(this.identifiedShip, this.allShots);
         } else {
           coordinates = generateRandomCoordinates();
         }
@@ -92,6 +92,14 @@ class Player {
     this.fireShot(coordinates)
 
     return coordinates;
+
+    function isIllegalMove(coordinates, allShots){
+      if (allShots.includes(coordinates)) {
+        return true;
+      } else {
+        return (coordinates.charCodeAt(0) < 65) || (coordinates.charCodeAt(0) > 74) || Number(coordinates.substring(1)) < 1 || Number(coordinates.substring(1)) > 10;
+      }
+    }
 
     function fireOnAxis(originalShot, previousShot, orientation, mostRecentTarget, allShots){
       let reverseDirection = function() {
@@ -108,61 +116,64 @@ class Player {
             break;
         }
       }
-
+      let illegalMove = true;
       let direction;
       let coordinates;
       let previousShotSuccessful = (typeof mostRecentTarget == "object")
-      // Determine direction of next shot
-      if (orientation == "x") {
-        if (previousShot.charCodeAt(0) > originalShot.charCodeAt(0)) {
-            direction = "Right";
-          } else {
-            direction = "Left"; 
+      while (illegalMove) {
+        // Determine direction of next shot
+        if (orientation == "x") {
+          if (previousShot.charCodeAt(0) > originalShot.charCodeAt(0)) {
+              direction = "Right";
+            } else {
+              direction = "Left"; 
+            }
+          } else if (orientation == "y") {
+          if (previousShot.substring(1) > originalShot.substring(1)) {
+              direction = "Down";
+            } else {
+              direction = "Up";
+            }
           }
-        } else if (orientation == "y") {
-        if (previousShot.substring(1) > originalShot.substring(1)) {
-            direction = "Down";
-          } else {
-            direction = "Up";
-          }
+        // Determine base shot (i.e. where to base next shot from)
+        let baseShot;
+        if (previousShotSuccessful){
+          baseShot = previousShot;
+        } else {
+          baseShot = originalShot;
+          direction = reverseDirection();
         }
-      // Determine base shot (i.e. where to base next shot from)
-      let baseShot;
-      if (previousShotSuccessful){
-        baseShot = previousShot;
-      } else {
-        baseShot = originalShot;
-        direction = reverseDirection();
-      }
-      let x = baseShot[0];
-      let y = Number(baseShot.substring(1));
-      let xChar = x.charCodeAt(0);
-      // If last shot was a miss, reverse direction starting at original shot
-        //Base shot = identifiedShip
-        //Direction = reverse
+        let x = baseShot[0];
+        let y = Number(baseShot.substring(1));
+        let xChar = x.charCodeAt(0);
+        // If last shot was a miss, reverse direction starting at original shot
+          //Base shot = identifiedShip
+          //Direction = reverse
 
-      // If last shot was a hit, continue current direction
-        //Base shot = last 
-        //Direction = same
-      switch(direction){
-        case "Right":
-          xChar += 1;
-          x = String.fromCharCode(xChar);
-          break;
-        case "Left":
-          xChar -= 1;
-          x = String.fromCharCode(xChar);
-          break;
-        case "Up":
-          y -= 1;
-          break
-        case "Down":
-          y += 1;
-          break;
-        default:
-          break;
+        // If last shot was a hit, continue current direction
+          //Base shot = last 
+          //Direction = same
+        switch(direction){
+          case "Right":
+            xChar += 1;
+            x = String.fromCharCode(xChar);
+            break;
+          case "Left":
+            xChar -= 1;
+            x = String.fromCharCode(xChar);
+            break;
+          case "Up":
+            y -= 1;
+            break
+          case "Down":
+            y += 1;
+            break;
+          default:
+            break;
+        }
+        coordinates = (x).concat(y);
+        illegalMove = isIllegalMove(coordinates, allShots);
       }
-      coordinates = (x).concat(y);
       return coordinates;
     }
 
@@ -177,11 +188,10 @@ class Player {
       }
     }
 
-    function isIllegalMove(coordinates){
-      return (coordinates.charCodeAt(0) < 65) || (coordinates.charCodeAt(0) > 74) || Number(coordinates.substring(1)) < 1 || Number(coordinates.substring(1)) > 10;
-    }
 
-    function generateAdjacentShot(previousShot){
+
+    function generateAdjacentShot(previousShot, allShots){
+      // CHANGE NEEDED - NEED TO BAIL ON SHOT IF ALREADY IN ALLSHOTS
       let illegalMove = true;
       // Generate a number between 1 & 4
       let coordinates;
@@ -209,7 +219,7 @@ class Player {
             break;
         }
         coordinates = (x).concat(y);
-        illegalMove = isIllegalMove(coordinates);
+        illegalMove = isIllegalMove(coordinates, allShots);
       } 
       return coordinates;
 

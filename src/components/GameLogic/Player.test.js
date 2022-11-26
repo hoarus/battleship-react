@@ -223,6 +223,22 @@ test('AI will sink 3-piece ship in at least 6 turns 2', () => {
   expect(ship.isSunk()).toBe(true);
 });
 
+test('AI will sink 3-piece ship in at least 6 turns even if already fire in logical path', () => {
+  // Note that AI will get stuck if it's already fired somewhere in it's desired path
+  let player = new Player();
+  let enemyGameBoard = new GameBoard();
+  player.enemyGameBoard = enemyGameBoard;
+  let ship = new Ship(3);
+  enemyGameBoard.placeShip(ship, "C3", "x");
+  player.fireShot("F3"); //Miss
+  player.fireShot("D3"); //Hit
+  for (let i =0; i < 8; i++) {
+    player.aiTurn();
+  }
+  console.log(player.allShots)
+  expect(ship.isSunk()).toBe(true);
+});
+
 
 
 
