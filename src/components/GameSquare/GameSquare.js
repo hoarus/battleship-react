@@ -126,7 +126,7 @@ export default function GameSquare(props) {
   }
 
   
-  if(typeof squareType() === "object"){ //If Ship
+  if(typeof squareType() === "object" && currentPlayer.name !=="AI"){ //If Ship
     return(
       <div className={`${classes.gameSquare} ${classes.shipSquare}`}></div>
     );

@@ -22,11 +22,17 @@ const useStyles = createUseStyles({
     width: '100%',
     maxWidth: '700px',
   },
-  playersTurn: {
+  playerOneTurn: {
     color: '#0E3744',
     padding: '0px',
     margin: '0px',
+  },
+  playerTwoTurn: {
+    color: '#d24531',
+    padding: '0px',
+    margin: '0px',
   }
+
 })
 
 
@@ -42,11 +48,10 @@ playerTwo.enemyGameBoard = gameBoardOne;
 //Ship assignment has to be duplicate to ensure players are not sharing a set of ships
 playerOne.availableShips = [
   new Ship(2)
-  // Temporarily disabled ships
-  // new Ship(3), new Ship(3), new Ship(4), new Ship(5)
+  //, new Ship(3), new Ship(3), new Ship(4), new Ship(5)
 ]
 playerTwo.availableShips = [
-  new Ship(2), 
+  new Ship(2), new Ship(3), new Ship(3), new Ship(4), new Ship(5)
 ]
 
 export default function Game() {
@@ -111,6 +116,18 @@ export default function Game() {
     }
   }
 
+  const CurrentPlayerTitle = function(){
+    if (playerOne == currentPlayer) {
+      return (
+        <h1 className={classes.playerOneTurn}>{currentPlayer.name}'s Turn</h1>
+      )
+    } else {
+      return (
+        <h1 className={classes.playerTwoTurn}>{currentPlayer.name}'s Turn</h1>
+      )
+    }
+  }
+
   // If players have not been created, remain on Player Inputs screen
   if (players[0].name === "AI") {
     return (
@@ -121,7 +138,7 @@ export default function Game() {
   } else if (turnOver===false) { // If turn is not over, render main game
     return(
       <GameContext.Provider value={gameState}>
-        <h1 className={classes.playersTurn}>{currentPlayer.name}'s Turn</h1>
+        <CurrentPlayerTitle/>        
         <div className={classes.gameWrapper}>
           {turnCount <=1 && // Only render Rotate Ships button if during place ships phase of game
             <RotateShips
@@ -149,7 +166,7 @@ export default function Game() {
       currentPlayer={currentPlayer}
     />
     )
-  } else { // Proceed to next turn
+  } else if (playerTwo.name !== "AI") { // Proceed to next turn
     return(
       <NextTurn
         players={players}
@@ -162,6 +179,24 @@ export default function Game() {
         selectShip = {selectShip}
       />
     )
+  } else {
+    // End turn if AI
+    let nextPlayer = "";
+    if (players[0] === currentPlayer) {
+      nextPlayer=(players[1]);
+    } else {
+      nextPlayer=(players[0]);
+    }
+  
+    const endTurn = function() {
+      selectShip(nextPlayer.availableShips[0]);
+      setCurrentPlayer(nextPlayer);
+      setTurnCount(turnCount + 1);
+      setTurnOver(false);
+      setShotTaken(false);
+    }
+    endTurn();
+    return;
   }
 }
 
