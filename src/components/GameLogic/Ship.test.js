@@ -31,7 +31,14 @@ test('Ship with 2 length is not sunk after being hit once', () => {
 test('Check Ship Health 1', () => {
   let ship = new Ship(2);
   expect(ship.getHealth()).toBe(2);
-}); 
+});
+
+test('Can determine shots taken by subtracting ship length by health', () => {
+  let ship = new Ship(2);
+  ship.hit();
+  let shotsTaken = ship.getLength() - ship.getHealth();
+  expect(shotsTaken).toBe(1);
+})
 
 
 

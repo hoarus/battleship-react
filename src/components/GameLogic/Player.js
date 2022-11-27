@@ -59,8 +59,10 @@ class Player {
       let arrayLength = this.allShots.length
       let shotOne = this.identifiedShip;
       let shotTwo = this.allShots[arrayLength - 1];
-      // Determine Axis
-      if (shotOne[0] == shotTwo[0]) {
+      if (shotOne == shotTwo) {
+        return
+      }
+      else if (shotOne[0] == shotTwo[0]) {
         // If letter is the same, it is y-axis. 
         this.identifiedShipOrientation = "y"
       } else if (shotOne[1] == shotTwo[1]) {
@@ -102,7 +104,22 @@ class Player {
     }
 
     function fireOnAxis(originalShot, previousShot, orientation, mostRecentTarget, allShots){
-      let reverseDirection = function() {
+      let determineDirection = function (orientation, previousShot, originalShot) {
+        if (orientation == "x") {
+          if (previousShot.charCodeAt(0) > originalShot.charCodeAt(0)) {
+              return "Right";
+            } else {
+              return "Left"; 
+            }
+          } else if (orientation == "y") {
+          if (previousShot.substring(1) > originalShot.substring(1)) {
+              return "Down";
+            } else {
+              return "Up";
+            }
+          }
+      }
+      let reverseDirection = function(direction) {
         switch(direction){
           case "Right":
             return "Left";
@@ -116,43 +133,19 @@ class Player {
             break;
         }
       }
-      let illegalMove = true;
-      let direction;
-      let coordinates;
-      let previousShotSuccessful = (typeof mostRecentTarget == "object")
-      while (illegalMove) {
-        // Determine direction of next shot
-        if (orientation == "x") {
-          if (previousShot.charCodeAt(0) > originalShot.charCodeAt(0)) {
-              direction = "Right";
-            } else {
-              direction = "Left"; 
-            }
-          } else if (orientation == "y") {
-          if (previousShot.substring(1) > originalShot.substring(1)) {
-              direction = "Down";
-            } else {
-              direction = "Up";
-            }
-          }
-        // Determine base shot (i.e. where to base next shot from)
-        let baseShot;
+      let determineBaseShot = function(previousShot, originalShot, direction) {
+        let previousShotSuccessful = (typeof mostRecentTarget == "object");
         if (previousShotSuccessful){
-          baseShot = previousShot;
+          return [previousShot, direction];
         } else {
-          baseShot = originalShot;
-          direction = reverseDirection();
+          return [originalShot, reverseDirection(direction)]
         }
+      }
+
+      let determineNewCoordinates = function(baseShot, direction) {
         let x = baseShot[0];
         let y = Number(baseShot.substring(1));
-        let xChar = x.charCodeAt(0);
-        // If last shot was a miss, reverse direction starting at original shot
-          //Base shot = identifiedShip
-          //Direction = reverse
-
-        // If last shot was a hit, continue current direction
-          //Base shot = last 
-          //Direction = same
+        let xChar = x.charCodeAt(0);       
         switch(direction){
           case "Right":
             xChar += 1;
@@ -171,10 +164,23 @@ class Player {
           default:
             break;
         }
-        coordinates = (x).concat(y);
-        illegalMove = isIllegalMove(coordinates, allShots);
+        return (x).concat(y);
+      }
+      console.log(allShots);
+
+      let originalDirection = determineDirection(orientation, previousShot, originalShot);
+      let [baseShot, direction] = determineBaseShot(previousShot, originalShot, originalDirection);
+      let coordinates = determineNewCoordinates(baseShot, direction);
+      if (isIllegalMove(coordinates, allShots)) {
+        console.log("illegal");
+        console.log(coordinates);
+        console.log(allShots);
+        coordinates = determineNewCoordinates(originalShot, reverseDirection(direction));
       }
       return coordinates;
+
+
+      
     }
 
     function generateRandomCoordinates(){
@@ -191,7 +197,6 @@ class Player {
 
 
     function generateAdjacentShot(previousShot, allShots){
-      // CHANGE NEEDED - NEED TO BAIL ON SHOT IF ALREADY IN ALLSHOTS
       let illegalMove = true;
       // Generate a number between 1 & 4
       let coordinates;
