@@ -223,7 +223,7 @@ test('AI will sink 3-piece ship in at least 6 turns 2', () => {
   expect(ship.isSunk()).toBe(true);
 });
 
-test('AI will sink 3-piece ship in at least 6 turns even if already fire in logical path', () => {
+test('AI will sink 3-piece ship even if it has already fired in the logical path 1', () => {
   // Note that AI will get stuck if it's already fired somewhere in it's desired path
   let player = new Player();
   let enemyGameBoard = new GameBoard();
@@ -239,17 +239,40 @@ test('AI will sink 3-piece ship in at least 6 turns even if already fire in logi
   expect(ship.isSunk()).toBe(true);
 });
 
+test('AI will sink 3-piece ship even if it has already fired in the logical path 2', () => {
+  // Note that AI will get stuck if it's already fired somewhere in it's desired path
+  let player = new Player();
+  let enemyGameBoard = new GameBoard();
+  player.enemyGameBoard = enemyGameBoard;
+  let ship = new Ship(3);
+  enemyGameBoard.placeShip(ship, "C3", "x");
+  player.fireShot("B3"); //Miss
+  player.fireShot("F3"); //Miss
+  player.fireShot("D3"); //Hit
+  for (let i =0; i < 8; i++) {
+    player.aiTurn();
+  }
+  console.log(player.allShots)
+  expect(ship.isSunk()).toBe(true);
+});
 
-
-
-// Specs
-// AI should keep track of most recent hit
-// It should remember this ship and target it until it sinks the ship
-// First, it targets adjacent square
-// Then, it determines if the adjacent square is a hit
-// If so, it determines the direction of the ship
-// It then continues along that direction until the ship is sunk
-// If it reaches a miss, it returns to the original shot and goes in the other direction
-// If it does not sink the ship after completing both directions, it goes to the original source and tries another direction
+test('AI will sink 3-piece ship even if it has already fired in the logical path 3', () => {
+  // Note that AI will get stuck if it's already fired somewhere in it's desired path
+  let player = new Player();
+  let enemyGameBoard = new GameBoard();
+  player.enemyGameBoard = enemyGameBoard;
+  let ship = new Ship(3);
+  enemyGameBoard.placeShip(ship, "C3", "x");
+  player.fireShot("B3"); //Miss
+  player.fireShot("C2"); //Miss
+  player.fireShot("C4"); //Miss
+  player.fireShot("F3"); //Miss
+  player.fireShot("D3"); //Hit
+  for (let i =0; i < 8; i++) {
+    player.aiTurn();
+  }
+  console.log(player.allShots)
+  expect(ship.isSunk()).toBe(true);
+});
 
 

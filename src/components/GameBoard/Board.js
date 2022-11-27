@@ -128,9 +128,8 @@ function Board(props) {
         if (shotTaken) {
           return
         }
-        
-        const coordinates = currentPlayer.aiTurn();
-        setShotResult(shotResult(gameBoard.lookupPosition(coordinates)));
+        const [result, coordinates] = currentPlayer.aiTurn();
+        setShotResult(shotResult(result));
         setMostRecentShot(coordinates);
         setShotTaken(true);
         if(currentPlayer.enemyGameBoard.allShipsSunk() === true) {

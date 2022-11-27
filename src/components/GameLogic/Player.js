@@ -91,9 +91,9 @@ class Player {
       } while (this.allShots.includes(coordinates));
         // Keep generating if this shot has already been fired
     
-    this.fireShot(coordinates)
+    
 
-    return coordinates;
+    return [this.fireShot(coordinates), coordinates];
 
     function isIllegalMove(coordinates, allShots){
       if (allShots.includes(coordinates)) {
