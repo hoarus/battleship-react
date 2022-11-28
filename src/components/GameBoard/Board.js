@@ -62,6 +62,7 @@ function Board(props) {
   const mostRecentShot = props.mostRecentShot
   const setMostRecentShot = props.setMostRecentShot;
   const [highlightedShipSquares, setHighlightedShipSquares] = useState([]);
+  const [illegalShipSquares, setIllegalShipSquares] = useState([]);
 
      // Place Ship
   const myGameBoard = currentPlayer.myGameBoard;
@@ -161,6 +162,8 @@ function Board(props) {
         mostRecentShot = {mostRecentShot}
         highlightedShipSquares = {highlightedShipSquares}
         setHighlightedShipSquares = {setHighlightedShipSquares}
+        illegalShipSquares = {illegalShipSquares}
+        setIllegalShipSquares = {setIllegalShipSquares}
         placeShip = {placeShip}
       /> 
       )

@@ -38,7 +38,6 @@ _Screenshot coming soon_
 This project was created with [Create React App](https://github.com/facebook/create-react-app).
 You will need to install the below before getting started:
 - npm `sudo apt install npm`
-- create-react-app `sudo npm -g install create-react-app`
 
 In the project directory, you can run:
 
@@ -60,14 +59,10 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ## Support
 For any questions in relation to the project, please reach out to me at [hoarus@gmail.com](mailto:hoarus@gmail.com)
-
 
 ## Color Themes
 
@@ -79,12 +74,5 @@ Ship: #FBA346
 
 # Backlog
 - Readme
-- Display error color if ship placement illegal
-- Implement single click highlight and double click place (ships & shots) if mobile
 - Show boards side by side if on computer
-- AI as it currently exists
-- Improved AI
-- Improved test suits (including mocks and stubs)
-
-
-
+- Display error color if ship placement illegal

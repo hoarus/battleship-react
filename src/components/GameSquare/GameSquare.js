@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import GameContext from '../Game/GameContext';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
   gameSquare: {
     boxSizing: 'border-box',
-    border: 'outset 3px lightgreen',
+    border: 'outset 3px #CCE8E6',
     display: 'flex',
     color: 'black',
     width: '100%',
@@ -14,21 +14,15 @@ const useStyles = createUseStyles({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#0E3744',
-    borderColor: '#0E3744',
-  },
-  activeSquare: {
-    '&:hover': {
-      backgroundColor: '#d24531',
-      borderColor: '#d24531',
-    },
   },
   highlightedSquare: {
     backgroundColor: '#d24531',
-    borderColor: '#d24531',
+  },
+  illegalSquare: {
+    backgroundColor: 'grey',
   },
   shipSquare: {
     backgroundColor: '#FBA346',
-    borderColor: '#FBA346',
   }, 
   shot: {
     color: 'transparent',
@@ -84,6 +78,8 @@ export default function GameSquare(props) {
   const mostRecentShot = props.mostRecentShot
   const highlightedShipSquares = props.highlightedShipSquares;
   const setHighlightedShipSquares = props.setHighlightedShipSquares;
+  const illegalShipSquares = props.illegalShipSquares;
+  const setIllegalShipSquares = props.setIllegalShipSquares;
   const myGameBoard = currentPlayer.myGameBoard;
   const inactiveSquare = () => Object.keys(currentPlayer.availableShips).length === 0;
   const squareType =  () => myGameBoard.lookupPosition(props.position);
@@ -99,8 +95,10 @@ export default function GameSquare(props) {
     let yHighlightCoordinates = [];
     for (let i = 0; i < ship.length; i++) {
       let y = Number(position.slice(1)) + i;
-      let coordinates = position[0].concat(y);
-      yHighlightCoordinates.push(coordinates);
+      if (y <= 10){
+        let coordinates = position[0].concat(y);
+        yHighlightCoordinates.push(coordinates);
+      }
     }
     return yHighlightCoordinates;
   }
@@ -110,20 +108,35 @@ export default function GameSquare(props) {
     for (let i = 0; i < ship.length; i++) {
       let x = Number(position.slice(1));
       let y = String.fromCharCode(position.charCodeAt(0) + i);
-      let coordinates = y.concat(x);
-      xHighlightCoordinates.push(coordinates);
+      if (x <= 10 && y <= "J"){
+        let coordinates = y.concat(x);
+        xHighlightCoordinates.push(coordinates);
+      }
     }
     return xHighlightCoordinates;
   }
 
-  const highlightSquares = function() {
+  const getHighlightedSquares = function(){
     if (shipOrientation==="x") {
-      setHighlightedShipSquares(getXHighlightCoordinates());
+      return getXHighlightCoordinates()
     } else {
-      setHighlightedShipSquares(getYHighlightCoordinates());
+      return getYHighlightCoordinates();
     }
-    
   }
+
+  const highlightSquares = function() {
+    let squares = getHighlightedSquares();
+    if (squares.length < selectedShip.length) {
+      setIllegalShipSquares(squares);
+      setHighlightedShipSquares([]);
+    } else {
+      setHighlightedShipSquares(squares);
+      setIllegalShipSquares([]);
+    }
+  }
+
+
+
 
   const isAI = () => currentPlayer.name === "AI";
 
@@ -158,7 +171,11 @@ export default function GameSquare(props) {
     return(
       <div className={`${classes.gameSquare}`}></div>
     )
-  } else if (squareType() === 0 && highlightedShipSquares.includes(position)) { //Highlight ship placement
+  } else if (squareType() === 0 && illegalShipSquares.includes(position)){ // Highlight illegal ship placement
+    return(
+     <div className={`${classes.gameSquare} ${classes.activeSquare} ${classes.illegalSquare}`}  onClick={() => placeShip(position)} ></div>
+    )
+  } else if (squareType() === 0 && highlightedShipSquares.includes(position)) { // Highlight ship placement
       return(
         <div className={`${classes.gameSquare} ${classes.activeSquare} ${classes.highlightedSquare}`}  onClick={() => placeShip(position)} ></div>
       );

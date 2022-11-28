@@ -56,7 +56,7 @@ playerTwo.availableShips = [
 export default function Game() {
   const [players, setPlayers] = useState([playerOne, playerTwo]);
   const [currentPlayer, setCurrentPlayer] = useState(players[0]);
-  const [selectedShip, selectShip] = useState();
+  const [selectedShip, selectShip] = useState(currentPlayer.availableShips[0]);
   const [shipOrientation, setShipOrientation] = useState("x");
   const [turnOver, setTurnOver] = useState(false);
   const [turnCount, setTurnCount] = useState(0);
