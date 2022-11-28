@@ -256,23 +256,26 @@ test('AI will sink 3-piece ship even if it has already fired in the logical path
   expect(ship.isSunk()).toBe(true);
 });
 
-test('AI will sink 3-piece ship even if it has already fired in the logical path 3', () => {
+test('AI will sink at least one ship if it stumbles across two', () => {
   // Note that AI will get stuck if it's already fired somewhere in it's desired path
   let player = new Player();
   let enemyGameBoard = new GameBoard();
   player.enemyGameBoard = enemyGameBoard;
-  let ship = new Ship(3);
-  enemyGameBoard.placeShip(ship, "C3", "x");
+  let shipOne = new Ship(3);
+  let shipTwo = new Ship(3);
+  enemyGameBoard.placeShip(shipOne, "C3", "x");
+  enemyGameBoard.placeShip(shipTwo, "C2", "x");
   player.fireShot("B3"); //Miss
-  player.fireShot("C2"); //Miss
+  player.fireShot("C2"); //Hit
   player.fireShot("C4"); //Miss
   player.fireShot("F3"); //Miss
   player.fireShot("D3"); //Hit
   for (let i =0; i < 8; i++) {
     player.aiTurn();
   }
+  let oneShipSunk = shipOne.isSunk() || shipTwo.isSunk();
   console.log(player.allShots)
-  expect(ship.isSunk()).toBe(true);
+  expect(oneShipSunk).toBe(true);
 });
 
 

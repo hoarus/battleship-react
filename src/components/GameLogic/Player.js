@@ -5,6 +5,7 @@ class Player {
     this.allShots = [];
     this.mostRecentTarget = "";
     this.identifiedShip = false;
+    this.identifiedShipCoordinates = "";
     this.identifiedShipOrientation = false;
   }
 
@@ -29,25 +30,34 @@ class Player {
   }
 
   fireShot(coordinates){
+    console.log("START SHOT");
     let target = this.enemyGameBoard.receiveAttack(coordinates)
     // Save shot
     this.allShots.push(coordinates);
     this.mostRecentTarget = target;
+    console.log(`target is ${target}`);
+    console.log(`coordinates is ${coordinates}`);
+    console.log(`allshots is ${this.allShots}`);
     this.updateAIValues(target, coordinates);
+    console.log("FINISHED SHOT");
     return target
   }
 
   updateAIValues(target, coordinates) {
-    if (this.identifiedShip === false && typeof target == "object") {
-      // Save location of ship if a hit
-      this.identifiedShip = coordinates;
+    if ((this.identifiedShip === false && typeof target == "object") || ((target !== this.identifiedShip && typeof target == "object")) ) {
+      // Save location of ship if a hit and no identified ship
+      this.identifiedShipCoordinates = coordinates;
+      this.identifiedShip = target;
+      console.log("IdentifyShip")
     } 
     if (typeof target == "object") {
       // Save ship oritentation
       this.saveShipOrientationIfKnown();
       if (target.isSunk() === true) {
         // Clear values
+        console.log("CLEAR VALUES")
         this.identifiedShip = false;
+        this.identifiedShipCoordinates = "";
         this.identifiedShipOrientation = false;
       }
     };
@@ -57,7 +67,7 @@ class Player {
     if (this.identifiedShip && this.allShots.length >= 2) {
       // Get two most recent shots
       let arrayLength = this.allShots.length
-      let shotOne = this.identifiedShip;
+      let shotOne = this.identifiedShipCoordinates;
       let shotTwo = this.allShots[arrayLength - 1];
       if (shotOne == shotTwo) {
         return
@@ -79,13 +89,14 @@ class Player {
     let coordinates;
       do {
         if (this.identifiedShipOrientation){
-          coordinates = fireOnAxis(this.identifiedShip, this.allShots[this.allShots.length - 1], this.identifiedShipOrientation, this.mostRecentTarget, this.allShots);
-        } else if (typeof this.mostRecentTarget == "object") { //If ship hit
-          coordinates = generateAdjacentShot(this.allShots[this.allShots.length - 1], this.allShots);
+          console.log("1");
+          coordinates = fireOnAxis(this.identifiedShipCoordinates, this.allShots[this.allShots.length - 1], this.identifiedShipOrientation, this.mostRecentTarget, this.allShots);
         } else if (this.identifiedShip) { 
           // If identified ship has not been sunk, fire adjacent to it
-          coordinates = generateAdjacentShot(this.identifiedShip, this.allShots);
+          console.log("3");
+          coordinates = generateAdjacentShot(this.identifiedShipCoordinates, this.allShots);
         } else {
+          console.log("4");
           coordinates = generateRandomCoordinates();
         }
       } while (this.allShots.includes(coordinates));
@@ -166,7 +177,6 @@ class Player {
         }
         return (x).concat(y);
       }
-      console.log(allShots);
 
       let originalDirection = determineDirection(orientation, previousShot, originalShot);
       let [baseShot, direction] = determineBaseShot(previousShot, originalShot, originalDirection);
@@ -178,6 +188,7 @@ class Player {
         coordinates = determineNewCoordinates(originalShot, reverseDirection(direction));
       }
       return coordinates;
+      
 
 
       
@@ -200,7 +211,10 @@ class Player {
       let illegalMove = true;
       // Generate a number between 1 & 4
       let coordinates;
-      while (illegalMove) {
+      let counter = 0;
+      while (illegalMove && counter < 30) {
+        counter += 1;
+        console.log("illegal adjacent shot");
         let x = previousShot[0];
         let y = Number(previousShot.substring(1));
         let xChar = x.charCodeAt(0);
