@@ -35,6 +35,7 @@ const useStyles = createUseStyles({
     border: 'solid 2px #0E3744',
     width: '100%',
     maxWidth: '65vh',
+    maxHeight: '65vh',
     
   },
   button: {
