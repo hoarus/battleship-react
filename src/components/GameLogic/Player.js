@@ -30,16 +30,11 @@ class Player {
   }
 
   fireShot(coordinates){
-    console.log("START SHOT");
     let target = this.enemyGameBoard.receiveAttack(coordinates)
     // Save shot
     this.allShots.push(coordinates);
     this.mostRecentTarget = target;
-    console.log(`target is ${target}`);
-    console.log(`coordinates is ${coordinates}`);
-    console.log(`allshots is ${this.allShots}`);
     this.updateAIValues(target, coordinates);
-    console.log("FINISHED SHOT");
     return target
   }
 
@@ -48,14 +43,12 @@ class Player {
       // Save location of ship if a hit and no identified ship
       this.identifiedShipCoordinates = coordinates;
       this.identifiedShip = target;
-      console.log("IdentifyShip")
     } 
     if (typeof target == "object") {
       // Save ship oritentation
       this.saveShipOrientationIfKnown();
       if (target.isSunk() === true) {
         // Clear values
-        console.log("CLEAR VALUES")
         this.identifiedShip = false;
         this.identifiedShipCoordinates = "";
         this.identifiedShipOrientation = false;
@@ -89,14 +82,11 @@ class Player {
     let coordinates;
       do {
         if (this.identifiedShipOrientation){
-          console.log("1");
           coordinates = fireOnAxis(this.identifiedShipCoordinates, this.allShots[this.allShots.length - 1], this.identifiedShipOrientation, this.mostRecentTarget, this.allShots);
         } else if (this.identifiedShip) { 
           // If identified ship has not been sunk, fire adjacent to it
-          console.log("3");
           coordinates = generateAdjacentShot(this.identifiedShipCoordinates, this.allShots);
         } else {
-          console.log("4");
           coordinates = generateRandomCoordinates();
         }
       } while (this.allShots.includes(coordinates));
@@ -181,11 +171,14 @@ class Player {
       let originalDirection = determineDirection(orientation, previousShot, originalShot);
       let [baseShot, direction] = determineBaseShot(previousShot, originalShot, originalDirection);
       let coordinates = determineNewCoordinates(baseShot, direction);
+      let counter = 0;
       if (isIllegalMove(coordinates, allShots)) {
-        console.log("illegal");
-        console.log(coordinates);
-        console.log(allShots);
+        counter += 1;
+        if (counter > 30) {
+          coordinates = generateRandomCoordinates()
+        } else {
         coordinates = determineNewCoordinates(originalShot, reverseDirection(direction));
+        }
       }
       return coordinates;
       
@@ -212,9 +205,8 @@ class Player {
       // Generate a number between 1 & 4
       let coordinates;
       let counter = 0;
-      while (illegalMove && counter < 30) {
+      while (illegalMove) {
         counter += 1;
-        console.log("illegal adjacent shot");
         let x = previousShot[0];
         let y = Number(previousShot.substring(1));
         let xChar = x.charCodeAt(0);
@@ -237,7 +229,12 @@ class Player {
           default:
             break;
         }
-        coordinates = (x).concat(y);
+        if (counter > 30) {
+          // Prevent infinite loop and generate random shot
+          coordinates = generateRandomCoordinates();
+        } else {
+          coordinates = (x).concat(y);
+        }
         illegalMove = isIllegalMove(coordinates, allShots);
       } 
       return coordinates;
