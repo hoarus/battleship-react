@@ -20,7 +20,7 @@ const useStyles = createUseStyles({
     alignItems: 'center',
     padding: '0% 5%',
     width: '100%',
-    maxWidth: '700px',
+    maxWidth: '1000px',
   },
   playerOneTurn: {
     color: '#0E3744',

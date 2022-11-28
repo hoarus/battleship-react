@@ -22,6 +22,8 @@ const useStyles = createUseStyles({
   },
   boardWrapper: {
     width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
     
   },
   gameBoard: {
@@ -31,7 +33,7 @@ const useStyles = createUseStyles({
     gridTemplateColumns: 'repeat(10, 1fr)',
     border: 'solid 2px #0E3744',
     width: '100%',
-    maxHeight: '50vh',
+    maxWidth: '65vh',
     
   },
   button: {
