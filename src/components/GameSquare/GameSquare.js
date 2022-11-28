@@ -30,6 +30,7 @@ const useStyles = createUseStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    fontSize: '2.8vh'
   },
   '@keyframes blinkMiss': {
     from: {

@@ -191,6 +191,7 @@ function Board(props) {
           <BoardTab
             currentBoard = {currentBoard}
             setCurrentBoard = { setCurrentBoard }
+            currentPlayer = {currentPlayer}
           />
         }
         <div className= {classes.gameBoard}>
