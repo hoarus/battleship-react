@@ -23,6 +23,7 @@ const useStyles = createUseStyles({
   boardWrapper: {
     width: '100%',
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     
   },
