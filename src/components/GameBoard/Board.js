@@ -26,8 +26,12 @@ const useStyles = createUseStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    maxWidth: '65vh',
-    maxHeight: '65vh',
+    maxWidth: '45vh',
+    maxHeight: '45vh',
+    '@media (min-width: 400px)': {
+      maxWidth: '65vh',
+      maxHeight: '65vh',
+    }
     
   },
   gameBoard: {
@@ -35,8 +39,10 @@ const useStyles = createUseStyles({
     //flex: '2 1 auto',
     display: 'grid',
     gridTemplateColumns: 'repeat(10, 1fr)',
-    border: 'solid 2px #0E3744',
     width: '100%',
+    '@media (min-width: 400px)': {
+      border: 'solid 2px #0E3744',
+    }
 
     
   },
