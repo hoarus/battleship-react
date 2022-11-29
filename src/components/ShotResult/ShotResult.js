@@ -10,6 +10,7 @@ const useStyles = createUseStyles({
   },
   button: {
     padding: '1rem',
+    margin: '1rem',
     textAlign: 'center',
     fontSize: '1rem',
     fontWeight: 'bold',
@@ -39,6 +40,9 @@ const useStyles = createUseStyles({
     maxWidth: '300px',
     top: '25vh',
 
+  },
+  h3: {
+    marginTop: '0px',
   } 
 })
 
@@ -57,14 +61,27 @@ export default function PlayerDetails(props){
     }, 500)
   }, [])
 
+  const EndTurnButton = function() {
+    let buttonText = "End Turn";
+    if (currentPlayer.name === "AI") {
+      buttonText = "Start Turn"
+    }
+    return(
+      <button onClick={setTurnOver} className={classes.button} autoFocus>{buttonText}</button>
+    )
+  }
+
   if(loading){
     return(
       <div></div>
     )
   } else return(
       <div className={classes.popUp}>
+        {currentPlayer.name === "AI" &&
+          <h2>AI Turn Complete</h2>
+        }
         {turnCount <= 1 &&
-        <h2>Ships Placed</h2>
+          <h3 className={classes.h3}>Ships Placed</h3>
         }
         {turnCount > 1 && shotResult !== "" && shotTaken &&
         <Fragment>
@@ -74,7 +91,8 @@ export default function PlayerDetails(props){
         <div>Ships Remaining: {enemyGameBoard.shipsRemaining()}</div>
         </Fragment>
         }
-        <button onClick={setTurnOver} className={classes.button} autoFocus>End Turn</button>
+        <EndTurnButton/>
+        
     </div>  
  
   )
