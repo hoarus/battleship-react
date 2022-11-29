@@ -14,7 +14,6 @@ const useStyles = createUseStyles({
     aspectRatio: '1/1',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#0E3744',
     width: '4vh',
     height: '4vh',
     minWidth: '0',
