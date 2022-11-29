@@ -22,6 +22,7 @@ const useStyles = createUseStyles({
   },
   boardWrapper: {
     //width: '100%',
+    boxSizing:'border-box',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',

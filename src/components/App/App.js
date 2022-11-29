@@ -10,6 +10,7 @@ const useStyles = createUseStyles({
     alignItems: 'center',
     backgroundColor: '#CCE8E6',
     minHeight: '100vh',
+    boxSizing:'border-box',
   },
 })
 
