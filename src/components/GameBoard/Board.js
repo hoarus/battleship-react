@@ -17,11 +17,11 @@ const useStyles = createUseStyles({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '7% 2%',
+    padding: '7% 7%',
     width: '90%'
   },
   boardWrapper: {
-    width: '100%',
+    //width: '100%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
