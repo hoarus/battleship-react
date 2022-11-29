@@ -3,7 +3,8 @@ import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
   boardTab: {
-    backgroundColor: '#d24531',
+    backgroundColor: '#d24531', //'#d24531',
+    opacity: '0.5',
     margin: '0px',
     padding: '0.5rem',
     width: '100%',
@@ -17,14 +18,14 @@ const useStyles = createUseStyles({
     '-ms-user-select': 'none', /* IE 10 and IE 11 */
     'user-select': 'none', /* Standard syntax */
     '&:hover': {
-      backgroundColor: 'pink'
+      opacity: '0.7'
     },
   },
   selectedTab: {
-    backgroundColor: '#0E3744',
+    opacity: '1',
     color: 'white',
     '&:hover': {
-      backgroundColor: '#0E3744'
+      opacity: '1',
     },
   },
   tabsContainer: {
