@@ -12,6 +12,8 @@ const useStyles = createUseStyles({
     maxWidth: '7vh',
     height: '100%',
     maxHeight: '7vh',
+    minWidth: '0',
+    minHeight: '0',
     aspectRatio: '1/1',
     alignItems: 'center',
     justifyContent: 'center',
