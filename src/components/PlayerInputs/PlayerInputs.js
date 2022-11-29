@@ -21,7 +21,7 @@ const useStyles = createUseStyles({
     fontSize: '1rem',
     color: '#0E3744',
     backgroundColor: '#CCE8E6',
-    border: 'solid 2px #0E3744'
+    border: 'solid 2px #0E3744',
   } ,
   centerText: {
     textAlign: 'center',
