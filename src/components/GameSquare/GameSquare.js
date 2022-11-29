@@ -21,7 +21,6 @@ const useStyles = createUseStyles({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#0E3744',
-    border: 'none',
   },
   highlightedSquare: {
     backgroundColor: '#d24531',

@@ -31,7 +31,7 @@ const useStyles = createUseStyles({
   },
   gameBoard: {
     boxSizing: 'border-box',
-    flex: '2 1 auto',
+    //flex: '2 1 auto',
     display: 'grid',
     gridTemplateColumns: 'repeat(10, 1fr)',
     border: 'solid 2px #0E3744',
