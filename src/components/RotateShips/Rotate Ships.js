@@ -12,12 +12,21 @@ const useStyles = createUseStyles({
     borderRadius: '5px',
     color: '#0E3744',
   },
-  rotateShip: {
-    width: '90%',
-    padding: '0.5rem',
+  button: {
+    padding: '1rem',
     textAlign: 'center',
     fontSize: '1rem',
-  }
+    fontWeight: 'bold',
+    color: '#0E3744',
+    width: '100%',
+    backgroundColor: '#CCE8E6',
+    border: 'solid 2px #0E3744',
+    borderRadius: '2px',
+    '&:hover': {
+      color: '#d24531',
+      borderColor: '#d24531',
+    },
+  } 
 })
 
 
@@ -37,7 +46,7 @@ function PlaceShips(props) {
     return(
       <div className={classes.wrapper}>
         <h2>Place your ships</h2> 
-        <button className={classes.rotateShip} onClick={toggleOrientation}>Rotate Ship</button>
+        <button className={classes.button} onClick={toggleOrientation}>Rotate Ship</button>
       </div>
     )
 

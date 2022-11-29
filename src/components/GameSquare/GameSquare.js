@@ -13,6 +13,8 @@ const useStyles = createUseStyles({
     minWidth: '0',
     minHeight: '0',
     overflow: 'hidden',
+    overflowX: 'hidden',
+    overflowY: 'hidden',
     aspectRatio: '1/1',
     alignItems: 'center',
     justifyContent: 'center',

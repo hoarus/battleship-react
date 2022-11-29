@@ -8,12 +8,20 @@ const useStyles = createUseStyles({
   header: {
     textAlign: 'center',
   },
-  endTurn: {
+  button: {
     padding: '1rem',
     textAlign: 'center',
     fontSize: '1rem',
-    margin: '1rem',
-  } ,
+    fontWeight: 'bold',
+    color: '#0E3744',
+    backgroundColor: '#CCE8E6',
+    border: 'solid 2px #0E3744',
+    borderRadius: '2px',
+    '&:hover': {
+      color: '#d24531',
+      borderColor: '#d24531',
+    },
+  },
   popUp: {
     boxSizing: 'border-box',
     position: 'absolute',
@@ -66,7 +74,7 @@ export default function PlayerDetails(props){
         <div>Ships Remaining: {enemyGameBoard.shipsRemaining()}</div>
         </Fragment>
         }
-        <button onClick={setTurnOver} className={classes.endTurn} autoFocus>End Turn</button>
+        <button onClick={setTurnOver} className={classes.button} autoFocus>End Turn</button>
     </div>  
  
   )

@@ -19,9 +19,15 @@ const useStyles = createUseStyles({
     padding: '1rem',
     textAlign: 'center',
     fontSize: '1rem',
+    fontWeight: 'bold',
     color: '#0E3744',
     backgroundColor: '#CCE8E6',
     border: 'solid 2px #0E3744',
+    borderRadius: '2px',
+    '&:hover': {
+      color: '#d24531',
+      borderColor: '#d24531',
+    },
   } ,
   centerText: {
     textAlign: 'center',
