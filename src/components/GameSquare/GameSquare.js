@@ -12,6 +12,8 @@ const useStyles = createUseStyles({
     height: '100%',
     minWidth: '0',
     minHeight: '0',
+    maxWidth: '100%',
+    maxHeight: '100%',
     overflow: 'hidden',
     overflowX: 'hidden',
     overflowY: 'hidden',
@@ -19,6 +21,7 @@ const useStyles = createUseStyles({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#0E3744',
+    border: 'none',
   },
   highlightedSquare: {
     backgroundColor: '#d24531',
