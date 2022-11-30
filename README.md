@@ -30,24 +30,24 @@ This project leverages the following technologies:
 
 ### Get Started
 The first screen requires the player to input their name and select One-Player or Two-Player before starting the game.
-![Search](/readme_images/battleship-get-started.jpg)
+![Search](/README_images/battleship-get-started.jpg)
 
 ### Place Ships
 Players are required to place all their ships before their opponent's turn. They can rotate the ship and see where it will be placed before making their decision. 
-![Search](/readme_images/battleship-place-ships.jpg)
+![Search](/README_images/battleship-place-ships.jpg)
 
 
 ### Fire Shots
 Players can click anywhere on their opponent's board to fire a shot.  Once they have taken their shot, they can end their turn.
-![Search](/readme_images/battleship-fire-shot.jpg)
+![Search](/README_images/battleship-fire-shot.jpg)
 
 ### View Own Board
 Players can also view the shots their opponent has made on their own board.
-![Search](/readme_images/battleship-show-board.jpg)
+![Search](/README_images/battleship-show-board.jpg)
 
 ### Ending the Game
 Once one player has sunk all their opponent's ships, the game comes to an end. Players are prompted to 'Play Again', which reloads the app.
-![Search](/readme_images/battleship-game-over.jpg)
+![Search](/README_images/battleship-game-over.jpg)
 
 ## Installation
 This project was created with [Create React App](https://github.com/facebook/create-react-app).
