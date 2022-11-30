@@ -8,9 +8,10 @@ const useStyles = createUseStyles({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: '#CCE8E6',
+    backgroundColor: '#121212',
     minHeight: '100vh',
     boxSizing:'border-box',
+    color: 'white',
   },
 })
 

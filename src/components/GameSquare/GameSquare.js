@@ -5,7 +5,7 @@ import { createUseStyles } from 'react-jss';
 const useStyles = createUseStyles({
   gameSquare: {
     boxSizing: 'border-box',
-    border: 'outset 3px #CCE8E6',
+    border: 'solid 1px #121212',
     display: 'flex',
     color: 'black',
     overflow: 'hidden',
@@ -14,7 +14,7 @@ const useStyles = createUseStyles({
     aspectRatio: '1/1',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#0E3744',
+    backgroundColor: '#8EB1C7', // previously #0E3744
     width: '4vh',
     height: '4vh',
     minWidth: '0',
@@ -27,17 +27,17 @@ const useStyles = createUseStyles({
     }
   },
   highlightedSquare: {
-    backgroundColor: '#d24531',
+    backgroundColor: '#C32F27',
   },
   illegalSquare: {
-    backgroundColor: 'grey',
+    backgroundColor: '#121212',
   },
   shipSquare: {
-    backgroundColor: '#FBA346',
+    backgroundColor: '#ffc600',
   }, 
   shot: {
     color: 'transparent',
-    textShadow: '0 0 0 #d24531',
+    textShadow: '0 0 0 #C32F27',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -56,7 +56,7 @@ const useStyles = createUseStyles({
       textShadow: '0 0 0 #d24531',
     },
     to: {
-      textShadow: '0 0 0 #FBA346',
+      textShadow: '0 0 0 #ffc600',
     }
   },
   blinkingMiss: {

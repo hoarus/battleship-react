@@ -5,8 +5,8 @@ import { createUseStyles } from 'react-jss';
 const useStyles = createUseStyles({
   gameSquare: {
     boxSizing: 'border-box',
-    border: 'outset 3px #CCE8E6',
-    backgroundColor: '#A8BDC5',
+    border: 'solid 1px white',
+    backgroundColor: '#121212',
     color: 'blue',
     overflow: 'hidden',
     overflowX: 'hidden',
@@ -26,14 +26,14 @@ const useStyles = createUseStyles({
     }
   }, 
   shipSquare: {
-    backgroundColor: '#FBA346',
+    backgroundColor: '#ffc600',
   },
   missSquare: {
-    backgroundColor: '#0E3744',
+    backgroundColor: '#8EB1C7',
   },
   playerSquare: {
     '&:hover': {
-      backgroundColor: '#d24531',
+      backgroundColor: '#C32F27',
     },
   }
 })

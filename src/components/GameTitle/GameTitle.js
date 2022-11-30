@@ -3,7 +3,7 @@ import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
   gameTitle: {
-    color: '#0E3744',
+    color: '#ffc600',
     margin: '2rem',
   },
   wrapper: {

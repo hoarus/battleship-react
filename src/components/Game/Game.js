@@ -23,12 +23,12 @@ const useStyles = createUseStyles({
     maxWidth: '1000px',
   },
   playerOneTurn: {
-    color: '#0E3744',
+    color: 'white',
     padding: '0px',
     margin: '0px',
   },
   playerTwoTurn: {
-    color: '#d24531',
+    color: 'white',
     padding: '0px',
     margin: '0px',
   }

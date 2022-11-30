@@ -5,12 +5,12 @@ import {createUseStyles} from 'react-jss';
 
 const useStyles = createUseStyles({
   wrapper: {
-    color: '0E3744',
+    color: 'white',
     boxSizing: 'border-box',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: '#CCE8E6',
+    backgroundColor: '#121212',
     width: '100%',
     height: '80vh',
     padding: '10%',
@@ -21,13 +21,13 @@ const useStyles = createUseStyles({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    border: 'solid 0.3rem #0E3744',
+    border: 'solid 0.3rem white',
     borderRadius: '3%',
     padding: '2rem',
     '-webkit-user-select': 'none', /* Safari */
     '-ms-user-select': 'none', /* IE 10 and IE 11 */
     'user-select': 'none', /* Standard syntax */
-    backgroundColor: '#CCE8E6',
+    backgroundColor: '#121212',
     width: '90%',
     minWidth: '30%',
     maxWidth: '300px',
@@ -38,18 +38,19 @@ const useStyles = createUseStyles({
     textAlign: 'center',
     fontSize: '1rem',
     fontWeight: 'bold',
-    color: '#0E3744',
-    backgroundColor: '#CCE8E6',
-    border: 'solid 2px #0E3744',
+    color: 'white',
+    backgroundColor: '#121212',
+    border: 'solid 2px white',
     borderRadius: '2px',
     '&:hover': {
-      color: '#d24531',
-      borderColor: '#d24531',
+      color: '#ffc600',
+      borderColor: '#ffc600',
     },
   },
-  darkBlue: {
-    color: '#0E3744',
+  yellow: {
+    color: '#ffc600',
   }
+
 })
 
 export default function GameOver(props){
@@ -60,8 +61,8 @@ export default function GameOver(props){
   return(
     <div className={classes.wrapper}>
     <div className={classes.messageContainer}>
-      <h2 className={classes.darkBlue}>Game Over</h2>
-      <h2 className={classes.darkBlue}>{currentPlayer.name} has won!</h2>
+      <h2 className={classes.yellow}>Game Over</h2>
+      <h2>{currentPlayer.name} has won!</h2>
       <button className={classes.button} onClick={reloadPage}> Play Again?</button>
     </div>
   </div>

@@ -40,9 +40,7 @@ const useStyles = createUseStyles({
     display: 'grid',
     gridTemplateColumns: 'repeat(10, 1fr)',
     width: '100%',
-    '@media (min-width: 400px)': {
-      border: 'solid 2px #0E3744',
-    }
+
 
     
   },

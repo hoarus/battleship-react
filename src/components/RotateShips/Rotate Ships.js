@@ -10,21 +10,21 @@ const useStyles = createUseStyles({
     flexDirection: 'column',
     alignItems: 'center',
     borderRadius: '5px',
-    color: '#0E3744',
+    color: 'white',
   },
   button: {
     padding: '1rem',
     textAlign: 'center',
     fontSize: '1rem',
     fontWeight: 'bold',
-    color: '#0E3744',
+    color: 'white',
     width: '100%',
-    backgroundColor: '#CCE8E6',
-    border: 'solid 2px #0E3744',
+    backgroundColor: '#121212',
+    border: 'solid 2px white',
     borderRadius: '2px',
     '&:hover': {
-      color: '#d24531',
-      borderColor: '#d24531',
+      color: '#ffc600',
+      borderColor: '#ffc600',
     },
   } 
 })

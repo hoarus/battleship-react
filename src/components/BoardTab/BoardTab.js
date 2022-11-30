@@ -3,14 +3,15 @@ import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
   boardTab: {
-    backgroundColor: '#d24531', //'#d24531',
+    boxSizing: 'border-box',
+    backgroundColor: 'white', //'#d24531',
+    color: '#121212',
     opacity: '0.5',
     margin: '0px',
     padding: '0.5rem',
     width: '100%',
-    color: 'white',
     textAlign: 'center',
-    border: 'solid 1px #CCE8E6',
+    border: 'solid 1px white',
     borderTopLeftRadius: '20%',
     borderTopRightRadius: '20%',
     boxSizing: 'border-box',
@@ -23,7 +24,6 @@ const useStyles = createUseStyles({
   },
   selectedTab: {
     opacity: '1',
-    color: 'white',
     '&:hover': {
       opacity: '1',
     },
@@ -32,6 +32,7 @@ const useStyles = createUseStyles({
     display: 'flex',
     justifyContent: 'center',
     width: '100%',
+    boxSizing: 'border-box',
   },
 })
 

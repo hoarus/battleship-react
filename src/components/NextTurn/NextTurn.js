@@ -31,7 +31,7 @@ const useStyles = createUseStyles({
     '-webkit-user-select': 'none', /* Safari */
     '-ms-user-select': 'none', /* IE 10 and IE 11 */
     'user-select': 'none', /* Standard syntax */
-    backgroundColor: '#CCE8E6',
+    backgroundColor: '#121212',
     width: '90%',
     minWidth: '30%',
     maxWidth: '300px',
